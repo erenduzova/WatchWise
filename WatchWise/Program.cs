@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using WatchWise.Data;
+
 namespace WatchWise;
 
 public class Program
@@ -6,6 +9,8 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddDbContext<WatchWiseContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("WatchWiseContext")));
 
         // Add services to the container.
 
