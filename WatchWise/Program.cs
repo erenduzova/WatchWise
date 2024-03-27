@@ -1,6 +1,7 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchWise.Data;
+using WatchWise.Models;
 
 namespace WatchWise;
 
@@ -10,7 +11,11 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddDbContext<WatchWiseContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("WatchWiseContext")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("WatchWiseContext") ?? throw new InvalidOperationException("Connection string 'WatchWiseContext' not found.")));
+
+        builder.Services.AddIdentity<WatchWiseUser, WatchWiseRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<WatchWiseContext>()
+            .AddDefaultTokenProviders();
 
         // Add services to the container.
 
@@ -28,6 +33,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
 

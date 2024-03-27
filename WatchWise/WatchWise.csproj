@@ -17,14 +17,17 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.17" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Data\" />
+    <None Remove="Models\CrossTables\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Data\" />
+    <Folder Include="Models\CrossTables\" />
   </ItemGroup>
 </Project>

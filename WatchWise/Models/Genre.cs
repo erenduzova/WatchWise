@@ -8,10 +8,11 @@ namespace WatchWise.Models
 
         public short Id { get; set; }
 
-        [Required]
         [StringLength(50, MinimumLength =2)]
         [Column(TypeName = "nvarchar(50)")]
         public required string Name { get; set; }
+
+        public List<MediaGenre>? MediaGenres { get; set; }
 
     }
 }
