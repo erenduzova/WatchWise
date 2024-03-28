@@ -21,7 +21,7 @@ namespace WatchWise.Models
 
         public DateTime ReleaseDate { get; set; }
 
-        public required string Title { get; set; }
+        public string Title { get; set; } = "";
 
         [StringLength(500)]
         [Column(TypeName = "nvarchar(500)")]

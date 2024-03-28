@@ -12,7 +12,7 @@ namespace WatchWise.Models
 
         [StringLength(200, MinimumLength = 1)]
         [Column(TypeName = "nvarchar(200)")]
-        public required string Name { get; set; }
+        public string Name { get; set; } = "";
 
         public List<MediaRestriction>? MediaRestrictions;
     }

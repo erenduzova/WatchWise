@@ -8,10 +8,10 @@ namespace WatchWise.Models
 {
 	public class WatchWiseUser : IdentityUser<long>
 	{
-        
+
         [StringLength(100, MinimumLength = 2)]
         [Column(TypeName = "nvarchar(100)")]
-        public required string Name { get; set; }
+        public string Name { get; set; } = "";
 
 		[Column(TypeName = "date")]
 		public DateTime BirthDate { get; set; }
