@@ -20,7 +20,7 @@ namespace WatchWise.Models
 
         public List<UserWatchedEpisode>? UserWatchedEpisodes { get; set; }
         public List<UserFavorite>? UserFavorites { get; set; }
-        public List<UserPlan>? UserPlans;
+        public List<UserPlan>? UserPlans { get; set; }
     }
 }
 
