@@ -33,6 +33,11 @@ namespace WatchWise.Repositories
         {
             _signInManager.UserManager.UpdateAsync(watchWiseUser).Wait();
         }
+
+        public WatchWiseUser? GetUserByUserName(string userName)
+        {
+            return _signInManager.UserManager.Users.FirstOrDefault(u => u.UserName == userName);
+        }
     }
 }
 

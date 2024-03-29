@@ -14,11 +14,13 @@ namespace WatchWise.Services
 	{
         private readonly IUserRepository _usersRepository;
         private readonly WatchWiseUserConverter _userConverter;
+        private readonly SignInManager<WatchWiseUser> _signInManager;
 
-        public UserService(IUserRepository usersRepository, WatchWiseUserConverter userConverter)
+        public UserService(IUserRepository usersRepository, WatchWiseUserConverter userConverter, SignInManager<WatchWiseUser> signInManager)
         {
             _usersRepository = usersRepository;
             _userConverter = userConverter;
+            _signInManager = signInManager;
         }
 
         public List<WatchWiseUserResponse> GetAllUsersResponses(bool passiveUser)
@@ -72,10 +74,30 @@ namespace WatchWise.Services
                 {
                     existingUser.UserName = watchWiseUserUpdateRequest.UserName;
                 }
+                if (watchWiseUserUpdateRequest.Email != null)
+                {
+                    existingUser.Email = watchWiseUserUpdateRequest.Email;
+                }
                 _usersRepository.UpdateUser(existingUser);
                 return 1;
             }
             return -1;
+        }
+
+        public SignInResult LogIn(LogInRequest logInRequest)
+        {
+            string userName = logInRequest.UserName;
+            string password = logInRequest.Password;
+            WatchWiseUser? watchWiseUser = _usersRepository.GetUserByUserName(userName);
+
+            if (watchWiseUser == null)
+            {
+                return Microsoft.AspNetCore.Identity.SignInResult.NotAllowed;
+            }
+
+            //TODO: Check PlanDate and make passive
+
+            return _signInManager.PasswordSignInAsync(watchWiseUser, password, false, false).Result;
         }
     }
 }

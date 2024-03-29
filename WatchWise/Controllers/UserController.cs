@@ -110,5 +110,31 @@ namespace WatchWise.Controllers
             return Ok("Deleted");
         }
 
+        [HttpPost("LogIn")]
+        public ActionResult LogIn(LogInRequest logInRequest)
+        {
+            Microsoft.AspNetCore.Identity.SignInResult signInResult = _userService.LogIn(logInRequest);
+            if (signInResult.Succeeded)
+            {
+                return Ok("LogIn succesfull");
+            }
+            else if (signInResult.IsLockedOut)
+            {
+                return BadRequest("Your account is locked out. Please try again later.");
+            }
+            else if (signInResult.IsNotAllowed)
+            {
+                return BadRequest("Login is not allowed for this user.");
+            }
+            else if (signInResult.RequiresTwoFactor)
+            {
+                return BadRequest("Two-factor authentication is required for this user.");
+            }
+            else
+            {
+                return BadRequest("An unknown error occurred during login.");
+            }
+        }
+
     }
 }

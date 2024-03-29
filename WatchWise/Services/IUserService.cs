@@ -13,6 +13,7 @@ namespace WatchWise.Services
         IdentityResult PostUser(WatchWiseUserRequest watchWiseUserRequest);
         int DeleteUser(long id);
         int UpdateUser(long id, WatchWiseUserUpdateRequest watchWiseUserUpdateRequest);
+        SignInResult LogIn(LogInRequest logInRequest);
     }
 }
 

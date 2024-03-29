@@ -9,7 +9,6 @@ namespace WatchWise.Models
 	public class WatchWiseUser : IdentityUser<long>
 	{
 
-        [StringLength(100, MinimumLength = 2)]
         [Column(TypeName = "nvarchar(100)")]
         public string Name { get; set; } = "";
 

@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchWise.Data;
+using WatchWise.DTOs.Converters;
 using WatchWise.Models;
+using WatchWise.Repositories;
+using WatchWise.Services;
 
 namespace WatchWise;
 
@@ -23,6 +27,11 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddScoped<IUserService,UserService>();
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<WatchWiseUserConverter>();
+
 
         var app = builder.Build();
 
