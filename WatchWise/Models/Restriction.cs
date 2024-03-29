@@ -8,6 +8,8 @@ namespace WatchWise.Models
 {
 	public class Restriction
 	{
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public byte Id { get; set; }
 
         [StringLength(200, MinimumLength = 1)]
