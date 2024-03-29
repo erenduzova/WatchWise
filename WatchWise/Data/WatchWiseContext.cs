@@ -44,6 +44,8 @@ namespace WatchWise.Data
             builder.Entity<UserPlan>().HasKey(up => new { up.UserId, up.PlanId });
             builder.Entity<UserWatchedEpisode>().HasKey(ue => new { ue.UserId, ue.EpisodeId });
 
+            builder.Entity<Episode>().HasKey(e => new { e.MediaId, e.SeasonNum, e.EpisodeNum });
+
             builder.Entity<MediaStar>()
                 .HasOne(ms => ms.Media)
                 .WithMany(m => m.MediaStars)
