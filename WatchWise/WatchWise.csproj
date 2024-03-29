@@ -24,10 +24,24 @@
     <None Remove="Models\" />
     <None Remove="Data\" />
     <None Remove="Models\CrossTables\" />
+    <None Remove="Controllers\" />
+    <None Remove="Repositories\" />
+    <None Remove="Services\" />
+    <None Remove="DTOs\" />
+    <None Remove="DTOs\Requests\" />
+    <None Remove="DTOs\Responses\" />
+    <None Remove="DTOs\Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Data\" />
     <Folder Include="Models\CrossTables\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Requests\" />
+    <Folder Include="DTOs\Responses\" />
+    <Folder Include="DTOs\Converters\" />
   </ItemGroup>
 </Project>
