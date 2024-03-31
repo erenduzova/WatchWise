@@ -6,7 +6,8 @@ using WatchWise.DTOs.Converters;
 using WatchWise.Models;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Repositories.Implementations;
-using WatchWise.Services;
+using WatchWise.Services.Interfaces;
+using WatchWise.Services.Implementations;
 
 namespace WatchWise;
 

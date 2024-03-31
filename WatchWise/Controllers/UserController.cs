@@ -12,7 +12,7 @@ using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Services;
+using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
 {
