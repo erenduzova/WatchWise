@@ -37,7 +37,6 @@
     <Folder Include="Data\" />
     <Folder Include="Models\CrossTables\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Services\" />
     <Folder Include="DTOs\Responses\" />
     <Folder Include="DTOs\Converters\" />
   </ItemGroup>

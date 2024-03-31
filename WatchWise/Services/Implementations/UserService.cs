@@ -7,11 +7,12 @@ using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 using WatchWise.Repositories.Interfaces;
+using WatchWise.Services.Interfaces;
 
-namespace WatchWise.Services
+namespace WatchWise.Services.Implementations
 {
     public class UserService : IUserService
-	{
+    {
         private readonly IUserRepository _usersRepository;
         private readonly WatchWiseUserConverter _userConverter;
         private readonly SignInManager<WatchWiseUser> _signInManager;
@@ -88,14 +89,19 @@ namespace WatchWise.Services
         {
             string userName = logInRequest.UserName;
             string password = logInRequest.Password;
-            WatchWiseUser? watchWiseUser = _usersRepository.GetUserByUserName(userName);
+            WatchWiseUser? watchWiseUser = _usersRepository.GetUserByUserName(userName, includePlans: true);
 
             if (watchWiseUser == null)
             {
-                return Microsoft.AspNetCore.Identity.SignInResult.NotAllowed;
+                return SignInResult.NotAllowed;
             }
 
             //TODO: Check PlanDate and make passive
+            if (watchWiseUser.UserPlans?.Where(u => u.EndDate >= DateTime.Today).Any() == false)
+            {
+                watchWiseUser.Passive = true;
+                _usersRepository.UpdateUser(watchWiseUser);
+            }
 
             return _signInManager.PasswordSignInAsync(watchWiseUser, password, false, false).Result;
         }

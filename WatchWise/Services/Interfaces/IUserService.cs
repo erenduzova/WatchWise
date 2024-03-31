@@ -4,10 +4,10 @@ using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
-namespace WatchWise.Services
+namespace WatchWise.Services.Interfaces
 {
-	public interface IUserService
-	{
+    public interface IUserService
+    {
         List<WatchWiseUserResponse> GetAllUsersResponses(bool passiveUser);
         WatchWiseUserResponse? GetWatchWiseUserResponse(long id);
         IdentityResult PostUser(WatchWiseUserRequest watchWiseUserRequest);
