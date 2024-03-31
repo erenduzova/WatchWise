@@ -30,9 +30,9 @@ namespace WatchWise.Controllers
         // GET: api/Users
         [HttpGet]
         //[Authorize("Administrator")]
-        public ActionResult<List<WatchWiseUserResponse>> GetUsers(bool passiveUser = true)
+        public ActionResult<List<WatchWiseUserResponse>> GetUsers(bool includePassive = true)
         {
-            return Ok(_userService.GetAllUsersResponses(passiveUser));
+            return Ok(_userService.GetAllUsersResponses(includePassive));
         }
 
         // GET: api/Users/5

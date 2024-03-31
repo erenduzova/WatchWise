@@ -24,10 +24,10 @@ namespace WatchWise.Services.Implementations
             _signInManager = signInManager;
         }
 
-        public List<WatchWiseUserResponse> GetAllUsersResponses(bool passiveUser)
+        public List<WatchWiseUserResponse> GetAllUsersResponses(bool includePassive)
         {
-            IQueryable<WatchWiseUser> users = _usersRepository.GetAllUsers();
-            if (passiveUser == false)
+            IQueryable<WatchWiseUser> users = _usersRepository.GetAllUsers(includePlans:true, includeWatchedEpisodes:true, includeFavorites: true);
+            if (includePassive == false)
             {
                 users = users.Where(u => u.Passive == false);
             }
@@ -36,7 +36,7 @@ namespace WatchWise.Services.Implementations
 
         public WatchWiseUserResponse? GetWatchWiseUserResponse(long id)
         {
-            WatchWiseUser? foundWatchWiseUser = _usersRepository.GetUserById(id);
+            WatchWiseUser? foundWatchWiseUser = _usersRepository.GetUserById(id, includePlans: true, includeWatchedEpisodes: true, includeFavorites: true);
             if (foundWatchWiseUser != null)
             {
                 return _userConverter.Convert(foundWatchWiseUser);
