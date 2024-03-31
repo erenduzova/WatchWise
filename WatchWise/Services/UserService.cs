@@ -6,11 +6,11 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Repositories;
+using WatchWise.Repositories.Interfaces;
 
 namespace WatchWise.Services
 {
-	public class UserService : IUserService
+    public class UserService : IUserService
 	{
         private readonly IUserRepository _usersRepository;
         private readonly WatchWiseUserConverter _userConverter;

@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 using WatchWise.Models;
+using WatchWise.Repositories.Interfaces;
 using WatchWise.Services;
 
-namespace WatchWise.Repositories
+namespace WatchWise.Repositories.Implementations
 {
     public class UserRepository : IUserRepository
     {
@@ -27,7 +28,7 @@ namespace WatchWise.Repositories
         public IdentityResult AddUser(WatchWiseUser watchWiseUser, string password)
         {
             return _signInManager.UserManager.CreateAsync(watchWiseUser, password).Result;
-        } 
+        }
 
         public void UpdateUser(WatchWiseUser watchWiseUser)
         {

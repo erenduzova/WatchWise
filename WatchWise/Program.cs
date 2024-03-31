@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using WatchWise.Data;
 using WatchWise.DTOs.Converters;
 using WatchWise.Models;
-using WatchWise.Repositories;
+using WatchWise.Repositories.Interfaces;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Services;
 
 namespace WatchWise;
@@ -31,7 +32,18 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<IUserService,UserService>();
+        
+        // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
+        builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+        builder.Services.AddScoped<IMediaRepository, MediaRepository>();
+        builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+        builder.Services.AddScoped<IRestrictionRepository, RestrictionRepository>();
+        builder.Services.AddScoped<IStarRepository, StarRepository>();
+        builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
+
+
         builder.Services.AddScoped<WatchWiseUserConverter>();
 
 
