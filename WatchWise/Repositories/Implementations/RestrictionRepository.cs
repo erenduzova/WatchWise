@@ -14,21 +14,39 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Restriction> GetAllRestrictions()
+        public IQueryable<Restriction> GetAllRestrictions(bool includeMedias = false)
         {
-            return _context.Restrictions;
+            IQueryable<Restriction> restrictions = _context.Restrictions;
+            if (includeMedias)
+            {
+                restrictions = restrictions.Include(r => r.MediaRestrictions);
+            }
+            return restrictions;
         }
 
-        public Restriction? GetRestrictionById(byte id)
+        public Restriction? GetRestrictionById(byte id, bool includeMedias = false)
         {
-            return _context.Restrictions.FirstOrDefault(r => r.Id == id);
+            IQueryable<Restriction> restrictions = _context.Restrictions;
+
+            if (includeMedias)
+            {
+                restrictions = restrictions.Include(r => r.MediaRestrictions);
+            }
+
+            return restrictions.FirstOrDefault(r => r.Id == id);
         }
 
-        public Restriction? GetRestrictionByName(string name)
+        public Restriction? GetRestrictionByName(string name, bool includeMedias = false)
         {
-            return _context.Restrictions.FirstOrDefault(r => r.Name == name);
-        }
+            IQueryable<Restriction> restrictions = _context.Restrictions;
 
+            if (includeMedias)
+            {
+                restrictions = restrictions.Include(r => r.MediaRestrictions);
+            }
+
+            return restrictions.FirstOrDefault(r => r.Name == name);
+        }
         public void AddRestriction(Restriction restriction)
         {
             _context.Restrictions.Add(restriction);

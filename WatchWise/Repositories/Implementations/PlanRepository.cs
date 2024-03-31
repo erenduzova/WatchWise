@@ -14,19 +14,34 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Plan> GetAllPlans()
+        public IQueryable<Plan> GetAllPlans(bool includeUsers = false)
         {
-            return _context.Plans;
+            IQueryable<Plan> plans = _context.Plans;
+            if (includeUsers)
+            {
+                plans = plans.Include(p => p.UserPlans);
+            }
+            return plans;
         }
 
-        public Plan? GetPlanById(short id)
+        public Plan? GetPlanById(short id, bool includeUsers = false)
         {
-            return _context.Plans.FirstOrDefault(p => p.Id == id);
+            IQueryable<Plan> plans = _context.Plans;
+            if (includeUsers)
+            {
+                plans = plans.Include(p => p.UserPlans);
+            }
+            return plans.FirstOrDefault(p => p.Id == id);
         }
 
-        public Plan? GetPlanByName(string name)
+        public Plan? GetPlanByName(string name, bool includeUsers = false)
         {
-            return _context.Plans.FirstOrDefault(p => p.Name == name);
+            IQueryable<Plan> plans = _context.Plans;
+            if (includeUsers)
+            {
+                plans = plans.Include(p => p.UserPlans);
+            }
+            return plans.FirstOrDefault(p => p.Name == name);
         }
 
         public void AddPlan(Plan plan)

@@ -5,10 +5,10 @@ namespace WatchWise.Repositories.Interfaces
 {
     public interface IStarRepository
     {
-        IQueryable<Star> GetAllStars();
-        Star? GetStarById(int id);
+        IQueryable<Star> GetAllStars(bool includeMedia = false);
+        Star? GetStarById(int id, bool includeMedia = false);
+        Star? GetStarByName(string name, bool includeMedia = false);
         void AddStar(Star star);
-        Star? GetStarByName(string name);
         void DeleteStar(Star star);
     }
 }

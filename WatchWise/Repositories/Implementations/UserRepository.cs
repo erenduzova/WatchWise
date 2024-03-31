@@ -16,20 +16,27 @@ namespace WatchWise.Repositories.Implementations
             _signInManager = signInManager;
         }
 
-        public IQueryable<WatchWiseUser> GetAllUsers()
+        public IQueryable<WatchWiseUser> GetAllUsers(bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
-            return _signInManager.UserManager.Users;
+            IQueryable<WatchWiseUser> users = _signInManager.UserManager.Users;
+
+            if (includePlans)
+            {
+                users = users.Include(u => u.UserPlans);
+            }
+
+            if (includeWatchedEpisodes)
+            {
+                users = users.Include(u => u.UserWatchedEpisodes);
+            }
+
+            if (includeFavorites)
+            {
+                users = users.Include(u => u.UserFavorites);
+            }
+            return users;
         }
 
-        public IdentityResult AddUser(WatchWiseUser watchWiseUser, string password)
-        {
-            return _signInManager.UserManager.CreateAsync(watchWiseUser, password).Result;
-        }
-
-        public void UpdateUser(WatchWiseUser watchWiseUser)
-        {
-            _signInManager.UserManager.UpdateAsync(watchWiseUser).Wait();
-        }
         public WatchWiseUser? GetUserById(long id, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
             IQueryable<WatchWiseUser> users = _signInManager.UserManager.Users;
@@ -71,6 +78,16 @@ namespace WatchWise.Repositories.Implementations
             }
 
             return users.FirstOrDefault(u => u.UserName == userName);
+        }
+
+        public IdentityResult AddUser(WatchWiseUser watchWiseUser, string password)
+        {
+            return _signInManager.UserManager.CreateAsync(watchWiseUser, password).Result;
+        }
+
+        public void UpdateUser(WatchWiseUser watchWiseUser)
+        {
+            _signInManager.UserManager.UpdateAsync(watchWiseUser).Wait();
         }
     }
 }

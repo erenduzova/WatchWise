@@ -14,14 +14,34 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Director> GetAllDirectors()
+        public IQueryable<Director> GetAllDirectors(bool includeMedias = false)
         {
-            return _context.Directors;
+            IQueryable<Director> directors = _context.Directors;
+            if (includeMedias)
+            {
+                directors = directors.Include(d => d.MediaDirectors);
+            }
+            return directors;
         }
 
-        public Director? GetDirectorById(int id)
+        public Director? GetDirectorById(int id, bool includeMedias = false)
         {
-            return _context.Directors.FirstOrDefault(d => d.Id == id);
+            IQueryable<Director> directors = _context.Directors;
+            if (includeMedias)
+            {
+                directors = directors.Include(d => d.MediaDirectors);
+            }
+            return directors.FirstOrDefault(d => d.Id == id);
+        }
+
+        public Director? GetDirectorByName(string name, bool includeMedias = false)
+        {
+            IQueryable<Director> directors = _context.Directors;
+            if (includeMedias)
+            {
+                directors = directors.Include(d => d.MediaDirectors);
+            }
+            return directors.FirstOrDefault(d => d.Name == name);
         }
 
         public void AddDirector(Director director)
@@ -30,10 +50,6 @@ namespace WatchWise.Repositories.Implementations
             _context.SaveChanges();
         }
 
-        public Director? GetDirectorByName(string name)
-        {
-            return _context.Directors.FirstOrDefault(d => d.Name == name);
-        }
         public void DeleteDirector(Director director)
         {
             _context.Directors.Remove(director);

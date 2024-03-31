@@ -14,14 +14,24 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Episode> GetAllEpisodes()
+        public IQueryable<Episode> GetAllEpisodes(bool includeUserWatchedEpisodes = false)
         {
-            return _context.Episodes;
+            IQueryable<Episode> episodes = _context.Episodes;
+            if (includeUserWatchedEpisodes)
+            {
+                episodes = episodes.Include(e => e.UserWatchedEpisodes);
+            }
+            return episodes;
         }
 
-        public Episode? GetEpisodeById(long id)
+        public Episode? GetEpisodeById(long id, bool includeUserWatchedEpisodes = false)
         {
-            return _context.Episodes.FirstOrDefault(e => e.Id == id);
+            IQueryable<Episode> episodes = _context.Episodes;
+            if (includeUserWatchedEpisodes)
+            {
+                episodes = episodes.Include(e => e.UserWatchedEpisodes);
+            }
+            return episodes.FirstOrDefault(e => e.Id == id);
         }
 
         public void AddEpisode(Episode episode)

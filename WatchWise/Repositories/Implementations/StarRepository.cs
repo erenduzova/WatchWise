@@ -1,4 +1,5 @@
-﻿using WatchWise.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using WatchWise.Data;
 using WatchWise.Models;
 using WatchWise.Repositories.Interfaces;
 
@@ -13,24 +14,44 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Star> GetAllStars()
+        public IQueryable<Star> GetAllStars(bool includeMedia = false)
         {
-            return _context.Stars;
+            IQueryable<Star> stars = _context.Stars;
+
+            if (includeMedia)
+            {
+                stars = stars.Include(s => s.MediaStars);
+            }
+            return stars;
         }
 
-        public Star? GetStarById(int id)
+        public Star? GetStarById(int id, bool includeMedia = false)
         {
-            return _context.Stars.FirstOrDefault(s => s.Id == id);
+            IQueryable<Star> stars = _context.Stars;
+
+            if (includeMedia)
+            {
+                stars = stars.Include(s => s.MediaStars);
+            }
+
+            return stars.FirstOrDefault(s => s.Id == id);
+        }
+
+        public Star? GetStarByName(string name, bool includeMedia = false)
+        {
+            IQueryable<Star> stars = _context.Stars;
+
+            if (includeMedia)
+            {
+                stars = stars.Include(s => s.MediaStars);
+            }
+
+            return stars.FirstOrDefault(s => s.Name == name);
         }
 
         public void AddStar(Star star)
         {
             _context.Stars.Add(star);
-        }
-
-        public Star? GetStarByName(string name)
-        {
-            return _context.Stars.FirstOrDefault(s => s.Name == name);
         }
 
         public void DeleteStar(Star star)
