@@ -29,7 +29,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Users
         [HttpGet]
-        [Authorize("Administrator")]
+        //[Authorize("Administrator")]
         public ActionResult<List<WatchWiseUserResponse>> GetUsers(bool passiveUser = true)
         {
             return Ok(_userService.GetAllUsersResponses(passiveUser));
