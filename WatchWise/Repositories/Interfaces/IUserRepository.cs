@@ -7,10 +7,10 @@ namespace WatchWise.Repositories.Interfaces
     public interface IUserRepository
     {
         IQueryable<WatchWiseUser> GetAllUsers();
-        WatchWiseUser? GetUserById(long id);
         IdentityResult AddUser(WatchWiseUser watchWiseUser, string password);
         void UpdateUser(WatchWiseUser watchWiseUser);
-        WatchWiseUser? GetUserByUserName(string userName);
+        WatchWiseUser? GetUserById(long id, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false);
+        WatchWiseUser? GetUserByUserName(string userName, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false);
     }
 }
 
