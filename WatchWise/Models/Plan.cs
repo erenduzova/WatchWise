@@ -21,7 +21,7 @@ namespace WatchWise.Models
         [Column(TypeName = "varchar(20)")]
         public string MaxResolution { get; set; } = "";
 
-        public List<UserPlan>? UserPlans;
-	}
+        public virtual List<UserPlan>? UserPlans { get; set; }
+    }
 }
 

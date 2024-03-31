@@ -16,7 +16,7 @@ namespace WatchWise.Models
         [Column(TypeName = "nvarchar(200)")]
         public string Name { get; set; } = "";
 
-        public List<MediaRestriction>? MediaRestrictions;
+        public virtual List<MediaRestriction>? MediaRestrictions { get; set; }
     }
 }
 

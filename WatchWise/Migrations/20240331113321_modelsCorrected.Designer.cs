@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchWise.Data;
 
@@ -11,9 +12,11 @@ using WatchWise.Data;
 namespace WatchWise.Migrations
 {
     [DbContext(typeof(WatchWiseContext))]
-    partial class WatchWiseContextModelSnapshot : ModelSnapshot
+    [Migration("20240331113321_modelsCorrected")]
+    partial class modelsCorrected
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -17,9 +17,9 @@ namespace WatchWise.Models
 
         public bool Passive { get; set; }
 
-        public List<UserWatchedEpisode>? UserWatchedEpisodes { get; set; }
-        public List<UserFavorite>? UserFavorites { get; set; }
-        public List<UserPlan>? UserPlans { get; set; }
+        public virtual List<UserWatchedEpisode>? UserWatchedEpisodes { get; set; }
+        public virtual List<UserFavorite>? UserFavorites { get; set; }
+        public virtual List<UserPlan>? UserPlans { get; set; }
     }
 }
 

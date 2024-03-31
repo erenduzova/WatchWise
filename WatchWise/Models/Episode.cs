@@ -11,7 +11,7 @@ namespace WatchWise.Models
         
         public int MediaId { get; set; }
         [ForeignKey("MediaId")]
-        public Media? Media { get; set; }
+        public virtual Media? Media { get; set; }
 
         [Range(0, byte.MaxValue)]
         public byte SeasonNum { get; set; }
@@ -33,7 +33,7 @@ namespace WatchWise.Models
 
         public bool Passive { get; set; }
 
-        public List<UserWatchedEpisode>? UserWatchedEpisodes;
+        public virtual List<UserWatchedEpisode>? UserWatchedEpisodes { get; set; }
     }
 }
 

@@ -12,7 +12,7 @@ namespace WatchWise.Models
         [Column(TypeName = "nvarchar(50)")]
         public string Name { get; set; } = "";
 
-        public List<MediaGenre>? MediaGenres { get; set; }
+        public virtual List<MediaGenre>? MediaGenres { get; set; }
 
     }
 }

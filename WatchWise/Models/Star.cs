@@ -6,7 +6,7 @@ namespace WatchWise.Models
 {
     public class Star : Person
 	{
-        public List<MediaStar>? MediaStars { get; set; }
+        public virtual List<MediaStar>? MediaStars { get; set; }
     }
 }
 

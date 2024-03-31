@@ -17,9 +17,11 @@ public class Program
         builder.Services.AddDbContext<WatchWiseContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("WatchWiseContext") ?? throw new InvalidOperationException("Connection string 'WatchWiseContext' not found.")));
 
-        builder.Services.AddIdentity<WatchWiseUser, WatchWiseRole>(options => options.SignIn.RequireConfirmedAccount = true)
+        builder.Services.AddIdentity<WatchWiseUser, WatchWiseRole>()
             .AddEntityFrameworkStores<WatchWiseContext>()
             .AddDefaultTokenProviders();
+        builder.Services.AddAuthentication();
+        builder.Services.AddAuthorization();
 
         // Add services to the container.
 
