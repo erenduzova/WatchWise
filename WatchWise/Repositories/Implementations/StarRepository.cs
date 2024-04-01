@@ -58,5 +58,11 @@ namespace WatchWise.Repositories.Implementations
         {
             _context.Stars.Remove(star);
         }
+
+        public void UpdateStar(Star star)
+        {
+            _context.Update(star);
+            _context.SaveChanges();
+        }
     }
 }
