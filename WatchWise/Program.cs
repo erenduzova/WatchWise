@@ -32,8 +32,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        // Service Layer
         builder.Services.AddScoped<IUserService,UserService>();
-        
+        builder.Services.AddScoped<IDirectorService, DirectorService>();
+
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
@@ -44,8 +46,10 @@ public class Program
         builder.Services.AddScoped<IStarRepository, StarRepository>();
         builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
 
-
+        // Converters-Mappers
         builder.Services.AddScoped<WatchWiseUserConverter>();
+        builder.Services.AddScoped<DirectorConverter>();
+
 
 
         var app = builder.Build();
