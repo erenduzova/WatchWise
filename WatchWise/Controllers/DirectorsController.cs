@@ -35,7 +35,7 @@ namespace WatchWise.Controllers
         [HttpGet("{id}")]
         public ActionResult<DirectorResponse> GetDirector(int id)
         {
-            DirectorResponse? directorResponse = _directorService.GetDirectorById(id);
+            DirectorResponse? directorResponse = _directorService.GetDirectorResponseById(id);
             if (directorResponse == null)
             {
                 return NotFound();
