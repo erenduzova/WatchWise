@@ -9,5 +9,6 @@ namespace WatchWise.Repositories.Interfaces
         Director? GetDirectorByName(string name, bool includeMedias = false);
         void AddDirector(Director director);
         void DeleteDirector(Director director);
+        void UpdateDirector(Director director);
     }
 }

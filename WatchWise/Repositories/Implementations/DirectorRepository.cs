@@ -55,5 +55,11 @@ namespace WatchWise.Repositories.Implementations
             _context.Directors.Remove(director);
             _context.SaveChanges();
         }
+
+        public void UpdateDirector(Director director)
+        {
+            _context.Update(director);
+            _context.SaveChanges();
+        }
     }
 }
