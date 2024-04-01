@@ -36,6 +36,7 @@ public class Program
         builder.Services.AddScoped<IUserService,UserService>();
         builder.Services.AddScoped<IDirectorService, DirectorService>();
         builder.Services.AddScoped<IStarService, StarService>();
+        builder.Services.AddScoped<IGenreService, GenreService>();
 
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -51,6 +52,7 @@ public class Program
         builder.Services.AddScoped<WatchWiseUserConverter>();
         builder.Services.AddScoped<DirectorConverter>();
         builder.Services.AddScoped<StarConverter>();
+        builder.Services.AddScoped<GenreConverter>();
 
 
 
