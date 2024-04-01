@@ -8,7 +8,7 @@ namespace WatchWise.Services.Interfaces
     public interface IDirectorService
     {
         List<DirectorResponse> GetAllDirectorResponses();
-        DirectorResponse? GetDirectorById(int id);
+        DirectorResponse? GetDirectorResponseById(int id);
         void PostDirector(DirectorRequest directorRequest);
         int DeleteDirector(int id);
         int UpdateDirector(int id, DirectorRequest directorRequest);

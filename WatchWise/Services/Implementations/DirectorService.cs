@@ -27,7 +27,7 @@ namespace WatchWise.Services.Implementations
             return _directorConverter.Convert(directors.AsNoTracking().ToList());
         }
 
-        public DirectorResponse? GetDirectorById(int id)
+        public DirectorResponse? GetDirectorResponseById(int id)
         {
             Director? foundDirector = _directorRepository.GetDirectorById(id, includeMedias: true);
             if (foundDirector != null)
