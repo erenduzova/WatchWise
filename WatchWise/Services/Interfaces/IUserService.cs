@@ -9,7 +9,7 @@ namespace WatchWise.Services.Interfaces
     public interface IUserService
     {
         List<WatchWiseUserResponse> GetAllUsersResponses(bool passiveUser);
-        WatchWiseUserResponse? GetWatchWiseUserResponse(long id);
+        WatchWiseUserResponse? GetWatchWiseUserResponseById(long id);
         IdentityResult PostUser(WatchWiseUserRequest watchWiseUserRequest);
         int DeleteUser(long id);
         int UpdateUser(long id, WatchWiseUserUpdateRequest watchWiseUserUpdateRequest);

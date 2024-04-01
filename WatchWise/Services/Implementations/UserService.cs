@@ -34,7 +34,7 @@ namespace WatchWise.Services.Implementations
             return _userConverter.Convert(users.AsNoTracking().ToList());
         }
 
-        public WatchWiseUserResponse? GetWatchWiseUserResponse(long id)
+        public WatchWiseUserResponse? GetWatchWiseUserResponseById(long id)
         {
             WatchWiseUser? foundWatchWiseUser = _usersRepository.GetUserById(id, includePlans: true, includeWatchedEpisodes: true, includeFavorites: true);
             if (foundWatchWiseUser != null)
@@ -96,7 +96,6 @@ namespace WatchWise.Services.Implementations
                 return SignInResult.NotAllowed;
             }
 
-            //TODO: Check PlanDate and make passive
             if (watchWiseUser.UserPlans?.Where(u => u.EndDate >= DateTime.Today).Any() == false)
             {
                 watchWiseUser.Passive = true;
