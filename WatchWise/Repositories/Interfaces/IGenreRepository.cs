@@ -9,5 +9,6 @@ namespace WatchWise.Repositories.Interfaces
         Genre? GetGenreById(short id, bool includeMediaGenres = false);
         Genre? GetGenreByName(string name, bool includeMediaGenres = false);
         void AddGenre(Genre genre);
+        void UpdateGenre(Genre genre);
     }
 }

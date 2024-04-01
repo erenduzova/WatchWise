@@ -50,5 +50,10 @@ namespace WatchWise.Repositories.Implementations
             _context.SaveChanges();
         }
 
+        public void UpdateGenre(Genre genre)
+        {
+            _context.Genres.Update(genre);
+            _context.SaveChanges();
+        }
     }
 }
