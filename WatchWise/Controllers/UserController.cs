@@ -39,14 +39,14 @@ namespace WatchWise.Controllers
         [HttpGet("{id}")]
         public ActionResult<WatchWiseUserResponse> GetWatchWiseUser(long id)
         {
-            if (User.IsInRole("Administrator")==false)
+            if (User.IsInRole("Administrator") == false)
             {
                 if (User.FindFirstValue(ClaimTypes.NameIdentifier) != id.ToString())
                 {
                     return Unauthorized();
                 }
             }
-            WatchWiseUserResponse? foundUserResponse = _userService.GetWatchWiseUserResponse(id);
+            WatchWiseUserResponse? foundUserResponse = _userService.GetWatchWiseUserResponseById(id);
             if (foundUserResponse == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace WatchWise.Controllers
         }
 
         // PUT: api/Users/5
-        [HttpPut]
+        [HttpPut("{id}")]
         [Authorize]
         public ActionResult PutWatchWiseUser(long id, WatchWiseUserUpdateRequest watchWiseUserUpdateRequest)
         {
