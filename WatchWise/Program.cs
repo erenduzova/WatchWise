@@ -57,6 +57,9 @@ public class Program
         builder.Services.AddScoped<GenreConverter>();
         builder.Services.AddScoped<PlanConverter>();
         builder.Services.AddScoped<RestrictionConverter>();
+        builder.Services.AddScoped<EpisodeConverter>();
+        builder.Services.AddScoped<MediaConverter>();
+
 
 
 
