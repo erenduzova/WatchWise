@@ -37,6 +37,7 @@ public class Program
         builder.Services.AddScoped<IDirectorService, DirectorService>();
         builder.Services.AddScoped<IStarService, StarService>();
         builder.Services.AddScoped<IGenreService, GenreService>();
+        builder.Services.AddScoped<IPlanService, PlanService>();
 
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -53,6 +54,7 @@ public class Program
         builder.Services.AddScoped<DirectorConverter>();
         builder.Services.AddScoped<StarConverter>();
         builder.Services.AddScoped<GenreConverter>();
+        builder.Services.AddScoped<PlanConverter>();
 
 
 
