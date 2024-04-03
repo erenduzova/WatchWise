@@ -39,6 +39,8 @@ public class Program
         builder.Services.AddScoped<IGenreService, GenreService>();
         builder.Services.AddScoped<IPlanService, PlanService>();
         builder.Services.AddScoped<IRestrictionService, RestrictionService>();
+        builder.Services.AddScoped<IEpisodeService, EpisodeService>();
+        builder.Services.AddScoped<IMediaService, MediaService>();
 
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
