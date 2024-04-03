@@ -1,14 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchWise.Models.CrossTables
 {
 	public class UserPlan
 	{
-
 		public long Id { get; set; }
 
-		public long UserId;
+		public long UserId { get; set; }
         [ForeignKey("UserId")]
         public WatchWiseUser? WatchWiseUser { get; set; }
 

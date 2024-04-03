@@ -157,24 +157,29 @@ namespace WatchWise.Migrations
 
             modelBuilder.Entity("WatchWise.Models.CrossTables.UserPlan", b =>
                 {
-                    b.Property<long>("UserId")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<short>("PlanId")
-                        .HasColumnType("smallint");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("date");
 
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
+                    b.Property<short>("PlanId")
+                        .HasColumnType("smallint");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
 
-                    b.HasKey("UserId", "PlanId");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("PlanId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserPlans");
                 });

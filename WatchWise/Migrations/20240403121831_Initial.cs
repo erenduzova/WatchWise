@@ -32,7 +32,7 @@ namespace WatchWise.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "date", nullable: false),
                     Passive = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -346,15 +346,16 @@ namespace WatchWise.Migrations
                 name: "UserPlans",
                 columns: table => new
                 {
-                    PlanId = table.Column<short>(type: "smallint", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     StartDate = table.Column<DateTime>(type: "date", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "date", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "date", nullable: false),
+                    PlanId = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserPlans", x => new { x.UserId, x.PlanId });
+                    table.PrimaryKey("PK_UserPlans", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UserPlans_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -481,9 +482,10 @@ namespace WatchWise.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Episodes_MediaId",
+                name: "IX_Episodes_MediaId_SeasonNum_EpisodeNum",
                 table: "Episodes",
-                column: "MediaId");
+                columns: new[] { "MediaId", "SeasonNum", "EpisodeNum" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_MediaDirectors_DirectorId",
@@ -514,6 +516,11 @@ namespace WatchWise.Migrations
                 name: "IX_UserPlans_PlanId",
                 table: "UserPlans",
                 column: "PlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserPlans_UserId",
+                table: "UserPlans",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserWatchedEpisodes_EpisodeId",
