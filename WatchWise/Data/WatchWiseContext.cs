@@ -40,9 +40,7 @@ namespace WatchWise.Data
             builder.Entity<MediaDirector>().HasKey(md => new { md.MediaId, md.DirectorId });
             builder.Entity<MediaRestriction>().HasKey(mr => new { mr.MediaId, mr.RestrictionId });
 
-
             builder.Entity<UserFavorite>().HasKey(uf => new { uf.UserId, uf.MediaId });
-            builder.Entity<UserPlan>().HasKey(up => new { up.UserId, up.PlanId });
             builder.Entity<UserWatchedEpisode>().HasKey(ue => new { ue.UserId, ue.EpisodeId });
 
             builder.Entity<Episode>().HasIndex(e => new { e.MediaId, e.SeasonNum, e.EpisodeNum }).IsUnique();
