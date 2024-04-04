@@ -75,6 +75,7 @@ public class Program
         builder.Services.AddScoped<MediaDirectorConverter>();
         builder.Services.AddScoped<MediaGenreConverter>();
         builder.Services.AddScoped<MediaRestrictionConverter>();
+        builder.Services.AddScoped<MediaStarConverter>();
 
 
 
