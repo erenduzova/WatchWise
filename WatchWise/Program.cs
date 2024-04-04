@@ -78,6 +78,7 @@ public class Program
         builder.Services.AddScoped<MediaStarConverter>();
         builder.Services.AddScoped<UserFavoriteConverter>();
         builder.Services.AddScoped<UserPlanConverter>();
+        builder.Services.AddScoped<UserWatchedEpisodeConverter>();
 
 
 
