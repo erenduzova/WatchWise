@@ -77,6 +77,7 @@ public class Program
         builder.Services.AddScoped<MediaRestrictionConverter>();
         builder.Services.AddScoped<MediaStarConverter>();
         builder.Services.AddScoped<UserFavoriteConverter>();
+        builder.Services.AddScoped<UserPlanConverter>();
 
 
 
