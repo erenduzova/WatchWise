@@ -53,6 +53,7 @@ public class Program
         builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
 
         builder.Services.AddScoped<IMediaDirectorRepository, MediaDirectorRepository>();
+        builder.Services.AddScoped<IMediaGenreRepository, MediaGenreRepository>();
 
         // Converters-Mappers
         builder.Services.AddScoped<WatchWiseUserConverter>();
