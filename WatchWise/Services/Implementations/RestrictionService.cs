@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -21,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _restrictionConverter = restrictionConverter;
         }
 
-        public List<RestrictionResponse> GetAllRestrictionResponses()
+        public List<RestrictionResponse> GetAllRestrictionResponses(bool includeMedia)
         {
-            IQueryable<Restriction> restrictions = _restrictionRepository.GetAllRestrictions(includeMedias: true);
+            IQueryable<Restriction> restrictions = _restrictionRepository.GetAllRestrictions(includeMedia);
             return _restrictionConverter.Convert(restrictions.AsNoTracking().ToList());
         }
 
-        public RestrictionResponse? GetRestrictionResponseById(byte id)
+        public RestrictionResponse? GetRestrictionResponseById(byte id, bool includeMedia)
         {
-            Restriction? foundRestriction = _restrictionRepository.GetRestrictionById(id, includeMedias: true);
+            Restriction? foundRestriction = _restrictionRepository.GetRestrictionById(id, includeMedia);
             if (foundRestriction != null)
             {
                 return _restrictionConverter.Convert(foundRestriction);
@@ -66,6 +64,7 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
     }
 }
 

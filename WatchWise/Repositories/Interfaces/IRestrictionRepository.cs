@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WatchWise.Models;
+﻿using WatchWise.Models;
 
 namespace WatchWise.Repositories.Interfaces
 {

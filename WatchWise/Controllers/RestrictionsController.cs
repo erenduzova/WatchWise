@@ -1,15 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
-using WatchWise.Services.Implementations;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -27,16 +18,16 @@ namespace WatchWise.Controllers
 
         // GET: api/Restrictions
         [HttpGet]
-        public ActionResult<List<RestrictionResponse>> GetRestrictions()
+        public ActionResult<List<RestrictionResponse>> GetRestrictions(bool includeMedia = false)
         {
-            return Ok(_restrictionService.GetAllRestrictionResponses());
+            return Ok(_restrictionService.GetAllRestrictionResponses(includeMedia));
         }
 
         // GET: api/Restrictions/5
         [HttpGet("{id}")]
-        public ActionResult<RestrictionResponse> GetRestriction(byte id)
+        public ActionResult<RestrictionResponse> GetRestriction(byte id, bool includeMedia = false)
         {
-            RestrictionResponse? restrictionResponse = _restrictionService.GetRestrictionResponseById(id);
+            RestrictionResponse? restrictionResponse = _restrictionService.GetRestrictionResponseById(id, includeMedia);
             if (restrictionResponse == null)
             {
                 return NotFound();
@@ -55,7 +46,6 @@ namespace WatchWise.Controllers
             } else if (updateResponse == -1)
             {
                 return NotFound();
-
             }
             return Ok();
         }
@@ -71,5 +61,6 @@ namespace WatchWise.Controllers
             }
             return Ok();
         }
+
     }
 }
