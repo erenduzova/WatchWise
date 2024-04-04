@@ -20,16 +20,16 @@ namespace WatchWise.Repositories.Implementations
             return mediaStars;
         }
 
-        public MediaStar? GetMediaStarByMediaId(int id)
+        public IQueryable<MediaStar> GetMediaStarsByMediaId(int id)
         {
             IQueryable<MediaStar> mediaStars = _context.MediaStars;
-            return mediaStars.FirstOrDefault(ms => ms.MediaId == id);
+            return mediaStars.Where(ms => ms.MediaId == id);
         }
 
-        public MediaStar? GetMediaStarByStarId(int id)
+        public IQueryable<MediaStar> GetMediaStarsByStarId(int id)
         {
             IQueryable<MediaStar> mediaStars = _context.MediaStars;
-            return mediaStars.FirstOrDefault(ms => ms.StarId == id);
+            return mediaStars.Where(ms => ms.StarId == id);
         }
 
         public void AddMediaStar(MediaStar mediaStar)

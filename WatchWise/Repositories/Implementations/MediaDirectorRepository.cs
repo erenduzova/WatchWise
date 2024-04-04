@@ -20,17 +20,16 @@ namespace WatchWise.Repositories.Implementations
             return mediaDirectors;
         }
 
-        public MediaDirector? GetMediaDirectorByMediaId(int id)
+        public IQueryable<MediaDirector> GetMediaDirectorsByMediaId(int id)
         {
             IQueryable<MediaDirector> mediaDirectors = _context.MediaDirectors;
-            return mediaDirectors.FirstOrDefault(md => md.MediaId == id);
+            return mediaDirectors.Where(md => md.MediaId == id);
         }
 
-
-        public MediaDirector? GetMediaDirectorByDirectorId(int id)
+        public IQueryable<MediaDirector> GetMediaDirectorsByDirectorId(int id)
         {
             IQueryable<MediaDirector> mediaDirectors = _context.MediaDirectors;
-            return mediaDirectors.FirstOrDefault(md => md.DirectorId == id);
+            return mediaDirectors.Where(md => md.DirectorId == id);
         }
 
         public void AddMediaDirector(MediaDirector mediaDirector)

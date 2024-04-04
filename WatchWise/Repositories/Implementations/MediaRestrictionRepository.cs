@@ -21,16 +21,16 @@ namespace WatchWise.Repositories.Implementations
             return mediaRestrictions;
         }
 
-        public MediaRestriction? GetMediaRestrictionByMediaId(int id)
+        public IQueryable<MediaRestriction> GetMediaRestrictionsByMediaId(int id)
         {
             IQueryable<MediaRestriction> mediaRestrictions = _context.MediaRestrictions;
-            return mediaRestrictions.FirstOrDefault(mr => mr.MediaId == id);
+            return mediaRestrictions.Where(mr => mr.MediaId == id);
         }
 
-        public MediaRestriction? GetMediaRestrictionByRestrictionId(byte id)
+        public IQueryable<MediaRestriction> GetMediaRestrictionsByRestrictionId(byte id)
         {
             IQueryable<MediaRestriction> mediaRestrictions = _context.MediaRestrictions;
-            return mediaRestrictions.FirstOrDefault(mr => mr.RestrictionId == id);
+            return mediaRestrictions.Where(mr => mr.RestrictionId == id);
         }
 
         public void AddMediaRestriction(MediaRestriction mediaRestriction)

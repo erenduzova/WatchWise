@@ -6,8 +6,8 @@ namespace WatchWise.Repositories.Interfaces
 	public interface IUserFavoriteRepository
 	{
         IQueryable<UserFavorite> GetAllUserFavorites();
-        UserFavorite? GetUserFavoriteByUserId(long userId);
-        UserFavorite? GetUserFavoriteByMediaId(int mediaId);
+        IQueryable<UserFavorite> GetUserFavoritesByUserId(long userId);
+        IQueryable<UserFavorite> GetUserFavoritesByMediaId(int mediaId);
         void AddUserFavorite(UserFavorite userFavorite);
         void DeleteUserFavorite(UserFavorite userFavorite);
     }

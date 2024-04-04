@@ -20,16 +20,16 @@ namespace WatchWise.Repositories.Implementations
             return userFavorites;
         }
 
-        public UserFavorite? GetUserFavoriteByUserId(long userId)
+        public IQueryable<UserFavorite> GetUserFavoritesByUserId(long userId)
         {
             IQueryable<UserFavorite> userFavorites = _context.UserFavorites;
-            return userFavorites.FirstOrDefault(uf => uf.UserId == userId);
+            return userFavorites.Where(uf => uf.UserId == userId);
         }
 
-        public UserFavorite? GetUserFavoriteByMediaId(int mediaId)
+        public IQueryable<UserFavorite> GetUserFavoritesByMediaId(int mediaId)
         {
             IQueryable<UserFavorite> userFavorites = _context.UserFavorites;
-            return userFavorites.FirstOrDefault(uf => uf.MediaId == mediaId);
+            return userFavorites.Where(uf => uf.MediaId == mediaId);
         }
 
         public void AddUserFavorite(UserFavorite userFavorite)

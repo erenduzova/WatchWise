@@ -6,8 +6,8 @@ namespace WatchWise.Repositories.Interfaces
 	public interface IMediaRestrictionRepository
 	{
         IQueryable<MediaRestriction> GetAllMediaRestrictions();
-        MediaRestriction? GetMediaRestrictionByMediaId(int id);
-        MediaRestriction? GetMediaRestrictionByRestrictionId(byte id);
+        IQueryable<MediaRestriction> GetMediaRestrictionsByMediaId(int id);
+        IQueryable<MediaRestriction> GetMediaRestrictionsByRestrictionId(byte id);
         void AddMediaRestriction(MediaRestriction mediaRestriction);
         void DeleteMediaRestriction(MediaRestriction mediaRestriction);
     }

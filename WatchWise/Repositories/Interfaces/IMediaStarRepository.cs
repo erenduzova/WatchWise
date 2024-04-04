@@ -6,8 +6,8 @@ namespace WatchWise.Repositories.Interfaces
 	public interface IMediaStarRepository
 	{
         IQueryable<MediaStar> GetAllMediaStars();
-        MediaStar? GetMediaStarByMediaId(int id);
-        MediaStar? GetMediaStarByStarId(int id);
+        IQueryable<MediaStar> GetMediaStarsByMediaId(int id);
+        IQueryable<MediaStar> GetMediaStarsByStarId(int id);
         void AddMediaStar(MediaStar mediaStar);
         void DeleteMediaStar(MediaStar mediaStar);
     }

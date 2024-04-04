@@ -20,16 +20,16 @@ namespace WatchWise.Repositories.Implementations
             return mediaGenres;
         }
 
-        public MediaGenre? GetMediaGenreByMediaId(int id)
+        public IQueryable<MediaGenre> GetMediaGenresByMediaId(int id)
         {
             IQueryable<MediaGenre> mediaGenres = _context.MediaGenres;
-            return mediaGenres.FirstOrDefault(mg => mg.MediaId == id);
+            return mediaGenres.Where(mg => mg.MediaId == id);
         }
 
-        public MediaGenre? GetMediaGenreByGenreId(short id)
+        public IQueryable<MediaGenre> GetMediaGenresByGenreId(short id)
         {
             IQueryable<MediaGenre> mediaGenres = _context.MediaGenres;
-            return mediaGenres.FirstOrDefault(mg => mg.GenreId == id);
+            return mediaGenres.Where(mg => mg.GenreId == id);
         }
 
         public void AddMediaGenre(MediaGenre mediaGenre)
