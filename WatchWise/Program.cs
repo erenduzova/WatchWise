@@ -58,6 +58,7 @@ public class Program
         builder.Services.AddScoped<IMediaStarRepository, MediaStarRepository>();
         builder.Services.AddScoped<IUserFavoriteRepository, UserFavoriteRepository>();
         builder.Services.AddScoped<IUserPlanRepository, UserPlanRepository>();
+        builder.Services.AddScoped<IUserWatchedEpisodeRepository, UserWatchedEpisodeRepository>();
 
         // Converters-Mappers
         builder.Services.AddScoped<WatchWiseUserConverter>();
