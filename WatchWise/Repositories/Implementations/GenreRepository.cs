@@ -14,9 +14,8 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Genre> GetAllGenres(bool includeMedia = false)
+        private IQueryable<Genre> IncludeRelatedObjects(IQueryable<Genre> genres, bool includeMedia)
         {
-            IQueryable<Genre> genres = _context.Genres;
             if (includeMedia)
             {
                 genres = genres.Include(g => g.MediaGenres);
@@ -24,23 +23,24 @@ namespace WatchWise.Repositories.Implementations
             return genres;
         }
 
+        public IQueryable<Genre> GetAllGenres(bool includeMedia = false)
+        {
+            IQueryable<Genre> genres = _context.Genres;
+            genres = IncludeRelatedObjects(genres, includeMedia);
+            return genres;
+        }
+
         public Genre? GetGenreById(short id, bool includeMedia = false)
         {
             IQueryable<Genre> genres = _context.Genres;
-            if (includeMedia)
-            {
-                genres = genres.Include(g => g.MediaGenres);
-            }
+            genres = IncludeRelatedObjects(genres, includeMedia);
             return genres.FirstOrDefault(g => g.Id == id);
         }
 
         public Genre? GetGenreByName(string name, bool includeMedia = false)
         {
             IQueryable<Genre> genres = _context.Genres;
-            if (includeMedia)
-            {
-                genres = genres.Include(g => g.MediaGenres);
-            }
+            genres = IncludeRelatedObjects(genres, includeMedia);
             return genres.FirstOrDefault(g => g.Name == name);
         }
 
@@ -55,5 +55,6 @@ namespace WatchWise.Repositories.Implementations
             _context.Genres.Update(genre);
             _context.SaveChanges();
         }
+
     }
 }

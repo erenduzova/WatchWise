@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -26,16 +18,16 @@ namespace WatchWise.Controllers
 
         // GET: api/Genres
         [HttpGet]
-        public ActionResult<List<GenreResponse>> GetGenres()
+        public ActionResult<List<GenreResponse>> GetGenres(bool includeMedia = false)
         {
-            return Ok(_genreService.GetAllGenreResponses());
+            return Ok(_genreService.GetAllGenreResponses(includeMedia));
         }
 
         // GET: api/Genres/5
         [HttpGet("{id}")]
-        public ActionResult<GenreResponse> GetGenre(short id)
+        public ActionResult<GenreResponse> GetGenre(short id, bool includeMedia = false)
         {
-            GenreResponse? genreResponse = _genreService.GetGenreResponseById(id);
+            GenreResponse? genreResponse = _genreService.GetGenreResponseById(id, includeMedia);
             if (genreResponse == null)
             {
                 return NotFound();
@@ -62,5 +54,6 @@ namespace WatchWise.Controllers
             _genreService.PostGenre(genreRequest);
             return Ok();
         }
+
     }
 }

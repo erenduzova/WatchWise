@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -20,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _genreConverter = genreConverter;
         }
 
-        public List<GenreResponse> GetAllGenreResponses()
+        public List<GenreResponse> GetAllGenreResponses(bool includeMedia)
         {
-            IQueryable<Genre> genres = _genreRepository.GetAllGenres(includeMediaGenres: true);
+            IQueryable<Genre> genres = _genreRepository.GetAllGenres(includeMedia);
             return _genreConverter.Convert(genres.AsNoTracking().ToList());
         }
 
-        public GenreResponse? GetGenreResponseById(short id)
+        public GenreResponse? GetGenreResponseById(short id, bool includeMedia)
         {
-            Genre? foundGenre = _genreRepository.GetGenreById(id, includeMediaGenres: true);
+            Genre? foundGenre = _genreRepository.GetGenreById(id, includeMedia);
             if (foundGenre != null)
             {
                 return _genreConverter.Convert(foundGenre);
@@ -53,6 +52,7 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
     }
 }
 
