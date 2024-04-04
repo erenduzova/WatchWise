@@ -14,9 +14,8 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Plan> GetAllPlans(bool includeUsers = false)
+        private IQueryable<Plan> IncludeRelatedObjects(IQueryable<Plan> plans, bool includeUsers)
         {
-            IQueryable<Plan> plans = _context.Plans;
             if (includeUsers)
             {
                 plans = plans.Include(p => p.UserPlans);
@@ -24,23 +23,24 @@ namespace WatchWise.Repositories.Implementations
             return plans;
         }
 
+        public IQueryable<Plan> GetAllPlans(bool includeUsers = false)
+        {
+            IQueryable<Plan> plans = _context.Plans;
+            plans = IncludeRelatedObjects(plans, includeUsers);
+            return plans;
+        }
+
         public Plan? GetPlanById(short id, bool includeUsers = false)
         {
             IQueryable<Plan> plans = _context.Plans;
-            if (includeUsers)
-            {
-                plans = plans.Include(p => p.UserPlans);
-            }
+            plans = IncludeRelatedObjects(plans, includeUsers);
             return plans.FirstOrDefault(p => p.Id == id);
         }
 
         public Plan? GetPlanByName(string name, bool includeUsers = false)
         {
             IQueryable<Plan> plans = _context.Plans;
-            if (includeUsers)
-            {
-                plans = plans.Include(p => p.UserPlans);
-            }
+            plans = IncludeRelatedObjects(plans, includeUsers);
             return plans.FirstOrDefault(p => p.Name == name);
         }
 
@@ -55,5 +55,6 @@ namespace WatchWise.Repositories.Implementations
             _context.Update(plan);
             _context.SaveChanges();
         }
+
     }
 }

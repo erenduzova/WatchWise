@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -26,16 +18,16 @@ namespace WatchWise.Controllers
 
         // GET: api/Plans
         [HttpGet]
-        public ActionResult<List<PlanResponse>> GetPlans()
+        public ActionResult<List<PlanResponse>> GetPlans(bool includeUsers = false)
         {
-            return Ok(_planService.GetAllPlanResponses());
+            return Ok(_planService.GetAllPlanResponses(includeUsers));
         }
 
         // GET: api/Plans/5
         [HttpGet("{id}")]
-        public ActionResult<PlanResponse> GetPlan(short id)
+        public ActionResult<PlanResponse> GetPlan(short id, bool includeUsers = false)
         {
-            PlanResponse? planResponse = _planService.GetPlanResponseById(id);
+            PlanResponse? planResponse = _planService.GetPlanResponseById(id, includeUsers);
             if (planResponse == null)
             {
                 return NotFound();
@@ -62,5 +54,6 @@ namespace WatchWise.Controllers
             _planService.PostPlan(planRequest);
             return Ok();
         }
+
     }
 }

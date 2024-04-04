@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -20,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _planConverter = planConverter;
         }
 
-        public List<PlanResponse> GetAllPlanResponses()
+        public List<PlanResponse> GetAllPlanResponses(bool includeUsers)
         {
-            IQueryable<Plan> plans = _planRepository.GetAllPlans(includeUsers: true);
+            IQueryable<Plan> plans = _planRepository.GetAllPlans(includeUsers);
             return _planConverter.Convert(plans.AsNoTracking().ToList());
         }
 
-        public PlanResponse? GetPlanResponseById(short id)
+        public PlanResponse? GetPlanResponseById(short id, bool includeUsers)
         {
-            Plan? foundPlan = _planRepository.GetPlanById(id, includeUsers: true);
+            Plan? foundPlan = _planRepository.GetPlanById(id, includeUsers);
             if (foundPlan != null)
             {
                 return _planConverter.Convert(foundPlan);
@@ -55,6 +54,7 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
     }
 }
 
