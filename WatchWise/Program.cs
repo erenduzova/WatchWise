@@ -42,6 +42,8 @@ public class Program
         builder.Services.AddScoped<IEpisodeService, EpisodeService>();
         builder.Services.AddScoped<IMediaService, MediaService>();
 
+        builder.Services.AddScoped<IMediaDirectorService, MediaDirectorService>();
+
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
