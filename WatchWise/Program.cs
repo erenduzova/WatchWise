@@ -54,6 +54,7 @@ public class Program
 
         builder.Services.AddScoped<IMediaDirectorRepository, MediaDirectorRepository>();
         builder.Services.AddScoped<IMediaGenreRepository, MediaGenreRepository>();
+        builder.Services.AddScoped<IMediaRestrictionRepository, MediaRestrictionRepository>();
 
         // Converters-Mappers
         builder.Services.AddScoped<WatchWiseUserConverter>();
