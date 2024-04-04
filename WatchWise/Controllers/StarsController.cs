@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -26,21 +18,20 @@ namespace WatchWise.Controllers
 
         // GET: api/Stars
         [HttpGet]
-        public ActionResult<List<StarResponse>> GetStars()
+        public ActionResult<List<StarResponse>> GetStars(bool includeMedia = false)
         {
-            return Ok(_starService.GetAllStarResponses());
+            return Ok(_starService.GetAllStarResponses(includeMedia));
         }
 
         // GET: api/Stars/5
         [HttpGet("{id}")]
-        public ActionResult<StarResponse> GetStar(int id)
+        public ActionResult<StarResponse> GetStar(int id, bool includeMedia = false)
         {
-            StarResponse? starResponse = _starService.GetStarResponseById(id);
+            StarResponse? starResponse = _starService.GetStarResponseById(id, includeMedia);
             if (starResponse == null)
             {
                 return NotFound();
             }
-
             return starResponse;
         }
 
@@ -53,7 +44,6 @@ namespace WatchWise.Controllers
             {
                 return NotFound();
             }
-
             return Ok();
         }
 
@@ -76,5 +66,6 @@ namespace WatchWise.Controllers
             }
             return NoContent();
         }
+
     }
 }

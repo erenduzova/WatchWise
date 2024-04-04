@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -20,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _starConverter = starConverter;
         }
 
-        public List<StarResponse> GetAllStarResponses()
+        public List<StarResponse> GetAllStarResponses(bool includeMedia)
         {
-            IQueryable<Star> stars = _starRepository.GetAllStars(includeMedias: true);
+            IQueryable<Star> stars = _starRepository.GetAllStars(includeMedia);
             return _starConverter.Convert(stars.AsNoTracking().ToList());
         }
 
-        public StarResponse? GetStarResponseById(int id)
+        public StarResponse? GetStarResponseById(int id, bool includeMedia)
         {
-            Star? foundStar = _starRepository.GetStarById(id);
+            Star? foundStar = _starRepository.GetStarById(id, includeMedia);
             if (foundStar != null)
             {
                 return _starConverter.Convert(foundStar);
@@ -42,17 +41,6 @@ namespace WatchWise.Services.Implementations
             _starRepository.AddStar(newStar);
         }
 
-        public int DeleteStar(int id)
-        {
-            Star? star = _starRepository.GetStarById(id);
-            if (star != null)
-            {
-                _starRepository.DeleteStar(star);
-                return 1;
-            }
-            return -1;
-        }
-
         public int UpdateStar(int id, StarRequest starRequest)
         {
             Star? star = _starRepository.GetStarById(id);
@@ -64,6 +52,18 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
+        public int DeleteStar(int id)
+        {
+            Star? star = _starRepository.GetStarById(id);
+            if (star != null)
+            {
+                _starRepository.DeleteStar(star);
+                return 1;
+            }
+            return -1;
+        }
+
     }
 }
 

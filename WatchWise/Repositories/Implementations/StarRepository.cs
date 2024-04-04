@@ -14,10 +14,8 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Star> GetAllStars(bool includeMedia = false)
+        private IQueryable<Star> IncludeRelatedObjects(IQueryable<Star> stars, bool includeMedia)
         {
-            IQueryable<Star> stars = _context.Stars;
-
             if (includeMedia)
             {
                 stars = stars.Include(s => s.MediaStars);
@@ -25,27 +23,24 @@ namespace WatchWise.Repositories.Implementations
             return stars;
         }
 
+        public IQueryable<Star> GetAllStars(bool includeMedia = false)
+        {
+            IQueryable<Star> stars = _context.Stars;
+            stars = IncludeRelatedObjects(stars, includeMedia);
+            return stars;
+        }
+
         public Star? GetStarById(int id, bool includeMedia = false)
         {
             IQueryable<Star> stars = _context.Stars;
-
-            if (includeMedia)
-            {
-                stars = stars.Include(s => s.MediaStars);
-            }
-
+            stars = IncludeRelatedObjects(stars, includeMedia);
             return stars.FirstOrDefault(s => s.Id == id);
         }
 
         public Star? GetStarByName(string name, bool includeMedia = false)
         {
             IQueryable<Star> stars = _context.Stars;
-
-            if (includeMedia)
-            {
-                stars = stars.Include(s => s.MediaStars);
-            }
-
+            stars = IncludeRelatedObjects(stars, includeMedia);
             return stars.FirstOrDefault(s => s.Name == name);
         }
 
@@ -54,15 +49,16 @@ namespace WatchWise.Repositories.Implementations
             _context.Stars.Add(star);
         }
 
-        public void DeleteStar(Star star)
-        {
-            _context.Stars.Remove(star);
-        }
-
         public void UpdateStar(Star star)
         {
             _context.Update(star);
             _context.SaveChanges();
         }
+
+        public void DeleteStar(Star star)
+        {
+            _context.Stars.Remove(star);
+        }
+
     }
 }
