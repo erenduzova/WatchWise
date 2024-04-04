@@ -1,17 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -30,14 +22,14 @@ namespace WatchWise.Controllers
         // GET: api/Users
         [HttpGet]
         //[Authorize("Administrator")]
-        public ActionResult<List<WatchWiseUserResponse>> GetUsers(bool includePassive = true)
+        public ActionResult<List<WatchWiseUserResponse>> GetUsers(bool includePassive = false, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
-            return Ok(_userService.GetAllUsersResponses(includePassive));
+            return Ok(_userService.GetAllUsersResponses(includePassive, includePlans, includeWatchedEpisodes, includeFavorites));
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public ActionResult<WatchWiseUserResponse> GetWatchWiseUser(long id)
+        public ActionResult<WatchWiseUserResponse> GetWatchWiseUser(long id, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
             if (User.IsInRole("Administrator") == false)
             {
@@ -46,7 +38,7 @@ namespace WatchWise.Controllers
                     return Unauthorized();
                 }
             }
-            WatchWiseUserResponse? foundUserResponse = _userService.GetWatchWiseUserResponseById(id);
+            WatchWiseUserResponse? foundUserResponse = _userService.GetWatchWiseUserResponseById(id, includePlans, includeWatchedEpisodes, includeFavorites);
             if (foundUserResponse == null)
             {
                 return NotFound();
@@ -71,7 +63,6 @@ namespace WatchWise.Controllers
             {
                 return NotFound();
             }
-
             return Ok();
         }
 

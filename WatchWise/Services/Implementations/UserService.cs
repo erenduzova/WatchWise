@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
@@ -24,9 +22,9 @@ namespace WatchWise.Services.Implementations
             _signInManager = signInManager;
         }
 
-        public List<WatchWiseUserResponse> GetAllUsersResponses(bool includePassive)
+        public List<WatchWiseUserResponse> GetAllUsersResponses(bool includePassive, bool includePlans, bool includeWatchedEpisodes, bool includeFavorites)
         {
-            IQueryable<WatchWiseUser> users = _usersRepository.GetAllUsers(includePlans:true, includeWatchedEpisodes:true, includeFavorites: true);
+            IQueryable<WatchWiseUser> users = _usersRepository.GetAllUsers(includePlans, includeWatchedEpisodes, includeFavorites);
             if (includePassive == false)
             {
                 users = users.Where(u => u.Passive == false);
@@ -34,9 +32,9 @@ namespace WatchWise.Services.Implementations
             return _userConverter.Convert(users.AsNoTracking().ToList());
         }
 
-        public WatchWiseUserResponse? GetWatchWiseUserResponseById(long id)
+        public WatchWiseUserResponse? GetWatchWiseUserResponseById(long id, bool includePlans, bool includeWatchedEpisodes, bool includeFavorites)
         {
-            WatchWiseUser? foundWatchWiseUser = _usersRepository.GetUserById(id, includePlans: true, includeWatchedEpisodes: true, includeFavorites: true);
+            WatchWiseUser? foundWatchWiseUser = _usersRepository.GetUserById(id, includePlans, includeWatchedEpisodes, includeFavorites);
             if (foundWatchWiseUser != null)
             {
                 return _userConverter.Convert(foundWatchWiseUser);
@@ -89,21 +87,19 @@ namespace WatchWise.Services.Implementations
         {
             string userName = logInRequest.UserName;
             string password = logInRequest.Password;
-            WatchWiseUser? watchWiseUser = _usersRepository.GetUserByUserName(userName, includePlans: true);
-
+            WatchWiseUser? watchWiseUser = _usersRepository.GetUserByUserName(userName, includePlans: true, includeWatchedEpisodes: true, includeFavorites: true);
             if (watchWiseUser == null)
             {
                 return SignInResult.NotAllowed;
             }
-
             if (watchWiseUser.UserPlans?.Where(u => u.EndDate >= DateTime.Today).Any() == false)
             {
                 watchWiseUser.Passive = true;
                 _usersRepository.UpdateUser(watchWiseUser);
             }
-
             return _signInManager.PasswordSignInAsync(watchWiseUser, password, false, false).Result;
         }
+
     }
 }
 

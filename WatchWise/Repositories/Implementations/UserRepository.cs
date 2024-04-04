@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchWise.Models;
 using WatchWise.Repositories.Interfaces;
-using WatchWise.Services;
 
 namespace WatchWise.Repositories.Implementations
 {
@@ -16,10 +14,8 @@ namespace WatchWise.Repositories.Implementations
             _signInManager = signInManager;
         }
 
-        public IQueryable<WatchWiseUser> GetAllUsers(bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
+        private IQueryable<WatchWiseUser> IncludeRealtedObjects(IQueryable<WatchWiseUser> users, bool includePlans, bool includeWatchedEpisodes, bool includeFavorites)
         {
-            IQueryable<WatchWiseUser> users = _signInManager.UserManager.Users;
-
             if (includePlans)
             {
                 users = users.Include(u => u.UserPlans);
@@ -37,46 +33,24 @@ namespace WatchWise.Repositories.Implementations
             return users;
         }
 
+        public IQueryable<WatchWiseUser> GetAllUsers(bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
+        {
+            IQueryable<WatchWiseUser> users = _signInManager.UserManager.Users;
+            users = IncludeRealtedObjects(users, includePlans, includeWatchedEpisodes, includeFavorites);
+            return users;
+        }
+
         public WatchWiseUser? GetUserById(long id, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
             IQueryable<WatchWiseUser> users = _signInManager.UserManager.Users;
-
-            if (includePlans)
-            {
-                users = users.Include(u => u.UserPlans);
-            }
-
-            if (includeWatchedEpisodes)
-            {
-                users = users.Include(u => u.UserWatchedEpisodes);
-            }
-
-            if (includeFavorites)
-            {
-                users = users.Include(u => u.UserFavorites);
-            }
+            users = IncludeRealtedObjects(users, includePlans, includeWatchedEpisodes, includeFavorites);
             return users.FirstOrDefault(u => u.Id == id);
         }
 
         public WatchWiseUser? GetUserByUserName(string userName, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
             IQueryable<WatchWiseUser> users = _signInManager.UserManager.Users;
-
-            if (includePlans)
-            {
-                users = users.Include(u => u.UserPlans);
-            }
-
-            if (includeWatchedEpisodes)
-            {
-                users = users.Include(u => u.UserWatchedEpisodes);
-            }
-
-            if (includeFavorites)
-            {
-                users = users.Include(u => u.UserFavorites);
-            }
-
+            users = IncludeRealtedObjects(users, includePlans, includeWatchedEpisodes, includeFavorites);
             return users.FirstOrDefault(u => u.UserName == userName);
         }
 
@@ -89,6 +63,7 @@ namespace WatchWise.Repositories.Implementations
         {
             _signInManager.UserManager.UpdateAsync(watchWiseUser).Wait();
         }
+
     }
 }
 
