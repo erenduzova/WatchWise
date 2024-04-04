@@ -31,6 +31,10 @@
     <None Remove="DTOs\Requests\" />
     <None Remove="DTOs\Responses\" />
     <None Remove="DTOs\Converters\" />
+    <None Remove="DTOs\Responses\CrossTableResponses\" />
+    <None Remove="DTOs\Requests\CrossTableRequests\" />
+    <None Remove="DTOs\Requests\UpdateRequests\" />
+    <None Remove="DTOs\Converters\CrossTableConverters\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -39,5 +43,9 @@
     <Folder Include="Controllers\" />
     <Folder Include="DTOs\Responses\" />
     <Folder Include="DTOs\Converters\" />
+    <Folder Include="DTOs\Responses\CrossTableResponses\" />
+    <Folder Include="DTOs\Requests\CrossTableRequests\" />
+    <Folder Include="DTOs\Requests\UpdateRequests\" />
+    <Folder Include="DTOs\Converters\CrossTableConverters\" />
   </ItemGroup>
 </Project>
