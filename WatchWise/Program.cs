@@ -43,6 +43,7 @@ public class Program
         builder.Services.AddScoped<IMediaService, MediaService>();
 
         builder.Services.AddScoped<IMediaDirectorService, MediaDirectorService>();
+        builder.Services.AddScoped<IMediaGenreService, MediaGenreService>();
 
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
