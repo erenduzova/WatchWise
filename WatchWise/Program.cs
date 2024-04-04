@@ -70,6 +70,8 @@ public class Program
         builder.Services.AddScoped<EpisodeConverter>();
         builder.Services.AddScoped<MediaConverter>();
 
+        builder.Services.AddScoped<MediaDirectorConverter>();
+
 
 
 
