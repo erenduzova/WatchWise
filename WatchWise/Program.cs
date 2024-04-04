@@ -73,6 +73,7 @@ public class Program
         builder.Services.AddScoped<MediaConverter>();
 
         builder.Services.AddScoped<MediaDirectorConverter>();
+        builder.Services.AddScoped<MediaGenreConverter>();
 
 
 
