@@ -26,21 +26,20 @@ namespace WatchWise.Controllers
 
         // GET: api/Directors
         [HttpGet]
-        public ActionResult<List<DirectorResponse>> GetDirectors()
+        public ActionResult<List<DirectorResponse>> GetDirectors(bool includeMedia = false)
         {
-            return Ok(_directorService.GetAllDirectorResponses());
+            return Ok(_directorService.GetAllDirectorResponses(includeMedia));
         }
 
         // GET: api/Directors/5
         [HttpGet("{id}")]
-        public ActionResult<DirectorResponse> GetDirector(int id)
+        public ActionResult<DirectorResponse> GetDirector(int id, bool includeMedia = false)
         {
-            DirectorResponse? directorResponse = _directorService.GetDirectorResponseById(id);
+            DirectorResponse? directorResponse = _directorService.GetDirectorResponseById(id, includeMedia);
             if (directorResponse == null)
             {
                 return NotFound();
             }
-
             return directorResponse;
         }
 
@@ -48,13 +47,11 @@ namespace WatchWise.Controllers
         [HttpPut("{id}")]
         public ActionResult PutDirector(int id, DirectorRequest directorRequest)
         {
-
             int updateResponse = _directorService.UpdateDirector(id, directorRequest);
             if (updateResponse == -1)
             {
                 return NotFound();
             }
-
             return Ok();
         }
 
@@ -77,5 +74,6 @@ namespace WatchWise.Controllers
             }
             return NoContent();
         }
+
     }
 }

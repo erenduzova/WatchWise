@@ -1,18 +1,15 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 
 namespace WatchWise.Services.Interfaces
 {
     public interface IDirectorService
     {
-        List<DirectorResponse> GetAllDirectorResponses();
-        DirectorResponse? GetDirectorResponseById(int id);
+        List<DirectorResponse> GetAllDirectorResponses(bool includeMedia);
+        DirectorResponse? GetDirectorResponseById(int id, bool includeMedia);
         void PostDirector(DirectorRequest directorRequest);
-        int DeleteDirector(int id);
         int UpdateDirector(int id, DirectorRequest directorRequest);
-
+        int DeleteDirector(int id);
     }
 }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -21,15 +20,15 @@ namespace WatchWise.Services.Implementations
             _directorConverter = directorConverter;
         }
 
-        public List<DirectorResponse> GetAllDirectorResponses()
+        public List<DirectorResponse> GetAllDirectorResponses(bool includeMedia)
         {
-            IQueryable<Director> directors = _directorRepository.GetAllDirectors(includeMedias: true);
+            IQueryable<Director> directors = _directorRepository.GetAllDirectors(includeMedia);
             return _directorConverter.Convert(directors.AsNoTracking().ToList());
         }
 
-        public DirectorResponse? GetDirectorResponseById(int id)
+        public DirectorResponse? GetDirectorResponseById(int id, bool includeMedia)
         {
-            Director? foundDirector = _directorRepository.GetDirectorById(id, includeMedias: true);
+            Director? foundDirector = _directorRepository.GetDirectorById(id, includeMedia);
             if (foundDirector != null)
             {
                 return _directorConverter.Convert(foundDirector);
@@ -43,17 +42,6 @@ namespace WatchWise.Services.Implementations
             _directorRepository.AddDirector(newDirector);
         }
 
-        public int DeleteDirector(int id)
-        {
-            Director? foundDirector = _directorRepository.GetDirectorById(id);
-            if (foundDirector != null)
-            {
-                _directorRepository.DeleteDirector(foundDirector);
-                return 1;
-            }
-            return -1;
-        }
-
         public int UpdateDirector(int id, DirectorRequest directorRequest)
         {
             Director? foundDirector = _directorRepository.GetDirectorById(id);
@@ -65,6 +53,18 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
+        public int DeleteDirector(int id)
+        {
+            Director? foundDirector = _directorRepository.GetDirectorById(id);
+            if (foundDirector != null)
+            {
+                _directorRepository.DeleteDirector(foundDirector);
+                return 1;
+            }
+            return -1;
+        }
+
     }
 }
 

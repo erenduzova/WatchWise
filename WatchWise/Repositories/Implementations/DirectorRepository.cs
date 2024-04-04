@@ -14,9 +14,8 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Director> GetAllDirectors(bool includeMedias = false)
+        private IQueryable<Director> IncludeRelatedObjects(IQueryable<Director> directors, bool includeMedias)
         {
-            IQueryable<Director> directors = _context.Directors;
             if (includeMedias)
             {
                 directors = directors.Include(d => d.MediaDirectors);
@@ -24,23 +23,24 @@ namespace WatchWise.Repositories.Implementations
             return directors;
         }
 
+        public IQueryable<Director> GetAllDirectors(bool includeMedias = false)
+        {
+            IQueryable<Director> directors = _context.Directors;
+            directors = IncludeRelatedObjects(directors, includeMedias);
+            return directors;
+        }
+
         public Director? GetDirectorById(int id, bool includeMedias = false)
         {
             IQueryable<Director> directors = _context.Directors;
-            if (includeMedias)
-            {
-                directors = directors.Include(d => d.MediaDirectors);
-            }
+            directors = IncludeRelatedObjects(directors, includeMedias);
             return directors.FirstOrDefault(d => d.Id == id);
         }
 
         public Director? GetDirectorByName(string name, bool includeMedias = false)
         {
             IQueryable<Director> directors = _context.Directors;
-            if (includeMedias)
-            {
-                directors = directors.Include(d => d.MediaDirectors);
-            }
+            directors = IncludeRelatedObjects(directors, includeMedias);
             return directors.FirstOrDefault(d => d.Name == name);
         }
 
@@ -50,16 +50,17 @@ namespace WatchWise.Repositories.Implementations
             _context.SaveChanges();
         }
 
+        public void UpdateDirector(Director director)
+        {
+            _context.Update(director);
+            _context.SaveChanges();
+        }
+
         public void DeleteDirector(Director director)
         {
             _context.Directors.Remove(director);
             _context.SaveChanges();
         }
 
-        public void UpdateDirector(Director director)
-        {
-            _context.Update(director);
-            _context.SaveChanges();
-        }
     }
 }
