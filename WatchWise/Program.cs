@@ -52,6 +52,8 @@ public class Program
         builder.Services.AddScoped<IStarRepository, StarRepository>();
         builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
 
+        builder.Services.AddScoped<IMediaDirectorRepository, MediaDirectorRepository>();
+
         // Converters-Mappers
         builder.Services.AddScoped<WatchWiseUserConverter>();
         builder.Services.AddScoped<DirectorConverter>();
