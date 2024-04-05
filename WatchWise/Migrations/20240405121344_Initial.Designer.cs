@@ -12,7 +12,7 @@ using WatchWise.Data;
 namespace WatchWise.Migrations
 {
     [DbContext(typeof(WatchWiseContext))]
-    [Migration("20240403121831_Initial")]
+    [Migration("20240405121344_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -378,6 +378,9 @@ namespace WatchWise.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Plans");
                 });

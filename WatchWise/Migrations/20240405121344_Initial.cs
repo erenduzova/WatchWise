@@ -508,6 +508,12 @@ namespace WatchWise.Migrations
                 column: "StarId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Plans_Name",
+                table: "Plans",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserFavorites_MediaId",
                 table: "UserFavorites",
                 column: "MediaId");

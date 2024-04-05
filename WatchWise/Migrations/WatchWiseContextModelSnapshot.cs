@@ -376,6 +376,9 @@ namespace WatchWise.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Plans");
                 });
 
