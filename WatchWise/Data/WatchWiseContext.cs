@@ -44,6 +44,7 @@ namespace WatchWise.Data
             builder.Entity<UserWatchedEpisode>().HasKey(ue => new { ue.UserId, ue.EpisodeId });
 
             builder.Entity<Episode>().HasIndex(e => new { e.MediaId, e.SeasonNum, e.EpisodeNum }).IsUnique();
+            builder.Entity<Plan>().HasIndex(p => p.Name).IsUnique();
 
             builder.Entity<MediaStar>()
                 .HasOne(ms => ms.Media)
