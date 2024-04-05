@@ -1,5 +1,4 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
