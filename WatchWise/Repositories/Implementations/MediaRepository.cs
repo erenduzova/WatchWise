@@ -14,13 +14,13 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Media> GetAllMedia(bool includeMediaGenres = false
-            , bool includeMediaStars = false
-            , bool includeMediaDirectors = false
-            , bool includeMediaRestrictions = false
-            , bool includeUserFavorites = false)
+        private IQueryable<Media> IncludeRelatedObjects(IQueryable<Media> medias
+            , bool includeMediaGenres
+            , bool includeMediaStars
+            , bool includeMediaDirectors
+            , bool includeMediaRestrictions
+            , bool includeUserFavorites)
         {
-            IQueryable<Media> medias = _context.Medias;
             if (includeMediaGenres)
             {
                 medias = medias.Include(m => m.MediaGenres);
@@ -44,6 +44,21 @@ namespace WatchWise.Repositories.Implementations
             return medias;
         }
 
+        public IQueryable<Media> GetAllMedia(bool includeMediaGenres = false
+            , bool includeMediaStars = false
+            , bool includeMediaDirectors = false
+            , bool includeMediaRestrictions = false
+            , bool includeUserFavorites = false)
+        {
+            IQueryable<Media> medias = _context.Medias;
+            medias = IncludeRelatedObjects(medias, includeMediaGenres
+                , includeMediaStars
+                , includeMediaDirectors
+                , includeMediaRestrictions
+                , includeUserFavorites);
+            return medias;
+        }
+
         public Media? GetMediaById(int id
             , bool includeMediaGenres = false
             , bool includeMediaStars = false
@@ -51,28 +66,13 @@ namespace WatchWise.Repositories.Implementations
             , bool includeMediaRestrictions = false
             , bool includeUserFavorites = false)
         {
-            IQueryable<Media> media = _context.Medias;
-            if (includeMediaGenres)
-            {
-                media = media.Include(m => m.MediaGenres);
-            }
-            if (includeMediaStars)
-            {
-                media = media.Include(m => m.MediaStars);
-            }
-            if (includeMediaDirectors)
-            {
-                media = media.Include(m => m.MediaDirectors);
-            }
-            if (includeMediaRestrictions)
-            {
-                media = media.Include(m => m.MediaRestrictions);
-            }
-            if (includeUserFavorites)
-            {
-                media = media.Include(m => m.UserFavorites);
-            }
-            return media.FirstOrDefault(m => m.Id == id);
+            IQueryable<Media> medias = _context.Medias;
+            medias = IncludeRelatedObjects(medias, includeMediaGenres
+                , includeMediaStars
+                , includeMediaDirectors
+                , includeMediaRestrictions
+                , includeUserFavorites);
+            return medias.FirstOrDefault(m => m.Id == id);
         }
 
         public Media? GetMediaByName(string name
@@ -82,28 +82,14 @@ namespace WatchWise.Repositories.Implementations
             , bool includeMediaRestrictions = false
             , bool includeUserFavorites = false)
         {
-            IQueryable<Media> media = _context.Medias;
-            if (includeMediaGenres)
-            {
-                media = media.Include(m => m.MediaGenres);
-            }
-            if (includeMediaStars)
-            {
-                media = media.Include(m => m.MediaStars);
-            }
-            if (includeMediaDirectors)
-            {
-                media = media.Include(m => m.MediaDirectors);
-            }
-            if (includeMediaRestrictions)
-            {
-                media = media.Include(m => m.MediaRestrictions);
-            }
-            if (includeUserFavorites)
-            {
-                media = media.Include(m => m.UserFavorites);
-            }
-            return media.FirstOrDefault(m => m.Name == name);
+            IQueryable<Media> medias = _context.Medias;
+            medias = IncludeRelatedObjects(medias
+                , includeMediaGenres
+                , includeMediaStars
+                , includeMediaDirectors
+                , includeMediaRestrictions
+                , includeUserFavorites);
+            return medias.FirstOrDefault(m => m.Name == name);
         }
 
         public void AddMedia(Media media)
@@ -117,5 +103,6 @@ namespace WatchWise.Repositories.Implementations
             _context.Update(media);
             _context.SaveChanges();
         }
+
     }
 }

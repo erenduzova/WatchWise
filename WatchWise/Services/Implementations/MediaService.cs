@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -21,18 +19,27 @@ namespace WatchWise.Services.Implementations
             _mediaConverter = mediaConverter;
         }
 
-        public List<MediaResponse> GetAllMediaResponses()
+        public List<MediaResponse> GetAllMediaResponses(bool includeMediaGenres
+            , bool includeMediaStars
+            , bool includeMediaDirectors
+            , bool includeMediaRestrictions
+            , bool includeUserFavorites)
         {
-            IQueryable<Media> media = _mediaRepository.GetAllMedia(includeMediaGenres: false
-            , includeMediaStars: false
-            , includeMediaDirectors: false
-            , includeMediaRestrictions: false
-            , includeUserFavorites: false);
+            IQueryable<Media> media = _mediaRepository.GetAllMedia(includeMediaGenres
+            , includeMediaStars
+            , includeMediaDirectors
+            , includeMediaRestrictions
+            , includeUserFavorites);
 
             return _mediaConverter.Convert(media.AsNoTracking().ToList());
         }
 
-        public MediaResponse? GetMediaResponseById(int id)
+        public MediaResponse? GetMediaResponseById(int id
+            , bool includeMediaGenres
+            , bool includeMediaStars
+            , bool includeMediaDirectors
+            , bool includeMediaRestrictions
+            , bool includeUserFavorites)
         {
             Media? foundMedia = _mediaRepository.GetMediaById(id);
             if (foundMedia != null)
@@ -68,6 +75,7 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
         public int DeleteMedia(int id)
         {
             Media? media = _mediaRepository.GetMediaById(id);
@@ -79,6 +87,7 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
     }
 }
 

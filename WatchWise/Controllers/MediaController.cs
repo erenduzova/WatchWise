@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -26,16 +18,33 @@ namespace WatchWise.Controllers
 
         // GET: api/Media
         [HttpGet]
-        public ActionResult<List<MediaResponse>> GetMedias()
+        public ActionResult<List<MediaResponse>> GetMedias(bool includeMediaGenres = false
+            , bool includeMediaStars = false
+            , bool includeMediaDirectors = false
+            , bool includeMediaRestrictions = false
+            , bool includeUserFavorites = false)
         {
-            return Ok(_mediaService.GetAllMediaResponses());
+            return Ok(_mediaService.GetAllMediaResponses(includeMediaGenres
+                , includeMediaStars
+                , includeMediaDirectors
+                , includeMediaRestrictions
+                , includeUserFavorites));
         }
 
         // GET: api/Media/5
         [HttpGet("{id}")]
-        public ActionResult<MediaResponse> GetMedia(int id)
+        public ActionResult<MediaResponse> GetMedia(int id
+            , bool includeMediaGenres = false
+            , bool includeMediaStars = false
+            , bool includeMediaDirectors = false
+            , bool includeMediaRestrictions = false
+            , bool includeUserFavorites = false)
         {
-            MediaResponse? mediaResponse = _mediaService.GetMediaResponseById(id);
+            MediaResponse? mediaResponse = _mediaService.GetMediaResponseById(id, includeMediaGenres
+                , includeMediaStars
+                , includeMediaDirectors
+                , includeMediaRestrictions
+                , includeUserFavorites);
             if (mediaResponse == null)
             {
                 return NotFound();
@@ -74,5 +83,6 @@ namespace WatchWise.Controllers
             }
             return NoContent();
         }
+
     }
 }
