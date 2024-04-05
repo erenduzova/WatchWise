@@ -48,6 +48,7 @@ public class Program
         builder.Services.AddScoped<IMediaRestrictionService, MediaRestrictionService>();
         builder.Services.AddScoped<IUserFavoriteService, UserFavoriteService>();
         builder.Services.AddScoped<IUserWatchedEpisodeService, UserWatchedEpisodeService>();
+        builder.Services.AddScoped<IUserPlanService, UserPlanService>();
 
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
