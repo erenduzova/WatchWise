@@ -1,5 +1,4 @@
-﻿using System;
-namespace WatchWise.DTOs.Responses
+﻿namespace WatchWise.DTOs.Responses
 {
 	public class MediaDirectorResponse
 	{

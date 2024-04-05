@@ -1,9 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
-using WatchWise.Models;
-
-namespace WatchWise.DTOs.Responses
+﻿namespace WatchWise.DTOs.Responses
 {
 	public class UserPlanResponse
 	{

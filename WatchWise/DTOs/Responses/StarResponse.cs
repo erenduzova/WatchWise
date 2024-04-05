@@ -1,11 +1,8 @@
-﻿using System;
-using WatchWise.Models;
-
-namespace WatchWise.DTOs.Responses
+﻿namespace WatchWise.DTOs.Responses
 {
 	public class StarResponse : PersonResponse
 	{
-        public List<MediaStar>? MediaStars { get; set; }
+        public List<int>? MediaIds { get; set; }
     }
 }
 
