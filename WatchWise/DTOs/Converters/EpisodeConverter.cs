@@ -1,8 +1,6 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
@@ -38,13 +36,8 @@ namespace WatchWise.DTOs.Converters
                 Description = episode.Description,
                 Duration = episode.Duration,
                 ViewCount = episode.ViewCount,
-                Passive = episode.Passive,
-                UserWatchedEpisodes = new List<UserWatchedEpisode>()
+                Passive = episode.Passive
             };
-            if (episode.UserWatchedEpisodes != null)
-            {
-                episodeResponse.UserWatchedEpisodes = episode.UserWatchedEpisodes;
-            }
             return episodeResponse;
         }
 
@@ -57,6 +50,7 @@ namespace WatchWise.DTOs.Converters
             }
             return episodeResponses;
         }
+
     }
 }
 

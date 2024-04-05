@@ -1,5 +1,4 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
@@ -22,12 +21,11 @@ namespace WatchWise.DTOs.Converters
             {
                 Id = star.Id,
                 Name = star.Name,
-                MediaStars = new List<MediaStar>()
+                MediaIds = new List<int>()
             };
             if (star.MediaStars != null)
             {
-                starResponse.MediaStars = star.MediaStars;
-
+                starResponse.MediaIds = star.MediaStars.Select(ms => ms.MediaId).ToList();
             }
             return starResponse;
         }
@@ -41,6 +39,7 @@ namespace WatchWise.DTOs.Converters
             }
             return starResponses;
         }
+
     }
 }
 

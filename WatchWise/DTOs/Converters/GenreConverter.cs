@@ -1,5 +1,4 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
@@ -22,11 +21,11 @@ namespace WatchWise.DTOs.Converters
             {
                 Id = genre.Id,
                 Name = genre.Name,
-                MediaGenres = new List<MediaGenre>()
+                MediaIds = new List<int>()
             };
             if (genre.MediaGenres != null)
             {
-                genreResponse.MediaGenres = genre.MediaGenres;
+                genreResponse.MediaIds = genre.MediaGenres.Select(ms => ms.MediaId).ToList();
 
             }
             return genreResponse;
@@ -41,6 +40,7 @@ namespace WatchWise.DTOs.Converters
             }
             return genreResponse;
         }
+
     }
 }
 

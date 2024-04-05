@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
@@ -18,7 +15,6 @@ namespace WatchWise.DTOs.Converters
                 Email = watchWiseUserRequest.Email,
                 PhoneNumber = watchWiseUserRequest.PhoneNumber,
                 BirthDate = watchWiseUserRequest.BirthDate,
-
                 Passive = false
             };
             return newWatchWiseUser;
@@ -34,12 +30,7 @@ namespace WatchWise.DTOs.Converters
                 Email = watchWiseUser.Email!,
                 PhoneNumber = watchWiseUser.PhoneNumber!,
                 BirthDate = watchWiseUser.BirthDate,
-
-                Passive = watchWiseUser.Passive,
-
-                UserWatchedEpisodes = watchWiseUser.UserWatchedEpisodes,
-                UserFavorites = watchWiseUser.UserFavorites,
-                UserPlans = watchWiseUser.UserPlans
+                Passive = watchWiseUser.Passive
             };
             return newWatchWiseUserResponse;
         }
@@ -53,6 +44,7 @@ namespace WatchWise.DTOs.Converters
             }
             return userResponses;
         }
+
     }
 }
 

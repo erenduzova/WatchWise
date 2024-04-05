@@ -1,8 +1,6 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
@@ -26,13 +24,8 @@ namespace WatchWise.DTOs.Converters
                 Id = plan.Id,
                 Name = plan.Name,
                 Price = plan.Price,
-                MaxResolution = plan.MaxResolution,
-                UserPlans = new List<UserPlan>()
+                MaxResolution = plan.MaxResolution
             };
-            if (plan.UserPlans != null)
-            {
-                planResponse.UserPlans = plan.UserPlans;
-            }
             return planResponse;
         }
 
@@ -45,6 +38,7 @@ namespace WatchWise.DTOs.Converters
             }
             return planResponse;
         }
+
     }
 }
 

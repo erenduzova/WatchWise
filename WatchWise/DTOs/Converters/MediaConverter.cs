@@ -1,8 +1,6 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
@@ -29,31 +27,26 @@ namespace WatchWise.DTOs.Converters
                 Description = media.Description,
                 ImdbRating = media.ImdbRating,
                 Passive = media.Passive,
-                MediaGenres = new List<MediaGenre>(),
-                MediaStars = new List<MediaStar>(),
-                MediaDirectors = new List<MediaDirector>(),
-                MediaRestrictions = new List<MediaRestriction>(),
-                UserFavorites = new List<UserFavorite>()
+                GenreIds = new List<short>(),
+                RestrictionIds = new List<byte>(),
+                DirectorIds = new List<int>(),
+                StarIds = new List<int>()
             };
             if (media.MediaGenres != null)
             {
-                mediaResponse.MediaGenres = media.MediaGenres;
+                mediaResponse.GenreIds = media.MediaGenres.Select(ms => ms.GenreId).ToList();
             }
             if (media.MediaStars != null)
             {
-                mediaResponse.MediaStars = media.MediaStars;
+                mediaResponse.StarIds = media.MediaStars.Select(ms => ms.StarId).ToList();
             }
             if (media.MediaDirectors != null)
             {
-                mediaResponse.MediaDirectors = media.MediaDirectors;
+                mediaResponse.DirectorIds = media.MediaDirectors.Select(ms => ms.DirectorId).ToList();
             }
             if (media.MediaRestrictions != null)
             {
-                mediaResponse.MediaRestrictions = media.MediaRestrictions;
-            }
-            if (media.UserFavorites != null)
-            {
-                mediaResponse.UserFavorites = media.UserFavorites;
+                mediaResponse.RestrictionIds = media.MediaRestrictions.Select(ms => ms.RestrictionId).ToList();
             }
             return mediaResponse;
         }
@@ -67,6 +60,7 @@ namespace WatchWise.DTOs.Converters
             }
             return mediaResponses;
         }
+
     }
 }
 

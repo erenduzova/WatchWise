@@ -1,9 +1,6 @@
-﻿using System;
-using System.Numerics;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
@@ -24,13 +21,8 @@ namespace WatchWise.DTOs.Converters
             RestrictionResponse restrictionResponse = new()
             {
                 Id = restriction.Id,
-                Name = restriction.Name,
-                MediaRestrictions = new List<MediaRestriction>()
+                Name = restriction.Name
             };
-            if (restriction.MediaRestrictions != null)
-            {
-                restrictionResponse.MediaRestrictions = restriction.MediaRestrictions;
-            }
             return restrictionResponse;
         }
 
@@ -43,6 +35,7 @@ namespace WatchWise.DTOs.Converters
             }
             return restrictionResponses;
         }
+
     }
 }
 

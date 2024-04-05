@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
@@ -23,11 +21,11 @@ namespace WatchWise.DTOs.Converters
             {
 				Id = director.Id,
                 Name = director.Name,
-                MediaDirectors = new List<MediaDirector>()
+                MediaIds = new List<int>()
             };
 			if (director.MediaDirectors != null)
 			{
-                directorResponse.MediaDirectors = director.MediaDirectors;
+                directorResponse.MediaIds = director.MediaDirectors.Select(ms => ms.MediaId).ToList();
 
             }
             return directorResponse;
@@ -42,6 +40,7 @@ namespace WatchWise.DTOs.Converters
             }
             return directorResponses;
         }
+
     }
 }
 
