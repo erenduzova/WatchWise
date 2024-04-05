@@ -46,6 +46,7 @@ public class Program
         builder.Services.AddScoped<IMediaGenreService, MediaGenreService>();
         builder.Services.AddScoped<IMediaStarService, MediaStarService>();
         builder.Services.AddScoped<IMediaRestrictionService, MediaRestrictionService>();
+        builder.Services.AddScoped<IUserFavoriteService, UserFavoriteService>();
 
         // Repositories
         builder.Services.AddScoped<IUserRepository, UserRepository>();
