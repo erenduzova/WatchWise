@@ -14,9 +14,8 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        public IQueryable<Episode> GetAllEpisodes(bool includeUserWatchedEpisodes = false)
+        private IQueryable<Episode> IncludeRelatedObjects(IQueryable<Episode> episodes, bool includeUserWatchedEpisodes)
         {
-            IQueryable<Episode> episodes = _context.Episodes;
             if (includeUserWatchedEpisodes)
             {
                 episodes = episodes.Include(e => e.UserWatchedEpisodes);
@@ -24,13 +23,17 @@ namespace WatchWise.Repositories.Implementations
             return episodes;
         }
 
+        public IQueryable<Episode> GetAllEpisodes(bool includeUserWatchedEpisodes = false)
+        {
+            IQueryable<Episode> episodes = _context.Episodes;
+            episodes = IncludeRelatedObjects(episodes, includeUserWatchedEpisodes);
+            return episodes;
+        }
+
         public Episode? GetEpisodeById(long id, bool includeUserWatchedEpisodes = false)
         {
             IQueryable<Episode> episodes = _context.Episodes;
-            if (includeUserWatchedEpisodes)
-            {
-                episodes = episodes.Include(e => e.UserWatchedEpisodes);
-            }
+            episodes = IncludeRelatedObjects(episodes, includeUserWatchedEpisodes);
             return episodes.FirstOrDefault(e => e.Id == id);
         }
 
@@ -42,7 +45,7 @@ namespace WatchWise.Repositories.Implementations
 
         public void UpdateEpisode(Episode episode)
         {
-            _context.Update(episode);
+            _context.Episodes.Update(episode);
             _context.SaveChanges();
         }
     }

@@ -1,15 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WatchWise.Data;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
-using WatchWise.Services.Implementations;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -27,16 +18,16 @@ namespace WatchWise.Controllers
 
         // GET: api/Episodes
         [HttpGet]
-        public ActionResult<List<EpisodeResponse>> GetEpisodes()
+        public ActionResult<List<EpisodeResponse>> GetEpisodes(bool includeUserWatchedEpisodes = false)
         {
-            return _episodeService.GetAllEpisodeResponses();
+            return _episodeService.GetAllEpisodeResponses(includeUserWatchedEpisodes);
         }
 
         // GET: api/Episodes/5
         [HttpGet("{id}")]
-        public ActionResult<EpisodeResponse> GetEpisode(long id)
+        public ActionResult<EpisodeResponse> GetEpisode(long id, bool includeUserWatchedEpisodes = false)
         {
-            EpisodeResponse? episodeResponse = _episodeService.GetEpisodeResponseById(id);
+            EpisodeResponse? episodeResponse = _episodeService.GetEpisodeResponseById(id, includeUserWatchedEpisodes);
             if (episodeResponse == null)
             {
                 return NotFound();
@@ -75,5 +66,6 @@ namespace WatchWise.Controllers
             }
             return NoContent();
         }
+
     }
 }

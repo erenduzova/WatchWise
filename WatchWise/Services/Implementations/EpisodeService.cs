@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
-using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -21,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _episodeConverter = episodeConverter;
         }
 
-        public List<EpisodeResponse> GetAllEpisodeResponses()
+        public List<EpisodeResponse> GetAllEpisodeResponses(bool includeUserWatchedEpisodes)
         {
-            IQueryable<Episode> episodes = _episodeRepository.GetAllEpisodes(includeUserWatchedEpisodes: true);
+            IQueryable<Episode> episodes = _episodeRepository.GetAllEpisodes(includeUserWatchedEpisodes);
             return _episodeConverter.Convert(episodes.AsNoTracking().ToList());
         }
 
-        public EpisodeResponse? GetEpisodeResponseById(long id)
+        public EpisodeResponse? GetEpisodeResponseById(long id, bool includeUserWatchedEpisodes)
         {
-            Episode? foundEpisode = _episodeRepository.GetEpisodeById(id, includeUserWatchedEpisodes: true);
+            Episode? foundEpisode = _episodeRepository.GetEpisodeById(id, includeUserWatchedEpisodes);
             if (foundEpisode != null)
             {
                 return _episodeConverter.Convert(foundEpisode);
@@ -41,18 +39,6 @@ namespace WatchWise.Services.Implementations
         {
             Episode newEpisode = _episodeConverter.Convert(episodeRequest);
             _episodeRepository.AddEpisode(newEpisode);
-        }
-
-        public int DeleteEpisode(long id)
-        {
-            Episode? foundEpisode = _episodeRepository.GetEpisodeById(id);
-            if (foundEpisode != null)
-            {
-                foundEpisode.Passive = true;
-                _episodeRepository.UpdateEpisode(foundEpisode);
-                return 1;
-            }
-            return -1;
         }
 
         public int UpdateEpisode(long id, EpisodeUpdateRequest episodeUpdateRequest)
@@ -73,6 +59,19 @@ namespace WatchWise.Services.Implementations
             }
             return -1;
         }
+
+        public int DeleteEpisode(long id)
+        {
+            Episode? foundEpisode = _episodeRepository.GetEpisodeById(id);
+            if (foundEpisode != null)
+            {
+                foundEpisode.Passive = true;
+                _episodeRepository.UpdateEpisode(foundEpisode);
+                return 1;
+            }
+            return -1;
+        }
+
     }
 }
 
