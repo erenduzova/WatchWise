@@ -12,8 +12,7 @@ namespace WatchWise.DTOs.Converters
 		{
 			Director newDirector = new()
 			{
-				Name = directorRequest.Name,
-				MediaDirectors = new List<MediaDirector>()
+				Name = directorRequest.Name
 			};
 			return newDirector;
 		}

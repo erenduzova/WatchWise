@@ -14,8 +14,7 @@ namespace WatchWise.DTOs.Converters
             {
                 Name = planRequest.Name,
                 Price = planRequest.Price,
-                MaxResolution = planRequest.MaxResolution,
-                UserPlans = new List<UserPlan>()
+                MaxResolution = planRequest.MaxResolution
             };
             return newPlan;
         }

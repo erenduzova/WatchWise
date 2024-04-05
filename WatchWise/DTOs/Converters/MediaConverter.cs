@@ -15,12 +15,7 @@ namespace WatchWise.DTOs.Converters
                 Name = mediaRequest.Name,
                 Description = mediaRequest.Description,
                 ImdbRating = mediaRequest.ImdbRating,
-                Passive = mediaRequest.Passive,
-                MediaGenres = new List<MediaGenre>(),
-                MediaStars = new List<MediaStar>(),
-                MediaDirectors = new List<MediaDirector>(),
-                MediaRestrictions = new List<MediaRestriction>(),
-                UserFavorites = new List<UserFavorite>()
+                Passive = mediaRequest.Passive
             };
             return newMedia;
         }

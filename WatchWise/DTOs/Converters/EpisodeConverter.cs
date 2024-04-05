@@ -20,8 +20,7 @@ namespace WatchWise.DTOs.Converters
                 Description = episodeRequest.Description,
                 Duration = episodeRequest.Duration,
                 ViewCount = 0,
-                Passive = false,
-                UserWatchedEpisodes = new List<UserWatchedEpisode>()
+                Passive = false
             };
             return newEpisode;
         }

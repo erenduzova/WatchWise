@@ -19,11 +19,7 @@ namespace WatchWise.DTOs.Converters
                 PhoneNumber = watchWiseUserRequest.PhoneNumber,
                 BirthDate = watchWiseUserRequest.BirthDate,
 
-                Passive = false,
-
-                UserWatchedEpisodes = new List<UserWatchedEpisode>(),
-                UserFavorites = new List<UserFavorite>(),
-                UserPlans = new List<UserPlan>()
+                Passive = false
             };
             return newWatchWiseUser;
         }

@@ -14,8 +14,7 @@ namespace WatchWise.DTOs.Converters
             Restriction newRestriction = new()
             {
                 Id = restrictionRequest.Id,
-                Name = restrictionRequest.Name,
-                MediaRestrictions = new List<MediaRestriction>()
+                Name = restrictionRequest.Name
             };
             return newRestriction;
         }

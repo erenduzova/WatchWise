@@ -11,8 +11,7 @@ namespace WatchWise.DTOs.Converters
         {
             Star newStar = new()
             {
-                Name = starRequest.Name,
-                MediaStars = new List<MediaStar>()
+                Name = starRequest.Name
             };
             return newStar;
         }

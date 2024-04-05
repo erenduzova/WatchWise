@@ -11,8 +11,7 @@ namespace WatchWise.DTOs.Converters
         {
             Genre newGenre = new()
             {
-                Name = genreRequest.Name,
-                MediaGenres = new List<MediaGenre>()
+                Name = genreRequest.Name
             };
             return newGenre;
         }
