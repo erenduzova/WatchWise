@@ -10,7 +10,6 @@ namespace WatchWise.Repositories.Interfaces
         IQueryable<UserPlan> GetUserPlansByUserId(long userId);
         IQueryable<UserPlan> GetUserPlansByPlanId(short planId);
         void AddUserPlan(UserPlan userPlan);
-        void DeleteUserPlan(UserPlan userPlan);
     }
 }
 

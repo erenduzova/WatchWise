@@ -44,11 +44,6 @@ namespace WatchWise.Repositories.Implementations
             _context.SaveChanges();
         }
 
-        public void DeleteUserPlan(UserPlan userPlan)
-        {
-            _context.UserPlans.Remove(userPlan);
-            _context.SaveChanges();
-        }
     }
 }
 
