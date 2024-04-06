@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WatchWise.Data;
 using WatchWise.DTOs.Converters;
@@ -102,6 +101,15 @@ public class Program
 
 
         app.MapControllers();
+
+        WatchWiseContext? watchWiseContext = app.Services.CreateScope().ServiceProvider.GetService<WatchWiseContext>(); 
+        UserManager<WatchWiseUser>? userManager = app.Services.CreateScope().ServiceProvider.GetService<UserManager<WatchWiseUser>>();
+        RoleManager<WatchWiseRole>? roleManager = app.Services.CreateScope().ServiceProvider.GetService<RoleManager<WatchWiseRole>>();
+        if (watchWiseContext != null && userManager != null && roleManager != null)
+        {
+            DbInitializer dbInitializer = new DbInitializer(watchWiseContext, userManager, roleManager);
+            dbInitializer.Initialize();
+        }
 
         app.Run();
     }
