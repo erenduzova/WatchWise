@@ -18,16 +18,16 @@ namespace WatchWise.Controllers
 
         // GET: api/Plans
         [HttpGet]
-        public ActionResult<List<PlanResponse>> GetPlans(bool includeUsers = false)
+        public ActionResult<List<PlanResponse>> GetPlans()
         {
-            return Ok(_planService.GetAllPlanResponses(includeUsers));
+            return Ok(_planService.GetAllPlanResponses());
         }
 
         // GET: api/Plans/5
         [HttpGet("{id}")]
-        public ActionResult<PlanResponse> GetPlan(short id, bool includeUsers = false)
+        public ActionResult<PlanResponse> GetPlan(short id)
         {
-            PlanResponse? planResponse = _planService.GetPlanResponseById(id, includeUsers);
+            PlanResponse? planResponse = _planService.GetPlanResponseById(id);
             if (planResponse == null)
             {
                 return NotFound();

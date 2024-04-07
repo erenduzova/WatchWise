@@ -19,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _planConverter = planConverter;
         }
 
-        public List<PlanResponse> GetAllPlanResponses(bool includeUsers)
+        public List<PlanResponse> GetAllPlanResponses()
         {
-            IQueryable<Plan> plans = _planRepository.GetAllPlans(includeUsers);
+            IQueryable<Plan> plans = _planRepository.GetAllPlans();
             return _planConverter.Convert(plans.AsNoTracking().ToList());
         }
 
-        public PlanResponse? GetPlanResponseById(short id, bool includeUsers)
+        public PlanResponse? GetPlanResponseById(short id)
         {
-            Plan? foundPlan = _planRepository.GetPlanById(id, includeUsers);
+            Plan? foundPlan = _planRepository.GetPlanById(id);
             if (foundPlan != null)
             {
                 return _planConverter.Convert(foundPlan);

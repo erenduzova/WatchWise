@@ -5,8 +5,8 @@ namespace WatchWise.Services.Interfaces
 {
 	public interface IPlanService
 	{
-        List<PlanResponse> GetAllPlanResponses(bool includeUsers);
-        PlanResponse? GetPlanResponseById(short id, bool includeUsers);
+        List<PlanResponse> GetAllPlanResponses();
+        PlanResponse? GetPlanResponseById(short id);
         void PostPlan(PlanRequest planRequest);
         int UpdatePlan(short id, PlanRequest planRequest);
     }
