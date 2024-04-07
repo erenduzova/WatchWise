@@ -18,16 +18,16 @@ namespace WatchWise.Controllers
 
         // GET: api/Episodes
         [HttpGet]
-        public ActionResult<List<EpisodeResponse>> GetEpisodes(bool includeUserWatchedEpisodes = false)
+        public ActionResult<List<EpisodeResponse>> GetEpisodes()
         {
-            return _episodeService.GetAllEpisodeResponses(includeUserWatchedEpisodes);
+            return _episodeService.GetAllEpisodeResponses();
         }
 
         // GET: api/Episodes/5
         [HttpGet("{id}")]
-        public ActionResult<EpisodeResponse> GetEpisode(long id, bool includeUserWatchedEpisodes = false)
+        public ActionResult<EpisodeResponse> GetEpisode(long id)
         {
-            EpisodeResponse? episodeResponse = _episodeService.GetEpisodeResponseById(id, includeUserWatchedEpisodes);
+            EpisodeResponse? episodeResponse = _episodeService.GetEpisodeResponseById(id);
             if (episodeResponse == null)
             {
                 return NotFound();

@@ -19,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _episodeConverter = episodeConverter;
         }
 
-        public List<EpisodeResponse> GetAllEpisodeResponses(bool includeUserWatchedEpisodes)
+        public List<EpisodeResponse> GetAllEpisodeResponses()
         {
-            IQueryable<Episode> episodes = _episodeRepository.GetAllEpisodes(includeUserWatchedEpisodes);
+            IQueryable<Episode> episodes = _episodeRepository.GetAllEpisodes();
             return _episodeConverter.Convert(episodes.AsNoTracking().ToList());
         }
 
-        public EpisodeResponse? GetEpisodeResponseById(long id, bool includeUserWatchedEpisodes)
+        public EpisodeResponse? GetEpisodeResponseById(long id)
         {
-            Episode? foundEpisode = _episodeRepository.GetEpisodeById(id, includeUserWatchedEpisodes);
+            Episode? foundEpisode = _episodeRepository.GetEpisodeById(id);
             if (foundEpisode != null)
             {
                 return _episodeConverter.Convert(foundEpisode);
