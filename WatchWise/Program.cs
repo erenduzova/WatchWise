@@ -50,40 +50,40 @@ public class Program
         builder.Services.AddScoped<IUserPlanService, UserPlanService>();
 
         // Repositories
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
-        builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
-        builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-        builder.Services.AddScoped<IMediaRepository, MediaRepository>();
-        builder.Services.AddScoped<IPlanRepository, PlanRepository>();
-        builder.Services.AddScoped<IRestrictionRepository, RestrictionRepository>();
-        builder.Services.AddScoped<IStarRepository, StarRepository>();
-        builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
+        builder.Services.AddTransient<IUserRepository, UserRepository>();
+        builder.Services.AddTransient<IDirectorRepository, DirectorRepository>();
+        builder.Services.AddTransient<IGenreRepository, GenreRepository>();
+        builder.Services.AddTransient<IMediaRepository, MediaRepository>();
+        builder.Services.AddTransient<IPlanRepository, PlanRepository>();
+        builder.Services.AddTransient<IRestrictionRepository, RestrictionRepository>();
+        builder.Services.AddTransient<IStarRepository, StarRepository>();
+        builder.Services.AddTransient<IEpisodeRepository, EpisodeRepository>();
 
-        builder.Services.AddScoped<IMediaDirectorRepository, MediaDirectorRepository>();
-        builder.Services.AddScoped<IMediaGenreRepository, MediaGenreRepository>();
-        builder.Services.AddScoped<IMediaRestrictionRepository, MediaRestrictionRepository>();
-        builder.Services.AddScoped<IMediaStarRepository, MediaStarRepository>();
-        builder.Services.AddScoped<IUserFavoriteRepository, UserFavoriteRepository>();
-        builder.Services.AddScoped<IUserPlanRepository, UserPlanRepository>();
-        builder.Services.AddScoped<IUserWatchedEpisodeRepository, UserWatchedEpisodeRepository>();
+        builder.Services.AddTransient<IMediaDirectorRepository, MediaDirectorRepository>();
+        builder.Services.AddTransient<IMediaGenreRepository, MediaGenreRepository>();
+        builder.Services.AddTransient<IMediaRestrictionRepository, MediaRestrictionRepository>();
+        builder.Services.AddTransient<IMediaStarRepository, MediaStarRepository>();
+        builder.Services.AddTransient<IUserFavoriteRepository, UserFavoriteRepository>();
+        builder.Services.AddTransient<IUserPlanRepository, UserPlanRepository>();
+        builder.Services.AddTransient<IUserWatchedEpisodeRepository, UserWatchedEpisodeRepository>();
 
         // Converters-Mappers
-        builder.Services.AddScoped<WatchWiseUserConverter>();
-        builder.Services.AddScoped<DirectorConverter>();
-        builder.Services.AddScoped<StarConverter>();
-        builder.Services.AddScoped<GenreConverter>();
-        builder.Services.AddScoped<PlanConverter>();
-        builder.Services.AddScoped<RestrictionConverter>();
-        builder.Services.AddScoped<EpisodeConverter>();
-        builder.Services.AddScoped<MediaConverter>();
+        builder.Services.AddTransient<WatchWiseUserConverter>();
+        builder.Services.AddTransient<DirectorConverter>();
+        builder.Services.AddTransient<StarConverter>();
+        builder.Services.AddTransient<GenreConverter>();
+        builder.Services.AddTransient<PlanConverter>();
+        builder.Services.AddTransient<RestrictionConverter>();
+        builder.Services.AddTransient<EpisodeConverter>();
+        builder.Services.AddTransient<MediaConverter>();
 
-        builder.Services.AddScoped<MediaDirectorConverter>();
-        builder.Services.AddScoped<MediaGenreConverter>();
-        builder.Services.AddScoped<MediaRestrictionConverter>();
-        builder.Services.AddScoped<MediaStarConverter>();
-        builder.Services.AddScoped<UserFavoriteConverter>();
-        builder.Services.AddScoped<UserPlanConverter>();
-        builder.Services.AddScoped<UserWatchedEpisodeConverter>();
+        builder.Services.AddTransient<MediaDirectorConverter>();
+        builder.Services.AddTransient<MediaGenreConverter>();
+        builder.Services.AddTransient<MediaRestrictionConverter>();
+        builder.Services.AddTransient<MediaStarConverter>();
+        builder.Services.AddTransient<UserFavoriteConverter>();
+        builder.Services.AddTransient<UserPlanConverter>();
+        builder.Services.AddTransient<UserWatchedEpisodeConverter>();
 
 
 
