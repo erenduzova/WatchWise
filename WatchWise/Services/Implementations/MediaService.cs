@@ -8,8 +8,8 @@ using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Services.Implementations
 {
-	public class MediaService : IMediaService
-	{
+    public class MediaService : IMediaService
+    {
         private readonly IMediaRepository _mediaRepository;
         private readonly MediaConverter _mediaConverter;
 
@@ -22,14 +22,12 @@ namespace WatchWise.Services.Implementations
         public List<MediaResponse> GetAllMediaResponses(bool includeMediaGenres
             , bool includeMediaStars
             , bool includeMediaDirectors
-            , bool includeMediaRestrictions
-            , bool includeUserFavorites)
+            , bool includeMediaRestrictions)
         {
             IQueryable<Media> media = _mediaRepository.GetAllMedia(includeMediaGenres
             , includeMediaStars
             , includeMediaDirectors
-            , includeMediaRestrictions
-            , includeUserFavorites);
+            , includeMediaRestrictions);
 
             return _mediaConverter.Convert(media.AsNoTracking().ToList());
         }
@@ -38,10 +36,13 @@ namespace WatchWise.Services.Implementations
             , bool includeMediaGenres
             , bool includeMediaStars
             , bool includeMediaDirectors
-            , bool includeMediaRestrictions
-            , bool includeUserFavorites)
+            , bool includeMediaRestrictions)
         {
-            Media? foundMedia = _mediaRepository.GetMediaById(id);
+            Media? foundMedia = _mediaRepository.GetMediaById(id
+                , includeMediaGenres
+                , includeMediaStars
+                , includeMediaDirectors
+                , includeMediaRestrictions);
             if (foundMedia != null)
             {
                 return _mediaConverter.Convert(foundMedia);

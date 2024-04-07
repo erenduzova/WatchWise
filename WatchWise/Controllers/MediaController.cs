@@ -21,14 +21,12 @@ namespace WatchWise.Controllers
         public ActionResult<List<MediaResponse>> GetMedias(bool includeMediaGenres = false
             , bool includeMediaStars = false
             , bool includeMediaDirectors = false
-            , bool includeMediaRestrictions = false
-            , bool includeUserFavorites = false)
+            , bool includeMediaRestrictions = false)
         {
             return Ok(_mediaService.GetAllMediaResponses(includeMediaGenres
                 , includeMediaStars
                 , includeMediaDirectors
-                , includeMediaRestrictions
-                , includeUserFavorites));
+                , includeMediaRestrictions));
         }
 
         // GET: api/Media/5
@@ -37,14 +35,12 @@ namespace WatchWise.Controllers
             , bool includeMediaGenres = false
             , bool includeMediaStars = false
             , bool includeMediaDirectors = false
-            , bool includeMediaRestrictions = false
-            , bool includeUserFavorites = false)
+            , bool includeMediaRestrictions = false)
         {
             MediaResponse? mediaResponse = _mediaService.GetMediaResponseById(id, includeMediaGenres
                 , includeMediaStars
                 , includeMediaDirectors
-                , includeMediaRestrictions
-                , includeUserFavorites);
+                , includeMediaRestrictions);
             if (mediaResponse == null)
             {
                 return NotFound();
