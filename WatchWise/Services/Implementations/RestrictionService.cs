@@ -19,15 +19,15 @@ namespace WatchWise.Services.Implementations
             _restrictionConverter = restrictionConverter;
         }
 
-        public List<RestrictionResponse> GetAllRestrictionResponses(bool includeMedia)
+        public List<RestrictionResponse> GetAllRestrictionResponses()
         {
-            IQueryable<Restriction> restrictions = _restrictionRepository.GetAllRestrictions(includeMedia);
+            IQueryable<Restriction> restrictions = _restrictionRepository.GetAllRestrictions();
             return _restrictionConverter.Convert(restrictions.AsNoTracking().ToList());
         }
 
-        public RestrictionResponse? GetRestrictionResponseById(byte id, bool includeMedia)
+        public RestrictionResponse? GetRestrictionResponseById(byte id)
         {
-            Restriction? foundRestriction = _restrictionRepository.GetRestrictionById(id, includeMedia);
+            Restriction? foundRestriction = _restrictionRepository.GetRestrictionById(id);
             if (foundRestriction != null)
             {
                 return _restrictionConverter.Convert(foundRestriction);

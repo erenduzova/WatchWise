@@ -5,8 +5,8 @@ namespace WatchWise.Services.Interfaces
 {
 	public interface IRestrictionService
 	{
-        List<RestrictionResponse> GetAllRestrictionResponses(bool includeMedia);
-        RestrictionResponse? GetRestrictionResponseById(byte id , bool includeMedia);
+        List<RestrictionResponse> GetAllRestrictionResponses();
+        RestrictionResponse? GetRestrictionResponseById(byte id);
         int PostRestriction(RestrictionRequest restrictionRequest);
         int UpdateRestriction(byte id, RestrictionRequest restrictionRequest);
     }

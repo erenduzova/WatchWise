@@ -18,16 +18,16 @@ namespace WatchWise.Controllers
 
         // GET: api/Restrictions
         [HttpGet]
-        public ActionResult<List<RestrictionResponse>> GetRestrictions(bool includeMedia = false)
+        public ActionResult<List<RestrictionResponse>> GetRestrictions()
         {
-            return Ok(_restrictionService.GetAllRestrictionResponses(includeMedia));
+            return Ok(_restrictionService.GetAllRestrictionResponses());
         }
 
         // GET: api/Restrictions/5
         [HttpGet("{id}")]
-        public ActionResult<RestrictionResponse> GetRestriction(byte id, bool includeMedia = false)
+        public ActionResult<RestrictionResponse> GetRestriction(byte id)
         {
-            RestrictionResponse? restrictionResponse = _restrictionService.GetRestrictionResponseById(id, includeMedia);
+            RestrictionResponse? restrictionResponse = _restrictionService.GetRestrictionResponseById(id);
             if (restrictionResponse == null)
             {
                 return NotFound();
