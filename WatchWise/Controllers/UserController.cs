@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
+using WatchWise.Services.Implementations;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -21,7 +22,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Users
         [HttpGet]
-        //[Authorize("Administrator")]
+        [Authorize("Admin,UserManager")]
         public ActionResult<List<WatchWiseUserResponse>> GetUsers(bool includePassive = false, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
             return Ok(_userService.GetAllUsersResponses(includePassive, includePlans, includeWatchedEpisodes, includeFavorites));
@@ -29,9 +30,10 @@ namespace WatchWise.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
+        [Authorize("Admin,UserManager,Guest")]
         public ActionResult<WatchWiseUserResponse> GetWatchWiseUser(long id, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
-            if (User.IsInRole("Administrator") == false)
+            if (User.IsInRole("Admin") == false || User.IsInRole("UserManager") == false)
             {
                 if (User.FindFirstValue(ClaimTypes.NameIdentifier) != id.ToString())
                 {
@@ -51,7 +53,7 @@ namespace WatchWise.Controllers
         [Authorize]
         public ActionResult PutWatchWiseUser(long id, WatchWiseUserUpdateRequest watchWiseUserUpdateRequest)
         {
-            if (User.IsInRole("CustomerRepresentative") == false)
+            if (User.IsInRole("UserManager") == false)
             {
                 if (User.FindFirstValue(ClaimTypes.NameIdentifier) != id.ToString())
                 {
@@ -84,9 +86,10 @@ namespace WatchWise.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
+        [Authorize]
         public ActionResult DeleteWatchWiseUser(long id)
         {
-            if (User.IsInRole("CustomerRepresentative") == false)
+            if (User.IsInRole("UserManager") == false)
             {
                 if (User.FindFirstValue(ClaimTypes.NameIdentifier) != id.ToString())
                 {
@@ -127,5 +130,11 @@ namespace WatchWise.Controllers
             }
         }
 
+        [HttpPost("LogOut")]
+        [Authorize]
+        public void Logout()
+        {
+            _userService.LogOut();
+        }
     }
 }

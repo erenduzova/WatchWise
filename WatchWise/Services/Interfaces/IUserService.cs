@@ -12,6 +12,7 @@ namespace WatchWise.Services.Interfaces
         int DeleteUser(long id);
         int UpdateUser(long id, WatchWiseUserUpdateRequest watchWiseUserUpdateRequest);
         SignInResult LogIn(LogInRequest logInRequest);
+        void LogOut();
     }
 }
 

@@ -100,6 +100,11 @@ namespace WatchWise.Services.Implementations
             return _signInManager.PasswordSignInAsync(watchWiseUser, password, false, false).Result;
         }
 
+        public void LogOut()
+        {
+            _signInManager.SignOutAsync().Wait();
+        }
+
     }
 }
 
