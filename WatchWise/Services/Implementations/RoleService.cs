@@ -62,5 +62,24 @@ namespace WatchWise.Services.Implementations
             return 0;
         }
 
+        public void RemoveAllRolesFromUser(WatchWiseUser user)
+        {
+            IList<string> foundRoles = _roleRepository.GetUserRoles(user);
+            foundRoles.Remove("Admin");
+            if (foundRoles.Count > 0)
+            {
+                foreach (string roleName in foundRoles)
+                {
+                    _roleRepository.RemoveFromRole(user, roleName);
+                }
+            }
+        }
+
+        public bool IsInRole(WatchWiseUser user, string roleName)
+        {
+            IList<string> foundRoles = _roleRepository.GetUserRoles(user);
+            return foundRoles.Contains(roleName);
+        }
+
     }
 }
