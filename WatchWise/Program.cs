@@ -40,6 +40,7 @@ public class Program
         builder.Services.AddScoped<IRestrictionService, RestrictionService>();
         builder.Services.AddScoped<IEpisodeService, EpisodeService>();
         builder.Services.AddScoped<IMediaService, MediaService>();
+        builder.Services.AddScoped<IRoleService, RoleService>();
 
         builder.Services.AddScoped<IMediaDirectorService, MediaDirectorService>();
         builder.Services.AddScoped<IMediaGenreService, MediaGenreService>();
@@ -58,6 +59,7 @@ public class Program
         builder.Services.AddTransient<IRestrictionRepository, RestrictionRepository>();
         builder.Services.AddTransient<IStarRepository, StarRepository>();
         builder.Services.AddTransient<IEpisodeRepository, EpisodeRepository>();
+        builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 
         builder.Services.AddTransient<IMediaDirectorRepository, MediaDirectorRepository>();
         builder.Services.AddTransient<IMediaGenreRepository, MediaGenreRepository>();
