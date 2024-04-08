@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Services.Implementations;
+using WatchWise.Models;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -22,7 +22,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Users
         [HttpGet]
-        [Authorize("Admin,UserManager")]
+        [Authorize(Roles = "Admin,UserManager")]
         public ActionResult<List<WatchWiseUserResponse>> GetUsers(bool includePassive = false, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
             return Ok(_userService.GetAllUsersResponses(includePassive, includePlans, includeWatchedEpisodes, includeFavorites));
@@ -30,7 +30,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        [Authorize("Admin,UserManager,Guest")]
+        [Authorize(Roles = "Admin,UserManager,Guest")]
         public ActionResult<WatchWiseUserResponse> GetWatchWiseUser(long id, bool includePlans = false, bool includeWatchedEpisodes = false, bool includeFavorites = false)
         {
             if (User.IsInRole("Admin") == false || User.IsInRole("UserManager") == false)
@@ -50,7 +50,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(Roles = "UserManager,Guest")]
         public ActionResult PutWatchWiseUser(long id, WatchWiseUserUpdateRequest watchWiseUserUpdateRequest)
         {
             if (User.IsInRole("UserManager") == false)
@@ -72,24 +72,20 @@ namespace WatchWise.Controllers
         [HttpPost]
         public ActionResult PostWatchWiseUser(WatchWiseUserRequest watchWiseUserRequest)
         {
-            if (User.Identity!.IsAuthenticated == true)
-            {
-                return BadRequest();
-            }
             IdentityResult identityResult = _userService.PostUser(watchWiseUserRequest);
             if (!identityResult.Succeeded)
             {
                 return BadRequest(identityResult.Errors.FirstOrDefault()!.Description);
             }
-            return Ok();
+            return Ok("New user created");
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin,UserManager,Guest")]
         public ActionResult DeleteWatchWiseUser(long id)
         {
-            if (User.IsInRole("UserManager") == false)
+            if (User.IsInRole("UserManager") == false || User.IsInRole("Admin") == false)
             {
                 if (User.FindFirstValue(ClaimTypes.NameIdentifier) != id.ToString())
                 {
@@ -100,6 +96,10 @@ namespace WatchWise.Controllers
             if (deleteResponse == -1)
             {
                 return NotFound("User not found");
+            }
+            if (deleteResponse == 0)
+            {
+                return Problem("Can not delete Admin User");
             }
             return Ok("Deleted");
         }
@@ -135,6 +135,13 @@ namespace WatchWise.Controllers
         public void Logout()
         {
             _userService.LogOut();
+        }
+
+        [HttpGet("Roles")]
+        [Authorize(Roles = "Admin,UserManager")]
+        public List<WatchWiseRole> GetAllRoles()
+        {
+            return _userService.GetAllRoles();
         }
     }
 }
