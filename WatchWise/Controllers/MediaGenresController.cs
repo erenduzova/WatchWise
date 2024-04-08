@@ -45,8 +45,8 @@ namespace WatchWise.Controllers
             return Ok();
         }
 
-        // DELETE: api/MediaGenres/5
-        [HttpDelete("{id}")]
+        // DELETE: api/MediaGenres
+        [HttpDelete]
         public  IActionResult DeleteMediaGenre(MediaGenreRequest mediaGenreRequest)
         {
             int deleteResponse = _mediaGenreService.DeleteMediaGenre(mediaGenreRequest);
