@@ -80,8 +80,8 @@ namespace WatchWise.Data
         {
             WatchWiseUser adminUser = new()
             {
-                Name = "WatchWiseAdmin",
-                UserName = "WatchWiseAdmin",
+                Name = "Admin",
+                UserName = "Admin",
                 Email = "watchwiseadmin@gmail.com",
                 PhoneNumber = "11111111111",
                 BirthDate = new DateTime(1996, 12, 12),
