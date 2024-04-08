@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Interfaces;
@@ -49,11 +50,12 @@ namespace WatchWise.Controllers
             return Ok(_userPlanService.GetUserPlanResponsesByPlanId(planId));
         }
 
-        // POST: api/UserPlans
-        [HttpPost]
-        public ActionResult PostUserPlan(UserPlanRequest userPlanRequest)
+        // POST: api/UserPlans/BuyPlan/5
+        [HttpPost("BuyPlan/{planId}")]
+        public ActionResult PostUserPlan(short planId)
         {
-            _userPlanService.AddUserPlan(userPlanRequest);
+            long userId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            _userPlanService.AddUserPlan(userId, planId);
             return Ok();
         }
     }

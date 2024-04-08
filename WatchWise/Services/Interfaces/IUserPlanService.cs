@@ -10,6 +10,7 @@ namespace WatchWise.Services.Interfaces
         List<UserPlanResponse> GetUserPlanResponsesByUserId(long userId);
         List<UserPlanResponse> GetUserPlanResponsesByPlanId(short planId);
         void AddUserPlan(UserPlanRequest userPlanRequest);
+        void AddUserPlan(long userId, short planId);
     }
 }
 
