@@ -14,12 +14,14 @@ namespace WatchWise.Services.Implementations
         private readonly IUserRepository _usersRepository;
         private readonly WatchWiseUserConverter _userConverter;
         private readonly SignInManager<WatchWiseUser> _signInManager;
+        private readonly IRoleService _roleService;
 
-        public UserService(IUserRepository usersRepository, WatchWiseUserConverter userConverter, SignInManager<WatchWiseUser> signInManager)
+        public UserService(IUserRepository usersRepository, WatchWiseUserConverter userConverter, SignInManager<WatchWiseUser> signInManager, IRoleService roleService)
         {
             _usersRepository = usersRepository;
             _userConverter = userConverter;
             _signInManager = signInManager;
+            _roleService = roleService;
         }
 
         public List<WatchWiseUserResponse> GetAllUsersResponses(bool includePassive, bool includePlans, bool includeWatchedEpisodes, bool includeFavorites)
@@ -45,7 +47,13 @@ namespace WatchWise.Services.Implementations
         public IdentityResult PostUser(WatchWiseUserRequest watchWiseUserRequest)
         {
             WatchWiseUser newUser = _userConverter.Convert(watchWiseUserRequest);
-            return _usersRepository.AddUser(newUser, watchWiseUserRequest.Password);
+            IdentityResult addResult = _usersRepository.AddUser(newUser, watchWiseUserRequest.Password);
+            if (addResult.Succeeded)
+            {
+                _roleService.AddRole(newUser,"Guest");
+                return addResult;
+            }
+            return addResult;
         }
 
         public int DeleteUser(long id)
@@ -53,8 +61,13 @@ namespace WatchWise.Services.Implementations
             WatchWiseUser? foundWatchWiseUser = _usersRepository.GetUserById(id);
             if (foundWatchWiseUser != null)
             {
+                if (_roleService.IsInRole(foundWatchWiseUser, "Admin"))
+                {
+                    return 0;
+                }
                 foundWatchWiseUser.Passive = true;
                 _usersRepository.UpdateUser(foundWatchWiseUser);
+                _roleService.RemoveAllRolesFromUser(foundWatchWiseUser);
                 return 1;
             }
             return -1;
@@ -94,8 +107,13 @@ namespace WatchWise.Services.Implementations
             }
             if (watchWiseUser.UserPlans?.Where(u => u.EndDate >= DateTime.Today).Any() == false)
             {
-                watchWiseUser.Passive = true;
-                _usersRepository.UpdateUser(watchWiseUser);
+                _roleService.RemoveRole(watchWiseUser, "Subscriber");
+            } else
+            {
+                if (_roleService.IsInRole(watchWiseUser, "Subscriber"))
+                {
+                    _roleService.AddRole(watchWiseUser, "Subscriber");
+                }
             }
             return _signInManager.PasswordSignInAsync(watchWiseUser, password, false, false).Result;
         }
@@ -103,6 +121,11 @@ namespace WatchWise.Services.Implementations
         public void LogOut()
         {
             _signInManager.SignOutAsync().Wait();
+        }
+
+        public List<WatchWiseRole> GetAllRoles()
+        {
+            return _roleService.GetAllRoles();
         }
 
     }

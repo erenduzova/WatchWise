@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
+using WatchWise.Models;
 
 namespace WatchWise.Services.Interfaces
 {
@@ -13,6 +14,7 @@ namespace WatchWise.Services.Interfaces
         int UpdateUser(long id, WatchWiseUserUpdateRequest watchWiseUserUpdateRequest);
         SignInResult LogIn(LogInRequest logInRequest);
         void LogOut();
+        List<WatchWiseRole> GetAllRoles();
     }
 }
 
