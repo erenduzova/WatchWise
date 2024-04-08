@@ -36,10 +36,15 @@ namespace WatchWise.Services.Implementations
             return null;
         }
 
-        public void PostDirector(DirectorRequest directorRequest)
+        public int PostDirector(DirectorRequest directorRequest)
         {
-            Director newDirector = _directorConverter.Convert(directorRequest);
-            _directorRepository.AddDirector(newDirector);
+            Director newDirector = _directorConverter.Convert(directorRequest); 
+            if (!_directorRepository.GetAllDirectors().Any(d => d.Name == newDirector.Name))
+            {
+                _directorRepository.AddDirector(newDirector);
+                return 1;
+            }
+            return -1;
         }
 
         public int UpdateDirector(int id, DirectorRequest directorRequest)

@@ -51,7 +51,11 @@ namespace WatchWise.Controllers
         [HttpPost]
         public ActionResult PostDirector(DirectorRequest directorRequest)
         {
-            _directorService.PostDirector(directorRequest);
+            int addResponse = _directorService.PostDirector(directorRequest);
+            if (addResponse == -1)
+            {
+                return Conflict();
+            }
             return Ok();
         }
 

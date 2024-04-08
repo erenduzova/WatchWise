@@ -7,7 +7,7 @@ namespace WatchWise.Services.Interfaces
     {
         List<DirectorResponse> GetAllDirectorResponses(bool includeMedia);
         DirectorResponse? GetDirectorResponseById(int id, bool includeMedia);
-        void PostDirector(DirectorRequest directorRequest);
+        int PostDirector(DirectorRequest directorRequest);
         int UpdateDirector(int id, DirectorRequest directorRequest);
         int DeleteDirector(int id);
     }
