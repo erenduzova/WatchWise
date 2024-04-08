@@ -2,6 +2,7 @@
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models.CrossTables;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -42,9 +43,16 @@ namespace WatchWise.Services.Implementations
             _userWatchedEpisodeRepository.AddUserWatchedEpisode(userWatchedEpisode);
         }
 
-        public void RemoveUserWatchedEpisode(UserWatchedEpisode userWatchedEpisode)
+        public int RemoveUserWatchedEpisode(UserWatchedEpisodeRequest userWatchedEpisodeRequest)
         {
+            UserWatchedEpisode? userWatchedEpisode = _userWatchedEpisodeRepository.GetUserWatchedEpisodesByUserId(userWatchedEpisodeRequest.UserId)
+                .Where(ue => ue.EpisodeId == userWatchedEpisodeRequest.EpisodeId).FirstOrDefault();
+            if (userWatchedEpisode == null)
+            {
+                return -1;
+            }
             _userWatchedEpisodeRepository.DeleteUserWatchedEpisode(userWatchedEpisode);
+            return 1;
         }
 
     }
