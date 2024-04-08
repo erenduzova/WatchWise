@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
+using WatchWise.Services.Implementations;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -55,10 +56,10 @@ namespace WatchWise.Controllers
         [HttpPost]
         public ActionResult PostRestriction(RestrictionRequest restrictionRequest)
         {
-            int postResponse = _restrictionService.PostRestriction(restrictionRequest);
-            if (postResponse == 0)
+            int addResponse = _restrictionService.PostRestriction(restrictionRequest);
+            if (addResponse == -1)
             {
-                return Conflict("There is a Restriction with same id");
+                return Conflict();
             }
             return Ok();
         }

@@ -40,7 +40,7 @@ namespace WatchWise.Services.Implementations
             Restriction? foundRestriction = _restrictionRepository.GetRestrictionById(restrictionRequest.Id);
             if (foundRestriction != null)
             {
-                return 0;
+                return -1;
             }
             Restriction newRestriction = _restrictionConverter.Convert(restrictionRequest);
             _restrictionRepository.AddRestriction(newRestriction);

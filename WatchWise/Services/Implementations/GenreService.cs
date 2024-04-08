@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -35,10 +36,15 @@ namespace WatchWise.Services.Implementations
             return null;
         }
 
-        public void PostGenre(GenreRequest genreRequest)
+        public int PostGenre(GenreRequest genreRequest)
         {
             Genre newGenre = _genreConverter.Convert(genreRequest);
-            _genreRepository.AddGenre(newGenre);
+            if (!_genreRepository.GetAllGenres().Any(g => g.Name == newGenre.Name))
+            {
+                _genreRepository.AddGenre(newGenre);
+                return 1;
+            }
+            return -1;
         }
 
         public int UpdateGenre(short id, GenreRequest genreRequest)

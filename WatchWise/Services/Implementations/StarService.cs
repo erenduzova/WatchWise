@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -35,10 +36,15 @@ namespace WatchWise.Services.Implementations
             return null;
         }
 
-        public void PostStar(StarRequest starRequest)
+        public int PostStar(StarRequest starRequest)
         {
             Star newStar = _starConverter.Convert(starRequest);
-            _starRepository.AddStar(newStar);
+            if (!_starRepository.GetAllStars().Any(s => s.Name == newStar.Name))
+            {
+                _starRepository.AddStar(newStar);
+                return 1;
+            }
+            return -1;
         }
 
         public int UpdateStar(int id, StarRequest starRequest)

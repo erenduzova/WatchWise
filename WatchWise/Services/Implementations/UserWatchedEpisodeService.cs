@@ -1,7 +1,9 @@
 ﻿using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
+using WatchWise.Models;
 using WatchWise.Models.CrossTables;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -36,17 +38,27 @@ namespace WatchWise.Services.Implementations
             return _userWatchedEpisodeConverter.Convert(userWatchedEpisodes.ToList());
         }
 
-        public void AddUserWatchedEpisode(UserWatchedEpisodeRequest userWatchedEpisodeRequest)
+        public int AddUserWatchedEpisode(UserWatchedEpisodeRequest userWatchedEpisodeRequest)
         {
-            var userWatchedEpisode = _userWatchedEpisodeConverter.Convert(userWatchedEpisodeRequest);
-            _userWatchedEpisodeRepository.AddUserWatchedEpisode(userWatchedEpisode);
+            var userWatchedEpisode = _userWatchedEpisodeConverter.Convert(userWatchedEpisodeRequest); 
+            if (!_userWatchedEpisodeRepository.GetUserWatchedEpisodesByUserId(userWatchedEpisode.UserId).Any(uwe => uwe.EpisodeId == userWatchedEpisode.EpisodeId))
+            {
+                _userWatchedEpisodeRepository.AddUserWatchedEpisode(userWatchedEpisode);
+                return 1;
+            }
+            return -1;
         }
-        public void AddUserWatchedEpisode(long episodeId, long userId)
+        public int AddUserWatchedEpisode(long episodeId, long userId)
         {
             UserWatchedEpisode userWatchedEpisode = new UserWatchedEpisode();
             userWatchedEpisode.EpisodeId = episodeId;
             userWatchedEpisode.UserId = userId;
-            _userWatchedEpisodeRepository.AddUserWatchedEpisode(userWatchedEpisode);
+            if (!_userWatchedEpisodeRepository.GetUserWatchedEpisodesByUserId(userId).Any(uwe => uwe.EpisodeId == episodeId))
+            {
+                _userWatchedEpisodeRepository.AddUserWatchedEpisode(userWatchedEpisode);
+                return 1;
+            }
+            return -1;
         }
 
         public int RemoveUserWatchedEpisode(UserWatchedEpisodeRequest userWatchedEpisodeRequest)

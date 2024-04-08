@@ -13,7 +13,7 @@ namespace WatchWise.Services.Interfaces
             , bool includeMediaStars
             , bool includeMediaDirectors
             , bool includeMediaRestrictions);
-        void PostMedia(MediaRequest mediaRequest);
+        int PostMedia(MediaRequest mediaRequest);
         int UpdateMedia(int id, MediaRequest mediaRequest);
         int DeleteMedia(int id);
     }

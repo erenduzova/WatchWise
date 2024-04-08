@@ -7,7 +7,7 @@ namespace WatchWise.Services.Interfaces
     {
         List<PlanResponse> GetAllPlanResponses();
         PlanResponse? GetPlanResponseById(short id);
-        void PostPlan(PlanRequest planRequest);
+        int PostPlan(PlanRequest planRequest);
         int UpdatePlan(short id, PlanRequest planRequest);
     }
 }

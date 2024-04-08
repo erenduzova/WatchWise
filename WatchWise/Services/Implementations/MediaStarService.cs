@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -37,10 +38,15 @@ namespace WatchWise.Services.Implementations
             return _mediaStarConverter.Convert(mediaStars.AsNoTracking().ToList());
         }
 
-        public void PostMediaStar(MediaStarRequest mediaStarRequest)
+        public int PostMediaStar(MediaStarRequest mediaStarRequest)
         {
             MediaStar newMediaStar = _mediaStarConverter.Convert(mediaStarRequest);
-            _mediaStarRepository.AddMediaStar(newMediaStar);
+            if (!_mediaStarRepository.GetMediaStarsByStarId(newMediaStar.StarId).Any(ms => ms.MediaId == newMediaStar.MediaId))
+            {
+                _mediaStarRepository.AddMediaStar(newMediaStar);
+                return 1;
+            }
+            return -1;
         }
 
         public int DeleteMediaStar(MediaStarRequest mediaStarRequest)

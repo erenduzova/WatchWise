@@ -8,7 +8,7 @@ namespace WatchWise.Services.Interfaces
         List<MediaDirectorResponse> GetAllMediaDirectorResponses();
         List<MediaDirectorResponse> GetMediaDirectorResponsesByMediaId(int id);
         List<MediaDirectorResponse> GetMediaDirectorResponsesByDirectorId(int id);
-        void PostMediaDirector(MediaDirectorRequest mediaDirectorRequest);
+        int PostMediaDirector(MediaDirectorRequest mediaDirectorRequest);
         int DeleteMediaDirector(MediaDirectorRequest mediaDirectorRequest);
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
+using WatchWise.Services.Implementations;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -51,7 +52,11 @@ namespace WatchWise.Controllers
         [HttpPost]
         public ActionResult PostPlan(PlanRequest planRequest)
         {
-            _planService.PostPlan(planRequest);
+            int addResponse = _planService.PostPlan(planRequest);
+            if (addResponse == -1)
+            {
+                return Conflict();
+            }
             return Ok();
         }
 

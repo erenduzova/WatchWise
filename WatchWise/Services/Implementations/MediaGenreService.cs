@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -37,10 +38,15 @@ namespace WatchWise.Services.Implementations
             return _mediaGenreConverter.Convert(mediaGenres.AsNoTracking().ToList());
         }
 
-        public void PostMediaGenre(MediaGenreRequest mediaGenreRequest)
+        public int PostMediaGenre(MediaGenreRequest mediaGenreRequest)
         {
-            MediaGenre newMediaGenre = _mediaGenreConverter.Convert(mediaGenreRequest);
-            _mediaGenreRepository.AddMediaGenre(newMediaGenre);
+            MediaGenre newMediaGenre = _mediaGenreConverter.Convert(mediaGenreRequest); 
+            if (!_mediaGenreRepository.GetMediaGenresByGenreId(newMediaGenre.GenreId).Any(mg => mg.MediaId == newMediaGenre.MediaId))
+            {
+                _mediaGenreRepository.AddMediaGenre(newMediaGenre);
+                return 1;
+            }
+            return -1;
         }
 
         public int DeleteMediaGenre(MediaGenreRequest mediaGenreRequest)

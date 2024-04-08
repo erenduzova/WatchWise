@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
+using WatchWise.Services.Implementations;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -52,7 +53,11 @@ namespace WatchWise.Controllers
         [HttpPost]
         public ActionResult PostEpisode(EpisodeRequest episodeRequest)
         {
-            _episodeService.PostEpisode(episodeRequest);
+            int addResponse = _episodeService.PostEpisode(episodeRequest);
+            if (addResponse == -1)
+            {
+                return Conflict();
+            }
             return Ok();
         }
 

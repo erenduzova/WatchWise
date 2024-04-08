@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models.CrossTables;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -37,10 +38,15 @@ namespace WatchWise.Services.Implementations
             return _mediaRestrictionConverter.Convert(mediaRestrictions.AsNoTracking().ToList());
         }
 
-        public void PostMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest)
+        public int PostMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest)
         {
             MediaRestriction newMediaRestriction = _mediaRestrictionConverter.Convert(mediaRestrictionRequest);
-            _mediaRestrictionRepository.AddMediaRestriction(newMediaRestriction);
+            if (!_mediaRestrictionRepository.GetMediaRestrictionsByMediaId(newMediaRestriction.MediaId).Any(mr => mr.RestrictionId == newMediaRestriction.RestrictionId))
+            {
+                _mediaRestrictionRepository.AddMediaRestriction(newMediaRestriction);
+                return 1;
+            }
+            return -1;
         }
 
         public int DeleteMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest)

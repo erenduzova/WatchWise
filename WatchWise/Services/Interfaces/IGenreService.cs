@@ -7,7 +7,7 @@ namespace WatchWise.Services.Interfaces
     {
         List<GenreResponse> GetAllGenreResponses(bool includeMedia);
         GenreResponse? GetGenreResponseById(short id, bool includeMedia);
-        void PostGenre(GenreRequest genreRequest);
+        int PostGenre(GenreRequest genreRequest);
         int UpdateGenre(short id, GenreRequest genreRequest);
     }
 }

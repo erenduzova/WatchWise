@@ -8,7 +8,7 @@ namespace WatchWise.Services.Interfaces
         List<MediaStarResponse> GetAllMediaStarResponses();
         List<MediaStarResponse> GetMediaStarResponsesByMediaId(int id);
         List<MediaStarResponse> GetMediaStarResponsesByStarId(int id);
-        void PostMediaStar(MediaStarRequest mediaStarRequest);
+        int PostMediaStar(MediaStarRequest mediaStarRequest);
         int DeleteMediaStar(MediaStarRequest mediaStarRequest);
     }
 }

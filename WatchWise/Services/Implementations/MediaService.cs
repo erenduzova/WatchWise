@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -50,10 +51,15 @@ namespace WatchWise.Services.Implementations
             return null;
         }
 
-        public void PostMedia(MediaRequest mediaRequest)
+        public int PostMedia(MediaRequest mediaRequest)
         {
             Media newMedia = _mediaConverter.Convert(mediaRequest);
-            _mediaRepository.AddMedia(newMedia);
+            if (!_mediaRepository.GetAllMedia().Any(m => m.Name == newMedia.Name && m.Description == newMedia.Description))
+            {
+                _mediaRepository.AddMedia(newMedia);
+                return 1;
+            }
+            return -1;
         }
 
         public int UpdateMedia(int id, MediaRequest mediaRequest)

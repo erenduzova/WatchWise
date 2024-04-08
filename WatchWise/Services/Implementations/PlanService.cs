@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -35,10 +36,15 @@ namespace WatchWise.Services.Implementations
             return null;
         }
 
-        public void PostPlan(PlanRequest planRequest)
+        public int PostPlan(PlanRequest planRequest)
         {
             Plan newPlan = _planConverter.Convert(planRequest);
-            _planRepository.AddPlan(newPlan);
+            if (!_planRepository.GetAllPlans().Any(p => p.Name == newPlan.Name))
+            {
+                _planRepository.AddPlan(newPlan);
+                return 1;
+            }
+            return -1;
         }
 
         public int UpdatePlan(short id, PlanRequest planRequest)

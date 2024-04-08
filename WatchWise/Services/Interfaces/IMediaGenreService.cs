@@ -8,7 +8,7 @@ namespace WatchWise.Services.Interfaces
         List<MediaGenreResponse> GetAllMediaGenreResponses();
         List<MediaGenreResponse> GetMediaGenreResponsesByMediaId(int id);
         List<MediaGenreResponse> GetMediaGenreResponsesByGenreId(short id);
-        void PostMediaGenre(MediaGenreRequest mediaGenreRequest);
+        int PostMediaGenre(MediaGenreRequest mediaGenreRequest);
         int DeleteMediaGenre(MediaGenreRequest mediaGenreRequest);
     }
 }

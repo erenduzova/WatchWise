@@ -8,7 +8,7 @@ namespace WatchWise.Services.Interfaces
         List<MediaRestrictionResponse> GetAllMediaRestrictionResponses();
         List<MediaRestrictionResponse> GetMediaRestrictionResponsesByMediaId(int id);
         List<MediaRestrictionResponse> GetMediaRestrictionResponsesByRestrictionId(byte id);
-        void PostMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest);
+        int PostMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest);
         int DeleteMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest);
     }
 }

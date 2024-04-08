@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
+using WatchWise.Services.Implementations;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Controllers
@@ -41,7 +42,11 @@ namespace WatchWise.Controllers
         [HttpPost]
         public ActionResult PostMediaDirector(MediaDirectorRequest mediaDirectorRequest)
         {
-            _mediaDirectorService.PostMediaDirector(mediaDirectorRequest);
+            int addResponse = _mediaDirectorService.PostMediaDirector(mediaDirectorRequest);
+            if (addResponse == -1)
+            {
+                return Conflict();
+            }
             return Ok();
         }
 

@@ -7,7 +7,7 @@ namespace WatchWise.Services.Interfaces
     {
         List<EpisodeResponse> GetAllEpisodeResponses();
         EpisodeResponse? GetEpisodeResponseById(long id);
-        void PostEpisode(EpisodeRequest episodeRequest);
+        int PostEpisode(EpisodeRequest episodeRequest);
         int UpdateEpisode(long id, EpisodeUpdateRequest episodeUpdateRequest);
         int DeleteEpisode(long id);
         int Watch(long id, long userId);

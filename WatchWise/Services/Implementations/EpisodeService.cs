@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -39,10 +40,18 @@ namespace WatchWise.Services.Implementations
             return null;
         }
 
-        public void PostEpisode(EpisodeRequest episodeRequest)
+        public int PostEpisode(EpisodeRequest episodeRequest)
         {
             Episode newEpisode = _episodeConverter.Convert(episodeRequest);
-            _episodeRepository.AddEpisode(newEpisode);
+            if (!_episodeRepository.GetAllEpisodes().Any(e =>
+                e.MediaId == episodeRequest.MediaId &&
+                e.SeasonNum == episodeRequest.SeasonNum &&
+                e.EpisodeNum == episodeRequest.EpisodeNum))
+            {
+                _episodeRepository.AddEpisode(newEpisode);
+                return 1;
+            }
+            return -1;
         }
 
         public int UpdateEpisode(long id, EpisodeUpdateRequest episodeUpdateRequest)
