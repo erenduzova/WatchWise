@@ -9,5 +9,8 @@
         public string PhoneNumber { get; set; } = null!;
         public DateTime BirthDate { get; set; }
         public bool Passive { get; set; }
+        public List<short>? PlanIds { get; set; }
+        public List<int>? FavoriteMediaIds { get; set; }
+        public List<long>? WatchedEpisodeIds { get; set; }
     }
 }

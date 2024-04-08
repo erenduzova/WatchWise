@@ -1,4 +1,5 @@
-﻿using WatchWise.DTOs.Requests;
+﻿using Microsoft.CodeAnalysis.Differencing;
+using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
@@ -32,6 +33,18 @@ namespace WatchWise.DTOs.Converters
                 BirthDate = watchWiseUser.BirthDate,
                 Passive = watchWiseUser.Passive
             };
+            if (watchWiseUser.UserPlans != null)
+            {
+                newWatchWiseUserResponse.PlanIds = watchWiseUser.UserPlans.Select(up => up.PlanId).ToList();
+            }
+            if (watchWiseUser.UserFavorites != null)
+            {
+                newWatchWiseUserResponse.FavoriteMediaIds = watchWiseUser.UserFavorites.Select(uf => uf.MediaId).ToList();
+            }
+            if (watchWiseUser.UserWatchedEpisodes != null)
+            {
+                newWatchWiseUserResponse.WatchedEpisodeIds = watchWiseUser.UserWatchedEpisodes.Select(up => up.EpisodeId).ToList();
+            }
             return newWatchWiseUserResponse;
         }
 
