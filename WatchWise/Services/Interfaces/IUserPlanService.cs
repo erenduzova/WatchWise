@@ -3,8 +3,8 @@ using WatchWise.DTOs.Responses;
 
 namespace WatchWise.Services.Interfaces
 {
-	public interface IUserPlanService
-	{
+    public interface IUserPlanService
+    {
         List<UserPlanResponse> GetAllUserPlanResponses();
         UserPlanResponse? GetUserPlanResponsesById(long id);
         List<UserPlanResponse> GetUserPlanResponsesByUserId(long userId);

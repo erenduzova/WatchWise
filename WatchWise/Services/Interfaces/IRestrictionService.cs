@@ -3,8 +3,8 @@ using WatchWise.DTOs.Responses;
 
 namespace WatchWise.Services.Interfaces
 {
-	public interface IRestrictionService
-	{
+    public interface IRestrictionService
+    {
         List<RestrictionResponse> GetAllRestrictionResponses();
         RestrictionResponse? GetRestrictionResponseById(byte id);
         int PostRestriction(RestrictionRequest restrictionRequest);

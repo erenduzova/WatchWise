@@ -3,8 +3,8 @@ using WatchWise.DTOs.Responses;
 
 namespace WatchWise.Services.Interfaces
 {
-	public interface IMediaDirectorService
-	{
+    public interface IMediaDirectorService
+    {
         List<MediaDirectorResponse> GetAllMediaDirectorResponses();
         List<MediaDirectorResponse> GetMediaDirectorResponsesByMediaId(int id);
         List<MediaDirectorResponse> GetMediaDirectorResponsesByDirectorId(int id);

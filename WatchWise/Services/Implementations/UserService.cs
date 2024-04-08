@@ -5,7 +5,6 @@ using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 using WatchWise.Models.CrossTables;
-using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -63,7 +62,7 @@ namespace WatchWise.Services.Implementations
             IdentityResult addResult = _usersRepository.AddUser(newUser, watchWiseUserRequest.Password);
             if (addResult.Succeeded)
             {
-                _roleService.AddRole(newUser,"Guest");
+                _roleService.AddRole(newUser, "Guest");
                 return addResult;
             }
             return addResult;
@@ -121,7 +120,8 @@ namespace WatchWise.Services.Implementations
             if (watchWiseUser.UserPlans?.Where(u => u.EndDate >= DateTime.Today).Any() == false)
             {
                 _roleService.RemoveRole(watchWiseUser, "Subscriber");
-            } else
+            }
+            else
             {
                 if (_roleService.IsInRole(watchWiseUser, "Subscriber"))
                 {

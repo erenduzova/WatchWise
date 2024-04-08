@@ -38,7 +38,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Episodes/5
         [HttpPut("{id}")]
-        public  ActionResult PutEpisode(long id, EpisodeUpdateRequest episodeUpdateRequest)
+        public ActionResult PutEpisode(long id, EpisodeUpdateRequest episodeUpdateRequest)
         {
             int updateResponse = _episodeService.UpdateEpisode(id, episodeUpdateRequest);
             if (updateResponse == -1)

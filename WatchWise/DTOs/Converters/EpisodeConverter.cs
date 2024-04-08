@@ -4,8 +4,8 @@ using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class EpisodeConverter
-	{
+    public class EpisodeConverter
+    {
         public Episode Convert(EpisodeRequest episodeRequest)
         {
             Episode newEpisode = new()

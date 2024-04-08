@@ -4,8 +4,8 @@ using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class StarConverter
-	{
+    public class StarConverter
+    {
         public Star Convert(StarRequest starRequest)
         {
             Star newStar = new()

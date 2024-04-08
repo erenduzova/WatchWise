@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Interfaces;
 
@@ -23,7 +22,7 @@ namespace WatchWise.Controllers
         {
             return Ok(_userPlanService.GetAllUserPlanResponses());
         }
-        
+
         // GET: api/UserPlans/5
         [HttpGet("{id}")]
         public ActionResult<List<UserPlanResponse>> GetUserPlansById(long id)

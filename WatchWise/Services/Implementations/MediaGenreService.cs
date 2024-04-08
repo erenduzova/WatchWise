@@ -8,8 +8,8 @@ using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Services.Implementations
 {
-	public class MediaGenreService : IMediaGenreService
-	{
+    public class MediaGenreService : IMediaGenreService
+    {
         private readonly IMediaGenreRepository _mediaGenreRepository;
         private readonly MediaGenreConverter _mediaGenreConverter;
 

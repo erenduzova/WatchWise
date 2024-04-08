@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WatchWise.DTOs.Requests
 {
-	public class EpisodeUpdateRequest
-	{
+    public class EpisodeUpdateRequest
+    {
         public string? Title { get; set; }
 
         [StringLength(500)]

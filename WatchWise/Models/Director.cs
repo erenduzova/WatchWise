@@ -1,8 +1,7 @@
-﻿using System;
-namespace WatchWise.Models
+﻿namespace WatchWise.Models
 {
-	public class Director : Person
-	{
+    public class Director : Person
+    {
         public virtual List<MediaDirector>? MediaDirectors { get; set; }
     }
 }

@@ -1,14 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WatchWise.Models.CrossTables;
 
 namespace WatchWise.Models
 {
-	public class Episode
-	{
+    public class Episode
+    {
         public long Id { get; set; }
-        
+
         public int MediaId { get; set; }
         [ForeignKey("MediaId")]
         public virtual Media? Media { get; set; }

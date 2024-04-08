@@ -4,8 +4,8 @@ using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class GenreConverter
-	{
+    public class GenreConverter
+    {
         public Genre Convert(GenreRequest genreRequest)
         {
             Genre newGenre = new()

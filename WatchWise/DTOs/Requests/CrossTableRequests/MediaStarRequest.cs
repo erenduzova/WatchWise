@@ -1,7 +1,6 @@
-﻿using System;
-namespace WatchWise.DTOs.Requests
+﻿namespace WatchWise.DTOs.Requests
 {
-	public class MediaStarRequest
+    public class MediaStarRequest
     {
         public int MediaId { get; set; }
         public int StarId { get; set; }

@@ -1,13 +1,11 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class UserFavoriteConverter
-	{
+    public class UserFavoriteConverter
+    {
         public UserFavorite Convert(UserFavoriteRequest userFavoriteRequest)
         {
             UserFavorite newUserFavorite = new()

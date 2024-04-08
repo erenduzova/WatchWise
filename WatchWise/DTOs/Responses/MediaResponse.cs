@@ -1,6 +1,6 @@
 ﻿namespace WatchWise.DTOs.Responses
 {
-	public class MediaResponse
+    public class MediaResponse
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";

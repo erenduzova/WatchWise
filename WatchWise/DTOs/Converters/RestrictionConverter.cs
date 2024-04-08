@@ -4,8 +4,8 @@ using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class RestrictionConverter
-	{
+    public class RestrictionConverter
+    {
         public Restriction Convert(RestrictionRequest restrictionRequest)
         {
             Restriction newRestriction = new()

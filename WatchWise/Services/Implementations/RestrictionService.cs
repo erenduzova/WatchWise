@@ -8,8 +8,8 @@ using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Services.Implementations
 {
-	public class RestrictionService : IRestrictionService
-	{
+    public class RestrictionService : IRestrictionService
+    {
         private readonly IRestrictionRepository _restrictionRepository;
         private readonly RestrictionConverter _restrictionConverter;
 

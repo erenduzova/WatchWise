@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchWise.Models
 {
-	public class Genre
-	{
+    public class Genre
+    {
 
         public short Id { get; set; }
 

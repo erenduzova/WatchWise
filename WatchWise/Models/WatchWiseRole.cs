@@ -1,18 +1,17 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace WatchWise.Models
 {
-	public class WatchWiseRole : IdentityRole<long>
-	{
-		public WatchWiseRole(string roleName) : base(roleName)
-		{
+    public class WatchWiseRole : IdentityRole<long>
+    {
+        public WatchWiseRole(string roleName) : base(roleName)
+        {
 
-		}
-		public WatchWiseRole()
-		{
+        }
+        public WatchWiseRole()
+        {
 
-		}
-	}
+        }
+    }
 }
 

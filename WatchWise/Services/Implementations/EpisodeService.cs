@@ -79,7 +79,7 @@ namespace WatchWise.Services.Implementations
         public int Watch(long id, long userId)
         {
             Episode? foundEpisode = _episodeRepository.GetEpisodeById(id);
-            WatchWiseUser foundUser = _userRepository.GetUserById(userId,includeWatchedEpisodes:true)!;
+            WatchWiseUser foundUser = _userRepository.GetUserById(userId, includeWatchedEpisodes: true)!;
             if (foundEpisode != null && foundEpisode.Passive == false)
             {
                 foundEpisode.ViewCount++;

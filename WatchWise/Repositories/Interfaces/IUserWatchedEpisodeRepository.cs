@@ -1,10 +1,9 @@
-﻿using System;
-using WatchWise.Models.CrossTables;
+﻿using WatchWise.Models.CrossTables;
 
 namespace WatchWise.Repositories.Interfaces
 {
-	public interface IUserWatchedEpisodeRepository
-	{
+    public interface IUserWatchedEpisodeRepository
+    {
         IQueryable<UserWatchedEpisode> GetAllUserWatchedEpisodes();
         IQueryable<UserWatchedEpisode> GetUserWatchedEpisodesByUserId(long userId);
         IQueryable<UserWatchedEpisode> GetUserWatchedEpisodesByEpisodeId(long episodeId);

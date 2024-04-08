@@ -1,12 +1,11 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class UserPlanConverter
-	{
+    public class UserPlanConverter
+    {
         public UserPlan Convert(UserPlanRequest userPlanRequest)
         {
             UserPlan newUserPlan = new()

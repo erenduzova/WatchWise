@@ -5,10 +5,10 @@ using WatchWise.Models.CrossTables;
 
 namespace WatchWise.Models
 {
-	public class Media
-	{
+    public class Media
+    {
 
-		public int Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(200, MinimumLength = 2)]
         [Column(TypeName = "nvarchar(200)")]

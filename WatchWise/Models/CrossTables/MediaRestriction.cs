@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchWise.Models.CrossTables
 {
-	public class MediaRestriction
-	{
+    public class MediaRestriction
+    {
 
         public int MediaId { get; set; }
 

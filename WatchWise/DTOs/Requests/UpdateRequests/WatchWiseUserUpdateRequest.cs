@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WatchWise.DTOs.Requests
 {
-	public class WatchWiseUserUpdateRequest
-	{
+    public class WatchWiseUserUpdateRequest
+    {
         [StringLength(100, MinimumLength = 2)]
         public string? UserName { get; set; }
 

@@ -1,12 +1,11 @@
-﻿using System;
-using WatchWise.Data;
+﻿using WatchWise.Data;
 using WatchWise.Models;
 using WatchWise.Repositories.Interfaces;
 
 namespace WatchWise.Repositories.Implementations
 {
-	public class MediaStarRepository : IMediaStarRepository
-	{
+    public class MediaStarRepository : IMediaStarRepository
+    {
         private readonly WatchWiseContext _context;
 
         public MediaStarRepository(WatchWiseContext context)

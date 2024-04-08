@@ -3,7 +3,7 @@ using WatchWise.DTOs.Responses;
 
 namespace WatchWise.Services.Interfaces
 {
-	public interface IMediaGenreService
+    public interface IMediaGenreService
     {
         List<MediaGenreResponse> GetAllMediaGenreResponses();
         List<MediaGenreResponse> GetMediaGenreResponsesByMediaId(int id);

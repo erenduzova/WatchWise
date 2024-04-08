@@ -1,12 +1,11 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class MediaStarConverter
-	{
+    public class MediaStarConverter
+    {
         public MediaStar Convert(MediaStarRequest mediaStarRequest)
         {
             MediaStar newMediaStar = new()

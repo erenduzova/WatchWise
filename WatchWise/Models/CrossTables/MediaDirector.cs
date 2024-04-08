@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchWise.Models
 {
-	public class MediaDirector
-	{
+    public class MediaDirector
+    {
         public int MediaId { get; set; }
 
         public int DirectorId { get; set; }

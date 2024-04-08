@@ -3,8 +3,8 @@ using WatchWise.DTOs.Responses;
 
 namespace WatchWise.Services.Interfaces
 {
-	public interface IMediaRestrictionService
-	{
+    public interface IMediaRestrictionService
+    {
         List<MediaRestrictionResponse> GetAllMediaRestrictionResponses();
         List<MediaRestrictionResponse> GetMediaRestrictionResponsesByMediaId(int id);
         List<MediaRestrictionResponse> GetMediaRestrictionResponsesByRestrictionId(byte id);

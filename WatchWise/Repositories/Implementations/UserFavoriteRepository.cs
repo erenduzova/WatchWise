@@ -1,12 +1,11 @@
-﻿using System;
-using WatchWise.Data;
+﻿using WatchWise.Data;
 using WatchWise.Models.CrossTables;
 using WatchWise.Repositories.Interfaces;
 
 namespace WatchWise.Repositories.Implementations
 {
-	public class UserFavoriteRepository : IUserFavoriteRepository
-	{
+    public class UserFavoriteRepository : IUserFavoriteRepository
+    {
         private readonly WatchWiseContext _context;
 
         public UserFavoriteRepository(WatchWiseContext context)

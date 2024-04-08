@@ -1,13 +1,11 @@
-﻿using System;
-using WatchWise.Data;
-using WatchWise.Models;
+﻿using WatchWise.Data;
 using WatchWise.Models.CrossTables;
 using WatchWise.Repositories.Interfaces;
 
 namespace WatchWise.Repositories.Implementations
 {
-	public class MediaRestrictionRepository : IMediaRestrictionRepository
-	{
+    public class MediaRestrictionRepository : IMediaRestrictionRepository
+    {
         private readonly WatchWiseContext _context;
 
         public MediaRestrictionRepository(WatchWiseContext context)

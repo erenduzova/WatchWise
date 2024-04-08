@@ -1,11 +1,10 @@
-﻿using System;
-using WatchWise.Data;
+﻿using WatchWise.Data;
 using WatchWise.Models.CrossTables;
 using WatchWise.Repositories.Interfaces;
 
 namespace WatchWise.Repositories.Implementations
 {
-	public class UserWatchedEpisodeRepository : IUserWatchedEpisodeRepository
+    public class UserWatchedEpisodeRepository : IUserWatchedEpisodeRepository
     {
         private readonly WatchWiseContext _context;
 

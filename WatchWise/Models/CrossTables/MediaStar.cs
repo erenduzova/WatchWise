@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchWise.Models
 {
-	public class MediaStar
-	{
+    public class MediaStar
+    {
         public int MediaId { get; set; }
 
         public int StarId { get; set; }

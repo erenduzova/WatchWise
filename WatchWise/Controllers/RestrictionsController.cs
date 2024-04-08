@@ -43,7 +43,8 @@ namespace WatchWise.Controllers
             if (updateResponse == 0)
             {
                 return Conflict("There is a Restriction with same id, can not update");
-            } else if (updateResponse == -1)
+            }
+            else if (updateResponse == -1)
             {
                 return NotFound();
             }

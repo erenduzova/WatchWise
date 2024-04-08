@@ -4,8 +4,8 @@ using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class PlanConverter
-	{
+    public class PlanConverter
+    {
         public Plan Convert(PlanRequest planRequest)
         {
             Plan newPlan = new()

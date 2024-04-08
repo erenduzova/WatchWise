@@ -1,13 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WatchWise.Models.CrossTables;
 
 namespace WatchWise.Models
 {
-	public class Restriction
-	{
+    public class Restriction
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public byte Id { get; set; }

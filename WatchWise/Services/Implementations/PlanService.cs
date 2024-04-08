@@ -8,8 +8,8 @@ using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Services.Implementations
 {
-	public class PlanService : IPlanService
-	{
+    public class PlanService : IPlanService
+    {
         private readonly IPlanRepository _planRepository;
         private readonly PlanConverter _planConverter;
 

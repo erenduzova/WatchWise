@@ -14,7 +14,7 @@ namespace WatchWise.Repositories.Implementations
             _context = context;
         }
 
-        private IQueryable<Restriction> IncludeRelatedObjects(IQueryable<Restriction> restrictions,bool includeMedia)
+        private IQueryable<Restriction> IncludeRelatedObjects(IQueryable<Restriction> restrictions, bool includeMedia)
         {
             if (includeMedia)
             {

@@ -1,10 +1,9 @@
-﻿using System;
-using WatchWise.Models;
+﻿using WatchWise.Models;
 
 namespace WatchWise.Repositories.Interfaces
 {
-	public interface IMediaStarRepository
-	{
+    public interface IMediaStarRepository
+    {
         IQueryable<MediaStar> GetAllMediaStars();
         IQueryable<MediaStar> GetMediaStarsByMediaId(int id);
         IQueryable<MediaStar> GetMediaStarsByStarId(int id);

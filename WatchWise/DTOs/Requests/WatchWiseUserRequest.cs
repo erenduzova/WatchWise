@@ -1,13 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using WatchWise.Models.CrossTables;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WatchWise.DTOs.Requests
 {
-	public class WatchWiseUserRequest
-	{
+    public class WatchWiseUserRequest
+    {
         [StringLength(100, MinimumLength = 2)]
         [Required]
         public string UserName { get; set; } = null!;

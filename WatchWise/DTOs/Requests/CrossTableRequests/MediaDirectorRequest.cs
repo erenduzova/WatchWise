@@ -1,8 +1,7 @@
-﻿using System;
-namespace WatchWise.DTOs.Requests
+﻿namespace WatchWise.DTOs.Requests
 {
-	public class MediaDirectorRequest
-	{
+    public class MediaDirectorRequest
+    {
         public int MediaId { get; set; }
         public int DirectorId { get; set; }
     }

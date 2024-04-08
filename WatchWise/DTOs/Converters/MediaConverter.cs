@@ -4,8 +4,8 @@ using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class MediaConverter
-	{
+    public class MediaConverter
+    {
         public Media Convert(MediaRequest mediaRequest)
         {
             Media newMedia = new()

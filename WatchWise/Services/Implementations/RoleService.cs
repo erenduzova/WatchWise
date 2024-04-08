@@ -36,7 +36,8 @@ namespace WatchWise.Services.Implementations
                 if (addResult.Succeeded)
                 {
                     return 1;
-                } else
+                }
+                else
                 {
                     return -1;
                 }
@@ -44,7 +45,7 @@ namespace WatchWise.Services.Implementations
             return 0;
         }
 
-        public int RemoveRole(WatchWiseUser user, string roleName) 
+        public int RemoveRole(WatchWiseUser user, string roleName)
         {
             IList<string> foundRoles = _roleRepository.GetUserRoles(user);
             if (foundRoles.Contains(roleName))

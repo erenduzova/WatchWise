@@ -1,20 +1,17 @@
-﻿using System;
-using System.Reflection.Emit;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WatchWise.Models;
 using WatchWise.Models.CrossTables;
 
 namespace WatchWise.Data
 {
-	public class WatchWiseContext : IdentityDbContext<WatchWiseUser, WatchWiseRole, long>
-	{
-		public WatchWiseContext(DbContextOptions<WatchWiseContext> options) : base(options)
-		{
-		}
+    public class WatchWiseContext : IdentityDbContext<WatchWiseUser, WatchWiseRole, long>
+    {
+        public WatchWiseContext(DbContextOptions<WatchWiseContext> options) : base(options)
+        {
+        }
 
-		public DbSet<Genre> Genres { get; set; } = default!;
+        public DbSet<Genre> Genres { get; set; } = default!;
         public DbSet<Star> Stars { get; set; } = default!;
         public DbSet<Director> Directors { get; set; } = default!;
         public DbSet<Media> Medias { get; set; } = default!;

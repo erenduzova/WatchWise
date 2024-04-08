@@ -1,14 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using WatchWise.Models;
-using WatchWise.Models.CrossTables;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WatchWise.DTOs.Requests
 {
-	public class EpisodeRequest
-	{
+    public class EpisodeRequest
+    {
         public int MediaId { get; set; }
 
         [Range(0, byte.MaxValue)]

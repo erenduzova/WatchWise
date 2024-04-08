@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis.Differencing;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
@@ -51,7 +50,7 @@ namespace WatchWise.DTOs.Converters
         public List<WatchWiseUserResponse> Convert(List<WatchWiseUser> watchWiseUsers)
         {
             List<WatchWiseUserResponse> userResponses = new();
-            foreach(WatchWiseUser user in watchWiseUsers)
+            foreach (WatchWiseUser user in watchWiseUsers)
             {
                 userResponses.Add(Convert(user));
             }

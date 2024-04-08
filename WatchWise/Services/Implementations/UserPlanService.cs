@@ -3,14 +3,13 @@ using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 using WatchWise.Models.CrossTables;
-using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Services.Implementations
 {
-	public class UserPlanService : IUserPlanService
-	{
+    public class UserPlanService : IUserPlanService
+    {
         private readonly IUserPlanRepository _userPlanRepository;
         private readonly IUserRepository _userRepository;
         private readonly UserPlanConverter _userPlanConverter;

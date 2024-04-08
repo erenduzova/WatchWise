@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using WatchWise.Data;
 using WatchWise.DTOs.Converters;
 using WatchWise.Models;
-using WatchWise.Repositories.Interfaces;
 using WatchWise.Repositories.Implementations;
-using WatchWise.Services.Interfaces;
+using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Implementations;
+using WatchWise.Services.Interfaces;
 
 namespace WatchWise;
 
@@ -32,7 +32,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         // Service Layer
-        builder.Services.AddScoped<IUserService,UserService>();
+        builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IDirectorService, DirectorService>();
         builder.Services.AddScoped<IStarService, StarService>();
         builder.Services.AddScoped<IGenreService, GenreService>();
@@ -104,7 +104,7 @@ public class Program
 
         app.MapControllers();
 
-        WatchWiseContext? watchWiseContext = app.Services.CreateScope().ServiceProvider.GetService<WatchWiseContext>(); 
+        WatchWiseContext? watchWiseContext = app.Services.CreateScope().ServiceProvider.GetService<WatchWiseContext>();
         UserManager<WatchWiseUser>? userManager = app.Services.CreateScope().ServiceProvider.GetService<UserManager<WatchWiseUser>>();
         RoleManager<WatchWiseRole>? roleManager = app.Services.CreateScope().ServiceProvider.GetService<RoleManager<WatchWiseRole>>();
         if (watchWiseContext != null && userManager != null && roleManager != null)

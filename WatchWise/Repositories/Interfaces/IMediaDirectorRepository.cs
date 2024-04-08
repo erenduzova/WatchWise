@@ -1,10 +1,9 @@
-﻿using System;
-using WatchWise.Models;
+﻿using WatchWise.Models;
 
 namespace WatchWise.Repositories.Interfaces
 {
-	public interface IMediaDirectorRepository
-	{
+    public interface IMediaDirectorRepository
+    {
         IQueryable<MediaDirector> GetAllMediaDirectors();
         IQueryable<MediaDirector> GetMediaDirectorsByMediaId(int id);
         IQueryable<MediaDirector> GetMediaDirectorsByDirectorId(int id);

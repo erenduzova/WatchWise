@@ -1,12 +1,11 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models.CrossTables;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class UserWatchedEpisodeConverter
-	{
+    public class UserWatchedEpisodeConverter
+    {
         public UserWatchedEpisode Convert(UserWatchedEpisodeRequest userWatchedEpisodeRequest)
         {
             UserWatchedEpisode newUserWatchedEpisode = new()

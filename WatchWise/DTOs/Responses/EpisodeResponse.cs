@@ -1,7 +1,7 @@
 ﻿namespace WatchWise.DTOs.Responses
 {
-	public class EpisodeResponse
-	{
+    public class EpisodeResponse
+    {
         public long Id { get; set; }
         public int MediaId { get; set; }
         public byte SeasonNum { get; set; }

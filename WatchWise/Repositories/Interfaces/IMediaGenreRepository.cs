@@ -1,10 +1,9 @@
-﻿using System;
-using WatchWise.Models;
+﻿using WatchWise.Models;
 
 namespace WatchWise.Repositories.Interfaces
 {
-	public interface IMediaGenreRepository
-	{
+    public interface IMediaGenreRepository
+    {
         IQueryable<MediaGenre> GetAllMediaGenres();
         IQueryable<MediaGenre> GetMediaGenresByMediaId(int id);
         IQueryable<MediaGenre> GetMediaGenresByGenreId(short id);

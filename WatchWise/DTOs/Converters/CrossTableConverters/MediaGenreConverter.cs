@@ -1,12 +1,11 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class MediaGenreConverter
-	{
+    public class MediaGenreConverter
+    {
         public MediaGenre Convert(MediaGenreRequest mediaGenreRequest)
         {
             MediaGenre newMediaGenre = new()

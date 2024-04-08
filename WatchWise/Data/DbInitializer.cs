@@ -142,7 +142,7 @@ namespace WatchWise.Data
 
         public void CreateGenres()
         {
-            string[] genreNames = {"Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Fantasy", "Horror", "Mystery", "Romance", "Science Fiction", "Thriller"};
+            string[] genreNames = { "Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Fantasy", "Horror", "Mystery", "Romance", "Science Fiction", "Thriller" };
             foreach (string name in genreNames)
             {
                 Genre genre = new() { Name = name };
@@ -305,7 +305,7 @@ namespace WatchWise.Data
                 Title = "Blink",
                 Description = "Sally Sparrow receives a cryptic message from the Doctor about a mysterious new enemy species that is after the TARDIS.",
                 Duration = TimeSpan.FromMinutes(45),
-                ViewCount =0,
+                ViewCount = 0,
                 Passive = false
             };
             _watchWiseContext.Episodes.Add(doctorWhoM3x10);
@@ -324,7 +324,7 @@ namespace WatchWise.Data
                 Passive = false
             };
             _watchWiseContext.Episodes.Add(doctorWhoM3x13);
-            
+
             Episode fromM1x1 = new()
             {
                 MediaId = fromM.Id,

@@ -3,8 +3,8 @@ using WatchWise.DTOs.Responses;
 
 namespace WatchWise.Services.Interfaces
 {
-	public interface IEpisodeService
-	{
+    public interface IEpisodeService
+    {
         List<EpisodeResponse> GetAllEpisodeResponses();
         EpisodeResponse? GetEpisodeResponseById(long id);
         void PostEpisode(EpisodeRequest episodeRequest);

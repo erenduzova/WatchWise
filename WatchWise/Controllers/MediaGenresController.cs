@@ -29,7 +29,7 @@ namespace WatchWise.Controllers
         {
             return Ok(_mediaGenreService.GetMediaGenreResponsesByMediaId(id));
         }
-        
+
         // GET: api/MediaGenres/Genre/5
         [HttpGet("Genre/{id}")]
         public ActionResult<List<MediaGenreResponse>> GetMediaGenresByGenreId(short id)
@@ -47,7 +47,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/MediaGenres
         [HttpDelete]
-        public  IActionResult DeleteMediaGenre(MediaGenreRequest mediaGenreRequest)
+        public IActionResult DeleteMediaGenre(MediaGenreRequest mediaGenreRequest)
         {
             int deleteResponse = _mediaGenreService.DeleteMediaGenre(mediaGenreRequest);
             if (deleteResponse == -1)

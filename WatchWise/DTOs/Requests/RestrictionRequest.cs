@@ -1,11 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WatchWise.DTOs.Requests
 {
-	public class RestrictionRequest
+    public class RestrictionRequest
     {
         public byte Id { get; set; }
 

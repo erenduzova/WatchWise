@@ -1,10 +1,9 @@
-﻿using System;
-using WatchWise.Models.CrossTables;
+﻿using WatchWise.Models.CrossTables;
 
 namespace WatchWise.Repositories.Interfaces
 {
-	public interface IMediaRestrictionRepository
-	{
+    public interface IMediaRestrictionRepository
+    {
         IQueryable<MediaRestriction> GetAllMediaRestrictions();
         IQueryable<MediaRestriction> GetMediaRestrictionsByMediaId(int id);
         IQueryable<MediaRestriction> GetMediaRestrictionsByRestrictionId(byte id);

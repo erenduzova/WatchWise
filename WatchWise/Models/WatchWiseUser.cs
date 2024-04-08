@@ -1,19 +1,17 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 using WatchWise.Models.CrossTables;
 
 namespace WatchWise.Models
 {
-	public class WatchWiseUser : IdentityUser<long>
-	{
+    public class WatchWiseUser : IdentityUser<long>
+    {
 
         [Column(TypeName = "nvarchar(100)")]
         public string Name { get; set; } = "";
 
-		[Column(TypeName = "date")]
-		public DateTime BirthDate { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime BirthDate { get; set; }
 
         public bool Passive { get; set; }
 

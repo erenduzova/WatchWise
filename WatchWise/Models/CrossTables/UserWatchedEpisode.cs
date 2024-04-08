@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchWise.Models.CrossTables
 {
-	public class UserWatchedEpisode
-	{
+    public class UserWatchedEpisode
+    {
         public long UserId { get; set; }
 
         public long EpisodeId { get; set; }

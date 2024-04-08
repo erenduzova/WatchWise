@@ -7,7 +7,7 @@ using WatchWise.Services.Interfaces;
 
 namespace WatchWise.Services.Implementations
 {
-	public class UserFavoriteService : IUserFavoriteService
+    public class UserFavoriteService : IUserFavoriteService
     {
         private readonly IUserFavoriteRepository _userFavoriteRepository;
         private readonly UserFavoriteConverter _userFavoriteConverter;

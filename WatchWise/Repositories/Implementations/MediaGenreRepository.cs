@@ -1,12 +1,11 @@
-﻿using System;
-using WatchWise.Data;
+﻿using WatchWise.Data;
 using WatchWise.Models;
 using WatchWise.Repositories.Interfaces;
 
 namespace WatchWise.Repositories.Implementations
 {
-	public class MediaGenreRepository : IMediaGenreRepository
-	{
+    public class MediaGenreRepository : IMediaGenreRepository
+    {
         private readonly WatchWiseContext _context;
 
         public MediaGenreRepository(WatchWiseContext context)

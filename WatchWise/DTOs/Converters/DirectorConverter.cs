@@ -4,27 +4,27 @@ using WatchWise.Models;
 
 namespace WatchWise.DTOs.Converters
 {
-	public class DirectorConverter
-	{
+    public class DirectorConverter
+    {
         public Director Convert(DirectorRequest directorRequest)
-		{
-			Director newDirector = new()
-			{
-				Name = directorRequest.Name
-			};
-			return newDirector;
-		}
+        {
+            Director newDirector = new()
+            {
+                Name = directorRequest.Name
+            };
+            return newDirector;
+        }
 
         public DirectorResponse Convert(Director director)
         {
             DirectorResponse directorResponse = new()
             {
-				Id = director.Id,
+                Id = director.Id,
                 Name = director.Name,
                 MediaIds = new List<int>()
             };
-			if (director.MediaDirectors != null)
-			{
+            if (director.MediaDirectors != null)
+            {
                 directorResponse.MediaIds = director.MediaDirectors.Select(ms => ms.MediaId).ToList();
 
             }
