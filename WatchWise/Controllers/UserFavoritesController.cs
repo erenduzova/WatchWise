@@ -41,13 +41,17 @@ namespace WatchWise.Controllers
         [HttpPost]
         public ActionResult PostUserFavorite(UserFavoriteRequest userFavoriteRequest)
         {
-            _userFavoriteService.AddUserFavorite(userFavoriteRequest);
+            int addFavoriteResult = _userFavoriteService.AddUserFavorite(userFavoriteRequest);
+            if (addFavoriteResult == -1)
+            {
+                return Conflict("Already added");
+            }
             return Ok();
         }
 
         // DELETE: api/UserFavorites
         [HttpDelete]
-        public IActionResult DeleteUserFavorite(UserFavoriteRequest userFavoriteRequest)
+        public ActionResult DeleteUserFavorite(UserFavoriteRequest userFavoriteRequest)
         {
             int deleteResponse = _userFavoriteService.DeleteUserFavorite(userFavoriteRequest);
             if (deleteResponse == -1)

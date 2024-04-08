@@ -8,7 +8,7 @@ namespace WatchWise.Services.Interfaces
         List<UserFavoriteResponse> GetAllUserFavoriteResponses();
         List<UserFavoriteResponse> GetUserFavoriteResponsesByUserId(long userId);
         List<UserFavoriteResponse> GetUserFavoriteResponsesByMediaId(int mediaId);
-        void AddUserFavorite(UserFavoriteRequest userFavoriteRequest);
+        int AddUserFavorite(UserFavoriteRequest userFavoriteRequest);
         int DeleteUserFavorite(UserFavoriteRequest userFavoriteRequest);
     }
 }

@@ -36,10 +36,15 @@ namespace WatchWise.Services.Implementations
             return _userFavoriteConverter.Convert(userFavorites.ToList());
         }
 
-        public void AddUserFavorite(UserFavoriteRequest userFavoriteRequest)
+        public int AddUserFavorite(UserFavoriteRequest userFavoriteRequest)
         {
-            var userFavorite = _userFavoriteConverter.Convert(userFavoriteRequest);
+            UserFavorite userFavorite = _userFavoriteConverter.Convert(userFavoriteRequest);
+            if (_userFavoriteRepository.GetUserFavoritesByUserId(userFavorite.UserId).Any(uf => uf.MediaId == userFavorite.MediaId))
+            {
+                return -1;
+            }
             _userFavoriteRepository.AddUserFavorite(userFavorite);
+            return 0;
         }
 
         public int DeleteUserFavorite(UserFavoriteRequest userFavoriteRequest)
