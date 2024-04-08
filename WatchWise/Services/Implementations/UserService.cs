@@ -170,6 +170,7 @@ namespace WatchWise.Services.Implementations
             }
             int age = CalculateCurrentAge(watchWiseUser.BirthDate);
             suggestedMediaQuery = suggestedMediaQuery.Where(m => !m.MediaRestrictions!.Any(mr => mr.RestrictionId >= age));
+            suggestedMediaQuery = suggestedMediaQuery.Where(m => m.Passive == false);
             return _mediaConverter.Convert(suggestedMediaQuery.ToList());
         }
 
