@@ -1,6 +1,5 @@
 ﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 
 namespace WatchWise.Services.Interfaces
 {
@@ -10,7 +9,7 @@ namespace WatchWise.Services.Interfaces
         List<MediaDirectorResponse> GetMediaDirectorResponsesByMediaId(int id);
         List<MediaDirectorResponse> GetMediaDirectorResponsesByDirectorId(int id);
         void PostMediaDirector(MediaDirectorRequest mediaDirectorRequest);
-        void DeleteMediaDirector(MediaDirector mediaDirector);
+        int DeleteMediaDirector(MediaDirectorRequest mediaDirectorRequest);
     }
 }
 

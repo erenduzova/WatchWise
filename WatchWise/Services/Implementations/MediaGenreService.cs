@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -44,9 +43,16 @@ namespace WatchWise.Services.Implementations
             _mediaGenreRepository.AddMediaGenre(newMediaGenre);
         }
 
-        public void DeleteMediaGenre(MediaGenre mediaGenre)
+        public int DeleteMediaGenre(MediaGenreRequest mediaGenreRequest)
         {
+            MediaGenre? mediaGenre = _mediaGenreRepository.GetMediaGenresByGenreId(mediaGenreRequest.GenreId)
+                .Where(mg => mg.MediaId == mediaGenreRequest.MediaId).FirstOrDefault();
+            if (mediaGenre == null)
+            {
+                return -1;
+            }
             _mediaGenreRepository.DeleteMediaGenre(mediaGenre);
+            return 1;
         }
     }
 }

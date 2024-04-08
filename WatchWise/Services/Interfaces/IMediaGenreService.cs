@@ -1,7 +1,5 @@
-﻿using System;
-using WatchWise.DTOs.Requests;
+﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 
 namespace WatchWise.Services.Interfaces
 {
@@ -11,7 +9,7 @@ namespace WatchWise.Services.Interfaces
         List<MediaGenreResponse> GetMediaGenreResponsesByMediaId(int id);
         List<MediaGenreResponse> GetMediaGenreResponsesByGenreId(short id);
         void PostMediaGenre(MediaGenreRequest mediaGenreRequest);
-        void DeleteMediaGenre(MediaGenre mediaGenre);
+        int DeleteMediaGenre(MediaGenreRequest mediaGenreRequest);
     }
 }
 

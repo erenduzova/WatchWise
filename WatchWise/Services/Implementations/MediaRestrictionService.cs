@@ -43,9 +43,16 @@ namespace WatchWise.Services.Implementations
             _mediaRestrictionRepository.AddMediaRestriction(newMediaRestriction);
         }
 
-        public void DeleteMediaRestriction(MediaRestriction mediaRestriction)
+        public int DeleteMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest)
         {
+            MediaRestriction? mediaRestriction = _mediaRestrictionRepository.GetMediaRestrictionsByRestrictionId(mediaRestrictionRequest.RestrictionId)
+                .Where(mg => mg.MediaId == mediaRestrictionRequest.MediaId).FirstOrDefault();
+            if (mediaRestriction == null)
+            {
+                return -1;
+            }
             _mediaRestrictionRepository.DeleteMediaRestriction(mediaRestriction);
+            return 1;
         }
 
     }

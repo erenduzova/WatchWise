@@ -3,6 +3,7 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -43,9 +44,16 @@ namespace WatchWise.Services.Implementations
             _mediaDirectorRepository.AddMediaDirector(newMediaDirector);
         }
 
-        public void DeleteMediaDirector(MediaDirector mediaDirector)
+        public int DeleteMediaDirector(MediaDirectorRequest mediaDirectorRequest)
         {
+            MediaDirector? mediaDirector = _mediaDirectorRepository.GetMediaDirectorsByDirectorId(mediaDirectorRequest.DirectorId)
+                .Where(md => md.MediaId == mediaDirectorRequest.MediaId).FirstOrDefault();
+            if (mediaDirector == null)
+            {
+                return -1;
+            }
             _mediaDirectorRepository.DeleteMediaDirector(mediaDirector);
+            return 1;
         }
     }
 }

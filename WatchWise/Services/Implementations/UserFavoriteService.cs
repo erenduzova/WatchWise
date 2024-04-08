@@ -42,9 +42,16 @@ namespace WatchWise.Services.Implementations
             _userFavoriteRepository.AddUserFavorite(userFavorite);
         }
 
-        public void RemoveUserFavorite(UserFavorite userFavorite)
+        public int DeleteUserFavorite(UserFavoriteRequest userFavoriteRequest)
         {
+            UserFavorite? userFavorite = _userFavoriteRepository.GetUserFavoritesByMediaId(userFavoriteRequest.MediaId)
+                .Where(mg => mg.UserId == userFavoriteRequest.UserId).FirstOrDefault();
+            if (userFavorite == null)
+            {
+                return -1;
+            }
             _userFavoriteRepository.DeleteUserFavorite(userFavorite);
+            return 1;
         }
 
     }
