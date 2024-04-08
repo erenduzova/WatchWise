@@ -10,6 +10,7 @@ namespace WatchWise.Services.Interfaces
         void PostEpisode(EpisodeRequest episodeRequest);
         int UpdateEpisode(long id, EpisodeUpdateRequest episodeUpdateRequest);
         int DeleteEpisode(long id);
+        int Watch(long id, long userId);
     }
 }
 

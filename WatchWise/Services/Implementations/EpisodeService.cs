@@ -11,12 +11,16 @@ namespace WatchWise.Services.Implementations
     public class EpisodeService : IEpisodeService
     {
         private readonly IEpisodeRepository _episodeRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserWatchedEpisodeService _userWatchedEpisodeService;
         private readonly EpisodeConverter _episodeConverter;
 
-        public EpisodeService(IEpisodeRepository episodeRepository, EpisodeConverter episodeConverter)
+        public EpisodeService(IEpisodeRepository episodeRepository, IUserRepository userRepository, EpisodeConverter episodeConverter, IUserWatchedEpisodeService userWatchedEpisodeService)
         {
             _episodeRepository = episodeRepository;
+            _userRepository = userRepository;
             _episodeConverter = episodeConverter;
+            _userWatchedEpisodeService = userWatchedEpisodeService;
         }
 
         public List<EpisodeResponse> GetAllEpisodeResponses()
@@ -67,6 +71,23 @@ namespace WatchWise.Services.Implementations
             {
                 foundEpisode.Passive = true;
                 _episodeRepository.UpdateEpisode(foundEpisode);
+                return 1;
+            }
+            return -1;
+        }
+
+        public int Watch(long id, long userId)
+        {
+            Episode? foundEpisode = _episodeRepository.GetEpisodeById(id);
+            WatchWiseUser foundUser = _userRepository.GetUserById(userId,includeWatchedEpisodes:true)!;
+            if (foundEpisode != null && foundEpisode.Passive == false)
+            {
+                foundEpisode.ViewCount++;
+                _episodeRepository.UpdateEpisode(foundEpisode);
+                if (!foundUser.UserWatchedEpisodes!.Any(uwe => uwe.EpisodeId == id))
+                {
+                    _userWatchedEpisodeService.AddUserWatchedEpisode(id, userId);
+                }
                 return 1;
             }
             return -1;

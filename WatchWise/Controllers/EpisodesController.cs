@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Interfaces;
@@ -65,6 +66,19 @@ namespace WatchWise.Controllers
                 return NotFound();
             }
             return NoContent();
+        }
+
+        // PUT: api/Episodes/Watch/5
+        [HttpPut("Watch/{id}")]
+        public ActionResult Watch(long id)
+        {
+            long userId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            int watchResult = _episodeService.Watch(id, userId);
+            if (watchResult == -1)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
 
     }

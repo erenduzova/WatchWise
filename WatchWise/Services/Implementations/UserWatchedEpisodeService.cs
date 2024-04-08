@@ -42,6 +42,13 @@ namespace WatchWise.Services.Implementations
             var userWatchedEpisode = _userWatchedEpisodeConverter.Convert(userWatchedEpisodeRequest);
             _userWatchedEpisodeRepository.AddUserWatchedEpisode(userWatchedEpisode);
         }
+        public void AddUserWatchedEpisode(long episodeId, long userId)
+        {
+            UserWatchedEpisode userWatchedEpisode = new UserWatchedEpisode();
+            userWatchedEpisode.EpisodeId = episodeId;
+            userWatchedEpisode.UserId = userId;
+            _userWatchedEpisodeRepository.AddUserWatchedEpisode(userWatchedEpisode);
+        }
 
         public int RemoveUserWatchedEpisode(UserWatchedEpisodeRequest userWatchedEpisodeRequest)
         {

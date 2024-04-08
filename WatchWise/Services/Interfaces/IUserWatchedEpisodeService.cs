@@ -9,6 +9,7 @@ namespace WatchWise.Services.Interfaces
         List<UserWatchedEpisodeResponse> GetUserWatchedEpisodeResponsesByUserId(long userId);
         List<UserWatchedEpisodeResponse> GetUserWatchedEpisodeResponsesByEpisodeId(long episodeId);
         void AddUserWatchedEpisode(UserWatchedEpisodeRequest userWatchedEpisodeRequest);
+        void AddUserWatchedEpisode(long episodeId, long userId);
         int RemoveUserWatchedEpisode(UserWatchedEpisodeRequest userWatchedEpisodeRequest);
     }
 }
