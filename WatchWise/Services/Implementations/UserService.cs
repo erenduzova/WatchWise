@@ -4,6 +4,8 @@ using WatchWise.DTOs.Converters;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Models;
+using WatchWise.Models.CrossTables;
+using WatchWise.Repositories.Implementations;
 using WatchWise.Repositories.Interfaces;
 using WatchWise.Services.Interfaces;
 
@@ -12,14 +14,25 @@ namespace WatchWise.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUserRepository _usersRepository;
+        private readonly IMediaRepository _mediaRepository;
+        private readonly IUserFavoriteRepository _userFavoriteRepository;
+        private readonly IUserWatchedEpisodeRepository _userWatchedEpisodeRepository;
         private readonly WatchWiseUserConverter _userConverter;
+        private readonly MediaConverter _mediaConverter;
         private readonly SignInManager<WatchWiseUser> _signInManager;
         private readonly IRoleService _roleService;
 
-        public UserService(IUserRepository usersRepository, WatchWiseUserConverter userConverter, SignInManager<WatchWiseUser> signInManager, IRoleService roleService)
+        public UserService(IUserRepository usersRepository, IMediaRepository mediaRepository
+            , WatchWiseUserConverter userConverter, IUserFavoriteRepository userFavoriteRepository
+            , IUserWatchedEpisodeRepository userWatchedEpisodeRepository, MediaConverter mediaConverter
+            , SignInManager<WatchWiseUser> signInManager, IRoleService roleService)
         {
             _usersRepository = usersRepository;
+            _mediaRepository = mediaRepository;
+            _userFavoriteRepository = userFavoriteRepository;
+            _userWatchedEpisodeRepository = userWatchedEpisodeRepository;
             _userConverter = userConverter;
+            _mediaConverter = mediaConverter;
             _signInManager = signInManager;
             _roleService = roleService;
         }
@@ -126,6 +139,49 @@ namespace WatchWise.Services.Implementations
         public List<WatchWiseRole> GetAllRoles()
         {
             return _roleService.GetAllRoles();
+        }
+
+        public List<MediaResponse> GetSuggestedMedias(long userId)
+        {
+            WatchWiseUser watchWiseUser = _usersRepository.GetUserById(userId, includeWatchedEpisodes: true, includeFavorites: true)!;
+            IQueryable<Media> suggestedMediaQuery = _mediaRepository.GetAllMedia(includeMediaGenres: true, includeMediaRestrictions: true);
+            IQueryable<UserFavorite>? userFavorites = _userFavoriteRepository.GetUserFavoritesByUserId(userId).Include(uf => uf.Media).ThenInclude(m => m!.MediaGenres);
+            if (userFavorites != null && userFavorites.Any())
+            {
+                IGrouping<short, MediaGenre>? mediaGenres = userFavorites
+                    .SelectMany(uf => uf.Media!.MediaGenres!)
+                    .GroupBy(m => m.GenreId)
+                    .AsEnumerable()
+                    .OrderByDescending(group => group.Count())
+                    .FirstOrDefault();
+                if (mediaGenres != null)
+                {
+                    short mostFrequentGenreId = mediaGenres.Key;
+                    suggestedMediaQuery = suggestedMediaQuery.Where(m => m.MediaGenres!.Any(mg => mg.GenreId == mostFrequentGenreId));
+                    if (watchWiseUser.UserWatchedEpisodes != null && watchWiseUser.UserWatchedEpisodes.Count > 0)
+                    {
+                        List<int> watchedMediaIds = _userWatchedEpisodeRepository.GetUserWatchedEpisodesByUserId(userId)
+                            .Include(uwe => uwe.Episode)
+                            .Select(uwe => uwe.Episode!.MediaId)
+                            .ToList();
+                        suggestedMediaQuery = suggestedMediaQuery.Where(m => !watchedMediaIds.Contains(m.Id));
+                    }
+                }
+            }
+            int age = CalculateCurrentAge(watchWiseUser.BirthDate);
+            suggestedMediaQuery = suggestedMediaQuery.Where(m => !m.MediaRestrictions!.Any(mr => mr.RestrictionId >= age));
+            return _mediaConverter.Convert(suggestedMediaQuery.ToList());
+        }
+
+        private int CalculateCurrentAge(DateTime birthDate)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - birthDate.Year;
+            if (birthDate.Date > today.AddYears(-age))
+            {
+                age--;
+            }
+            return age;
         }
 
     }

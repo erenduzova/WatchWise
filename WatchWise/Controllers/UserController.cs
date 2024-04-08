@@ -105,12 +105,12 @@ namespace WatchWise.Controllers
         }
 
         [HttpPost("LogIn")]
-        public ActionResult LogIn(LogInRequest logInRequest)
+        public ActionResult<List<MediaResponse>> LogIn(LogInRequest logInRequest)
         {
             Microsoft.AspNetCore.Identity.SignInResult signInResult = _userService.LogIn(logInRequest);
             if (signInResult.Succeeded)
             {
-                return Ok("LogIn succesfull");
+                return Ok(_userService.GetSuggestedMedias(long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!)));
             }
             else if (signInResult.IsLockedOut)
             {

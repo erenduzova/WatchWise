@@ -15,6 +15,7 @@ namespace WatchWise.Services.Interfaces
         SignInResult LogIn(LogInRequest logInRequest);
         void LogOut();
         List<WatchWiseRole> GetAllRoles();
+        List<MediaResponse> GetSuggestedMedias(long userId);
     }
 }
 
