@@ -1,6 +1,5 @@
 ﻿using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
-using WatchWise.Models;
 
 namespace WatchWise.Services.Interfaces
 {
@@ -10,7 +9,7 @@ namespace WatchWise.Services.Interfaces
         List<MediaStarResponse> GetMediaStarResponsesByMediaId(int id);
         List<MediaStarResponse> GetMediaStarResponsesByStarId(int id);
         void PostMediaStar(MediaStarRequest mediaStarRequest);
-        void DeleteMediaStar(MediaStar mediaStar);
+        int DeleteMediaStar(MediaStarRequest mediaStarRequest);
     }
 }
 

@@ -43,9 +43,16 @@ namespace WatchWise.Services.Implementations
             _mediaStarRepository.AddMediaStar(newMediaStar);
         }
 
-        public void DeleteMediaStar(MediaStar mediaStar)
+        public int DeleteMediaStar(MediaStarRequest mediaStarRequest)
         {
+            MediaStar? mediaStar = _mediaStarRepository.GetMediaStarsByStarId(mediaStarRequest.StarId)
+                .Where(mg => mg.MediaId == mediaStarRequest.MediaId).FirstOrDefault();
+            if (mediaStar == null)
+            {
+                return -1;
+            }
             _mediaStarRepository.DeleteMediaStar(mediaStar);
+            return 1;
         }
 
     }
