@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Implementations;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaStars
         [HttpGet]
+        [Authorize]
         public ActionResult<List<MediaStarResponse>> GetMediaStars()
         {
             return Ok(_mediaStarService.GetAllMediaStarResponses());
@@ -26,6 +28,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaStars/Media/5
         [HttpGet("Media/{id}")]
+        [Authorize]
         public ActionResult<List<MediaStarResponse>> GetMediaStarsByMediaId(int id)
         {
             return Ok(_mediaStarService.GetMediaStarResponsesByMediaId(id));
@@ -33,6 +36,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaStars/Star/5
         [HttpGet("Star/{id}")]
+        [Authorize]
         public ActionResult<List<MediaStarResponse>> GetMediaStarsByStarId(short id)
         {
             return Ok(_mediaStarService.GetMediaStarResponsesByStarId(id));
@@ -40,6 +44,7 @@ namespace WatchWise.Controllers
 
         // POST: api/MediaStars
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostMediaStar(MediaStarRequest mediaStarRequest)
         {
             int addResponse = _mediaStarService.PostMediaStar(mediaStarRequest);
@@ -52,6 +57,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/MediaStars/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public IActionResult DeleteMediaStar(MediaStarRequest mediaStarRequest)
         {
             int deleteResponse = _mediaStarService.DeleteMediaStar(mediaStarRequest);

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Interfaces;
@@ -18,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/UserFavorites
         [HttpGet]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult<List<UserFavoriteResponse>> GetUserFavorites()
         {
             return Ok(_userFavoriteService.GetAllUserFavoriteResponses());
@@ -25,13 +28,19 @@ namespace WatchWise.Controllers
 
         // GET: api/UserFavorites/User/5
         [HttpGet("User/{userId}")]
+        [Authorize(Roles = "Subscriber")]
         public ActionResult<List<UserFavoriteResponse>> GetUserFavoritesByUserId(long userId)
         {
+            if (User.FindFirstValue(ClaimTypes.NameIdentifier) != userId.ToString())
+            {
+                return Unauthorized();
+            }
             return Ok(_userFavoriteService.GetUserFavoriteResponsesByUserId(userId));
         }
 
         // GET: api/UserFavorites/Media/5
         [HttpGet("Media/{mediaId}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult<List<UserFavoriteResponse>> GetUserFavoritesByMediaId(int mediaId)
         {
             return Ok(_userFavoriteService.GetUserFavoriteResponsesByMediaId(mediaId));
@@ -39,8 +48,13 @@ namespace WatchWise.Controllers
 
         // POST: api/UserFavorites
         [HttpPost]
+        [Authorize(Roles = "Subscriber")]
         public ActionResult PostUserFavorite(UserFavoriteRequest userFavoriteRequest)
         {
+            if (User.FindFirstValue(ClaimTypes.NameIdentifier) != userFavoriteRequest.UserId.ToString())
+            {
+                return Unauthorized();
+            }
             int addFavoriteResult = _userFavoriteService.AddUserFavorite(userFavoriteRequest);
             if (addFavoriteResult == -1)
             {
@@ -51,8 +65,13 @@ namespace WatchWise.Controllers
 
         // DELETE: api/UserFavorites
         [HttpDelete]
+        [Authorize(Roles = "Subscriber")]
         public ActionResult DeleteUserFavorite(UserFavoriteRequest userFavoriteRequest)
         {
+            if (User.FindFirstValue(ClaimTypes.NameIdentifier) != userFavoriteRequest.UserId.ToString())
+            {
+                return Unauthorized();
+            }
             int deleteResponse = _userFavoriteService.DeleteUserFavorite(userFavoriteRequest);
             if (deleteResponse == -1)
             {

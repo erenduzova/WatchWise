@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Implementations;
@@ -26,6 +27,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaDirectors/Media/5
         [HttpGet("Media/{id}")]
+        [Authorize]
         public ActionResult<List<MediaDirectorResponse>> GetMediaDirectorsByMediaId(int id)
         {
             return Ok(_mediaDirectorService.GetMediaDirectorResponsesByMediaId(id));
@@ -33,6 +35,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaDirectors/Director/5
         [HttpGet("Director/{id}")]
+        [Authorize]
         public ActionResult<List<MediaDirectorResponse>> GetMediaDirectorsByDirectorId(short id)
         {
             return Ok(_mediaDirectorService.GetMediaDirectorResponsesByDirectorId(id));
@@ -40,6 +43,7 @@ namespace WatchWise.Controllers
 
         // POST: api/MediaDirectors
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostMediaDirector(MediaDirectorRequest mediaDirectorRequest)
         {
             int addResponse = _mediaDirectorService.PostMediaDirector(mediaDirectorRequest);
@@ -52,6 +56,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/MediaDirectors/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public IActionResult DeleteMediaDirector(MediaDirectorRequest mediaDirectorRequest)
         {
             int deleteResponse = _mediaDirectorService.DeleteMediaDirector(mediaDirectorRequest);

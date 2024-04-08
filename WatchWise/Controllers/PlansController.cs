@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Plans
         [HttpGet]
+        [Authorize]
         public ActionResult<List<PlanResponse>> GetPlans()
         {
             return Ok(_planService.GetAllPlanResponses());
@@ -26,6 +28,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Plans/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<PlanResponse> GetPlan(short id)
         {
             PlanResponse? planResponse = _planService.GetPlanResponseById(id);
@@ -38,6 +41,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Plans/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "UserManager")]
         public ActionResult PutPlan(short id, PlanRequest planRequest)
         {
             int updateResponse = _planService.UpdatePlan(id, planRequest);
@@ -50,6 +54,7 @@ namespace WatchWise.Controllers
 
         // POST: api/Plans
         [HttpPost]
+        [Authorize(Roles = "UserManager")]
         public ActionResult PostPlan(PlanRequest planRequest)
         {
             int addResponse = _planService.PostPlan(planRequest);

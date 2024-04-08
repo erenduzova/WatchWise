@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Implementations;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaGenres
         [HttpGet]
+        [Authorize]
         public ActionResult<List<MediaGenreResponse>> GetMediaGenres()
         {
             return Ok(_mediaGenreService.GetAllMediaGenreResponses());
@@ -26,6 +28,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaGenres/Media/5
         [HttpGet("Media/{id}")]
+        [Authorize]
         public ActionResult<List<MediaGenreResponse>> GetMediaGenresByMediaId(int id)
         {
             return Ok(_mediaGenreService.GetMediaGenreResponsesByMediaId(id));
@@ -33,6 +36,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaGenres/Genre/5
         [HttpGet("Genre/{id}")]
+        [Authorize]
         public ActionResult<List<MediaGenreResponse>> GetMediaGenresByGenreId(short id)
         {
             return Ok(_mediaGenreService.GetMediaGenreResponsesByGenreId(id));
@@ -40,6 +44,7 @@ namespace WatchWise.Controllers
 
         // POST: api/MediaGenres
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostMediaGenre(MediaGenreRequest mediaGenreRequest)
         {
             int addResponse = _mediaGenreService.PostMediaGenre(mediaGenreRequest);
@@ -52,6 +57,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/MediaGenres
         [HttpDelete]
+        [Authorize(Roles = "ContentManager")]
         public IActionResult DeleteMediaGenre(MediaGenreRequest mediaGenreRequest)
         {
             int deleteResponse = _mediaGenreService.DeleteMediaGenre(mediaGenreRequest);

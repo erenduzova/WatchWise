@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -18,6 +19,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Directors
         [HttpGet]
+        [Authorize]
         public ActionResult<List<DirectorResponse>> GetDirectors(bool includeMedia = false)
         {
             return Ok(_directorService.GetAllDirectorResponses(includeMedia));
@@ -25,6 +27,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Directors/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<DirectorResponse> GetDirector(int id, bool includeMedia = false)
         {
             DirectorResponse? directorResponse = _directorService.GetDirectorResponseById(id, includeMedia);
@@ -37,6 +40,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Directors/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PutDirector(int id, DirectorRequest directorRequest)
         {
             int updateResponse = _directorService.UpdateDirector(id, directorRequest);
@@ -49,6 +53,7 @@ namespace WatchWise.Controllers
 
         // POST: api/Directors
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostDirector(DirectorRequest directorRequest)
         {
             int addResponse = _directorService.PostDirector(directorRequest);
@@ -61,6 +66,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/Directors/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult DeleteDirector(int id)
         {
             int deleteResponse = _directorService.DeleteDirector(id);

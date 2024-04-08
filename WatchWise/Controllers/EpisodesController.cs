@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WatchWise.DTOs.Requests;
@@ -20,6 +21,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Episodes
         [HttpGet]
+        [Authorize]
         public ActionResult<List<EpisodeResponse>> GetEpisodes()
         {
             return _episodeService.GetAllEpisodeResponses();
@@ -27,6 +29,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Episodes/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<EpisodeResponse> GetEpisode(long id)
         {
             EpisodeResponse? episodeResponse = _episodeService.GetEpisodeResponseById(id);
@@ -39,6 +42,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Episodes/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PutEpisode(long id, EpisodeUpdateRequest episodeUpdateRequest)
         {
             int updateResponse = _episodeService.UpdateEpisode(id, episodeUpdateRequest);
@@ -51,6 +55,7 @@ namespace WatchWise.Controllers
 
         // POST: api/Episodes
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostEpisode(EpisodeRequest episodeRequest)
         {
             int addResponse = _episodeService.PostEpisode(episodeRequest);
@@ -63,6 +68,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/Episodes/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult DeleteEpisode(long id)
         {
             int deleteResponse = _episodeService.DeleteEpisode(id);
@@ -75,6 +81,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Episodes/Watch/5
         [HttpPut("Watch/{id}")]
+        [Authorize(Roles = "Subscriber")]
         public ActionResult Watch(long id)
         {
             long userId = long.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);

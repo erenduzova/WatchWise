@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Genres
         [HttpGet]
+        [Authorize]
         public ActionResult<List<GenreResponse>> GetGenres(bool includeMedia = false)
         {
             return Ok(_genreService.GetAllGenreResponses(includeMedia));
@@ -26,6 +28,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Genres/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<GenreResponse> GetGenre(short id, bool includeMedia = false)
         {
             GenreResponse? genreResponse = _genreService.GetGenreResponseById(id, includeMedia);
@@ -38,6 +41,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Genres/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PutGenre(short id, GenreRequest genreRequest)
         {
             int updateResponse = _genreService.UpdateGenre(id, genreRequest);
@@ -50,6 +54,7 @@ namespace WatchWise.Controllers
 
         // POST: api/Genres
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostGenre(GenreRequest genreRequest)
         {
             int addResponse = _genreService.PostGenre(genreRequest);

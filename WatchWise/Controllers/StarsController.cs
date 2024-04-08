@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Stars
         [HttpGet]
+        [Authorize]
         public ActionResult<List<StarResponse>> GetStars(bool includeMedia = false)
         {
             return Ok(_starService.GetAllStarResponses(includeMedia));
@@ -26,6 +28,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Stars/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<StarResponse> GetStar(int id, bool includeMedia = false)
         {
             StarResponse? starResponse = _starService.GetStarResponseById(id, includeMedia);
@@ -38,6 +41,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Stars/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PutStar(int id, StarRequest starRequest)
         {
             int updateResponse = _starService.UpdateStar(id, starRequest);
@@ -50,6 +54,7 @@ namespace WatchWise.Controllers
 
         // POST: api/Stars
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostStar(StarRequest starRequest)
         {
             int addResponse = _starService.PostStar(starRequest);
@@ -62,6 +67,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/Stars/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult DeleteStar(int id)
         {
             int deleteResponse = _starService.DeleteStar(id);

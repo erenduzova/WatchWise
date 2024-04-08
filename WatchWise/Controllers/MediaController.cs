@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Media
         [HttpGet]
+        [Authorize]
         public ActionResult<List<MediaResponse>> GetMedias(bool includeMediaGenres = false
             , bool includeMediaStars = false
             , bool includeMediaDirectors = false
@@ -32,6 +34,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Media/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<MediaResponse> GetMedia(int id
             , bool includeMediaGenres = false
             , bool includeMediaStars = false
@@ -51,6 +54,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Media/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PutMedia(int id, MediaRequest mediaRequest)
         {
             int updateResponse = _mediaService.UpdateMedia(id, mediaRequest);
@@ -63,6 +67,7 @@ namespace WatchWise.Controllers
 
         // POST: api/Media
         [HttpPost]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult PostMedia(MediaRequest mediaRequest)
         {
             int addResponse = _mediaService.PostMedia(mediaRequest);
@@ -75,6 +80,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/Media/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ContentManager")]
         public ActionResult DeleteMedia(int id)
         {
             int deleteResponse = _mediaService.DeleteMedia(id);

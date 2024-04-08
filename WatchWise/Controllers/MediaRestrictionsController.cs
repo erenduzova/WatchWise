@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
 using WatchWise.Services.Implementations;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaRestrictions
         [HttpGet]
+        [Authorize]
         public ActionResult<List<MediaRestrictionResponse>> GetMediaRestrictions()
         {
             return Ok(_mediaRestrictionService.GetAllMediaRestrictionResponses());
@@ -26,6 +28,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaRestrictions/Media/5
         [HttpGet("Media/{id}")]
+        [Authorize]
         public ActionResult<List<MediaRestrictionResponse>> GetMediaRestrictionsByMediaId(int id)
         {
             return Ok(_mediaRestrictionService.GetMediaRestrictionResponsesByMediaId(id));
@@ -33,6 +36,7 @@ namespace WatchWise.Controllers
 
         // GET: api/MediaRestrictions/Restriction/5
         [HttpGet("Restriction/{id}")]
+        [Authorize]
         public ActionResult<List<MediaRestrictionResponse>> GetMediaRestrictionsByRestrictionId(byte id)
         {
             return Ok(_mediaRestrictionService.GetMediaRestrictionResponsesByRestrictionId(id));
@@ -40,6 +44,7 @@ namespace WatchWise.Controllers
 
         // POST: api/MediaRestrictions
         [HttpPost]
+        [Authorize(Roles = "RestrictionManager")]
         public ActionResult PostMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest)
         {
             int addResponse = _mediaRestrictionService.PostMediaRestriction(mediaRestrictionRequest);
@@ -52,6 +57,7 @@ namespace WatchWise.Controllers
 
         // DELETE: api/MediaRestrictions/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "RestrictionManager")]
         public IActionResult DeleteMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest)
         {
             int deleteResponse = _mediaRestrictionService.DeleteMediaRestriction(mediaRestrictionRequest);

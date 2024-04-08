@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchWise.DTOs.Requests;
 using WatchWise.DTOs.Responses;
@@ -19,6 +20,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Restrictions
         [HttpGet]
+        [Authorize]
         public ActionResult<List<RestrictionResponse>> GetRestrictions()
         {
             return Ok(_restrictionService.GetAllRestrictionResponses());
@@ -26,6 +28,7 @@ namespace WatchWise.Controllers
 
         // GET: api/Restrictions/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<RestrictionResponse> GetRestriction(byte id)
         {
             RestrictionResponse? restrictionResponse = _restrictionService.GetRestrictionResponseById(id);
@@ -38,6 +41,7 @@ namespace WatchWise.Controllers
 
         // PUT: api/Restrictions/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "RestrictionManager")]
         public ActionResult PutRestriction(byte id, RestrictionRequest restrictionRequest)
         {
             int updateResponse = _restrictionService.UpdateRestriction(id, restrictionRequest);
@@ -54,6 +58,7 @@ namespace WatchWise.Controllers
 
         // POST: api/Restrictions
         [HttpPost]
+        [Authorize(Roles = "RestrictionManager")]
         public ActionResult PostRestriction(RestrictionRequest restrictionRequest)
         {
             int addResponse = _restrictionService.PostRestriction(restrictionRequest);
