@@ -45,7 +45,7 @@ namespace WatchWise.Services.Implementations
         public int DeleteUserFavorite(UserFavoriteRequest userFavoriteRequest)
         {
             UserFavorite? userFavorite = _userFavoriteRepository.GetUserFavoritesByMediaId(userFavoriteRequest.MediaId)
-                .Where(mg => mg.UserId == userFavoriteRequest.UserId).FirstOrDefault();
+                .Where(uf => uf.UserId == userFavoriteRequest.UserId).FirstOrDefault();
             if (userFavorite == null)
             {
                 return -1;

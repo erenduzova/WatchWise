@@ -46,7 +46,7 @@ namespace WatchWise.Services.Implementations
         public int DeleteMediaRestriction(MediaRestrictionRequest mediaRestrictionRequest)
         {
             MediaRestriction? mediaRestriction = _mediaRestrictionRepository.GetMediaRestrictionsByRestrictionId(mediaRestrictionRequest.RestrictionId)
-                .Where(mg => mg.MediaId == mediaRestrictionRequest.MediaId).FirstOrDefault();
+                .Where(mr => mr.MediaId == mediaRestrictionRequest.MediaId).FirstOrDefault();
             if (mediaRestriction == null)
             {
                 return -1;

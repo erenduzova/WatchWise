@@ -46,7 +46,7 @@ namespace WatchWise.Services.Implementations
         public int DeleteMediaStar(MediaStarRequest mediaStarRequest)
         {
             MediaStar? mediaStar = _mediaStarRepository.GetMediaStarsByStarId(mediaStarRequest.StarId)
-                .Where(mg => mg.MediaId == mediaStarRequest.MediaId).FirstOrDefault();
+                .Where(ms => ms.MediaId == mediaStarRequest.MediaId).FirstOrDefault();
             if (mediaStar == null)
             {
                 return -1;
